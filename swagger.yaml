@@ -1,0 +1,578 @@
+swagger: "2.0"
+info:
+  description: "CryptoMove API"
+  version: "1.0.0"
+  title: "CryptoMove API"
+basePath: "/v1"
+host: api.cryptomove.com
+schemes:
+  - "https"
+paths:
+  /user/secret/delete:
+    post:
+      description: "Delete an authorized users key"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Succesfully deleted parameters"
+        400:
+          description: "Could not delete parameters"
+        500:
+          description: "Failed to delete user key"
+  /user/server/betacode:
+    post:
+      description: "Verify beta code"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Information regarding user beta code"
+        400:
+          description: "Could not find beta code"
+  /user/login:
+    post:
+      description: "User login"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "logged in"
+        400:
+          description: "error"
+  /user/login_authorization_code:
+    post:
+      description: "User login"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "logged in"
+        400:
+          description: "error"
+  /user/authorization_code_email:
+    post:
+      description: "User login"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "get authorization code by email"
+        400:
+          description: "error"
+  /user/refresh_token:
+    post:
+      description: "User refresh token"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "refresh token successful"
+        400:
+          description: "error"
+  /user/resetpassword:
+    post:
+      description: "Reset Password"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "email sent"
+        400:
+          description: "error"
+  /user/signup:
+    post:
+      description: "User signup"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "registration succeeded"
+        400:
+          description: "error"
+  /user/reset_pwd:
+    post:
+      description: "reset_grpc_client_present_working_directory"
+      tags:
+      - "user"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Succesfully reset_grpc_client_pwd"
+        400:
+          description: "Could not reset_grpc_client_pwd"
+        500:
+          description: "Failed to reset_grpc_client_pwd"
+  /user/secret/protect:
+    post:
+      description: "Protect an authorized users key"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Succesfully updated parameters"
+        400:
+          description: "Could not update parameters"
+        500:
+          description: "Failed to lock user key"
+  /user/secret/protect_link:
+    post:
+      description: "Protect an authorized users key through a link"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Succesfully updated parameters"
+        400:
+          description: "Could not update parameters"
+        500:
+          description: "Failed to lock user key"
+  /user/secret/update_expiration:
+    post:
+      description: "Update expiration date for authorized request"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Succesfully updated expiration date"
+        400:
+          description: "Could not update expiration date"
+        500:
+          description: "Failed to update expiration date"
+  /user/secret/update_description:
+    post:
+      description: "Update description for authorized request"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Succesfully updated description date"
+        400:
+          description: "Could not update description date"
+        500:
+          description: "Failed to update description date"
+  /user/secret/update_classification:
+    post:
+      description: "Update classification for authorized request"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Succesfully updated classification"
+        400:
+          description: "Could not update classification"
+        500:
+          description: "Failed to update classification"
+  /user/secret/expose:
+    post:
+      description: "Expose an authorized users key"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Succesfully updated parameters"
+        400:
+          description: "Could not update parameters"
+        500:
+          description: "Failed to restore user key"
+  /user/secret/expose_link:
+    post:
+      description: "Expose an authorized users key through a link"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Succesfully updated parameters"
+        400:
+          description: "Could not update parameters"
+        500:
+          description: "Failed to restore user key"
+  /user/secret/share:
+    post:
+      description: "share_key_to_other_usrid_authorized"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: sharing_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/SharingRequestParameters"
+      responses:
+        200:
+          description: "Succesfully shared a key to specified users"
+        400:
+          description: "Could not share a key to specified users"
+        500:
+          description: "Failed to share a key to specified users"
+  /user/secret/unshare:
+    post:
+      description: "unshare_a_key_authorized"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Succesfully unshare_a_key"
+        400:
+          description: "Could not unshare_a_key"
+        500:
+          description: "Failed to unshare_a_key"
+  /user/secret/version_expose:
+    post:
+      description: "Expose a authorized user key current version"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Succesfully expose user key current version"
+        400:
+          description: "Could not expose user key current version"
+        500:
+          description: "Failed to get user key current version"
+  /user/secret/version_expose_link:
+    post:
+      description: "Expose a authorized user key current version"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Succesfully expose user key current version"
+        400:
+          description: "Could not expose user key current version"
+        500:
+          description: "Failed to get user key current version"
+  /user/secret/expose_expiration_time:
+    post:
+      description: "Expose user key version current expiration time for authorized request"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Succesfully expose user key version expiration time"
+        400:
+          description: "Could not expose user key version expiration time"
+        500:
+          description: "Failed to get user key version expiration time"
+  /user/secret/list:
+    post:
+      description: "List an authorized users secrets"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Succesfully updated parameters"
+        400:
+          description: "Could not update parameters"
+        500:
+          description: "Failed to restore user secret"
+  /user/secret/list_no_dup:
+    post:
+      description: "List an authorized users secrets"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Succesfully updated parameters"
+        400:
+          description: "Could not update parameters"
+        500:
+          description: "Failed to restore user secret"
+  /user/secret/version_list:
+    post:
+      description: "List user secrets versions for authorized request"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Succesfully list all versions of current key"
+        400:
+          description: "Could not list all versions of current key"
+        500:
+          description: "Failed to list all versions of user secret"
+  /user/secret/version_list_for_link:
+    post:
+      description: "List user secrets versions for link for authorized request"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Succesfully list all versions of current key"
+        400:
+          description: "Could not list all versions of current key"
+        500:
+          description: "Failed to list all versions of user secret"
+  /user/secret/update_key_metadata:
+    post:
+      description: "Update user key metadata for authorized request"
+      tags:
+        - "user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Succesfully update user metadata versions of current key"
+        400:
+          description: "Failed to update user key metadata"
+        500:
+          description: "Failed to update user key metadata"
+  /user/secret/update_user_metadata:
+      post:
+        description: "Update user metadata for authorized request"
+        tags:
+          - "user"
+        consumes:
+          - "application/json"
+        produces:
+          - "application/json"
+        responses:
+          200:
+            description: "Succesfully update user metadata versions of current key"
+          400:
+            description: "Failed to update user  metadata"
+          500:
+            description: "Failed to update user  metadata"
+  /user/secret/user_metadata:
+      post:
+        description: "Get user metadata for authorized request"
+        tags:
+          - "user"
+        consumes:
+          - "application/json"
+        produces:
+          - "application/json"
+        responses:
+          200:
+            description: "Succesfully get user metadata versions of current key"
+          400:
+            description: "Failed to get user metadata"
+          500:
+            description: "Failed to get user metadata"
+  /user/upload:
+    post:
+      tags:
+      - "user"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "multipart/form-data"
+      responses:
+        200:
+          description: "Got file succesfully"
+        400:
+          description: "Could not get file"
+
+definitions:
+  ServerConfig:
+    type: "object"
+    properties:
+      status:
+        type: "string"
+        description: "Whether the server is running or not"
+        enum:
+          - "up"
+          - "down"
+      initialized?:
+        type: "boolean"
+        description: "Whether the server has been initialized"
+      developer_token:
+        type: "string"
+  UserProtectionStatus:
+    type: "object"
+    properties:
+      protection_status:
+        type: "string"
+        description: "Protected or exposed"
+        enum:
+          - "protected"
+          - "exposed"
+      resource:
+        type: "string"
+        description: "A file or directory resource"
+  ProtectionGroup:
+    type: "object"
+    properties:
+      protection_setting:
+        type: "string"
+        description: "Provides the following options:
+          * Low: 2 copies, 4 parts, 1 move/day
+          * Medium: 3 copies, 8 parts, 12 move/day
+          * High: 4 copies, 16 parts, 24 move/day"
+        enum:
+          - "low"
+          - "medium"
+          - "high"
+  AdminUsers:
+    type: "object"
+    description: ""
+    properties:
+      id:
+        type: "string"
+        description: "hashed id"
+      email:
+        type: "string"
+        description: "new admin's email"
+      users:
+        type: "array"
+        description: "list of admin user hashed okta id and email"
+        items:
+          $ref: "#/definitions/UserCredential"
+  GenerateDataKeys:
+    type: "object"
+    description: ""
+    properties:
+      admin_id:
+        type: "string"
+        description: "admin user id"
+      group_id:
+        type: "string"
+        description: "unique okta group name"
+      user_credentials:
+        type: "array"
+        items:
+          $ref: "#/definitions/UserCredential"
+  StoreDataKey:
+    type: "object"
+    description: "User data key"
+    properties:
+      email:
+        type: "string"
+        description: "User email address"
+      pass_phrase:
+        type: "string"
+        description: "pass phrase used to encrypt/decrypt the key to/from the vault"
+      data_key:
+        type: "string"
+        description: "data key. may be signed"
+  UserCredential:
+    type: "object"
+    description: "User credential"
+    properties:
+      login:
+        type: "string"
+        description: "okta login handle, could be same as email"
+      email:
+        type: "string"
+        description: "okta primary email"
+      id:
+        type: "string"
+        description: "okta id string"
+  SharingRequestParameters:
+    type: object
+    properties:
+      key_name:
+        type: string
+        description: Plaintext name of the key
+      permission:
+        type: string
+        description: Write or Read Permissions
+        enum:
+          - R
+          - W
+          - RW
+      usr_id_from:
+        type: string
+        description: The email of the sharer
+      usr_id_to:
+          type: string
+          description: The email of the sharee

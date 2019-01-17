@@ -1,0 +1,24 @@
+{
+  "name": "cryptomovedocs",
+  "version": "1.0.0",
+  "description": "[Hello Guide](https://github.com/cryptocharudatta/CryptoMoveDocs/tree/master/source/helloguide.rst)",
+  "scripts": {
+    "createJson": "yaml2json --save swagger.yaml",
+    "deploy": "yarn run createJson && yarn run deployJson",
+    "deployJson": "rdme swagger swagger.json --key=$RDME_KY --id=$RDME_ID 1>/dev/null"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/cryptomove/cryptomovedocs.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cryptomove/cryptomovedocs/issues"
+  },
+  "homepage": "https://github.com/cryptomove/cryptomovedocs#readme",
+  "devDependencies": {
+    "rdme": "^2.2.2",
+    "yamljs": "^0.3.0"
+  }
+}
