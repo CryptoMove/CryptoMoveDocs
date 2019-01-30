@@ -3,20 +3,20 @@ info:
   description: "CryptoMove API"
   version: "1.0.0"
   title: "CryptoMove API"
-basePath: "/v1"
+basePath: "/v1/user"
 host: api.cryptomove.com
 schemes:
   - "https"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
 paths:
-  /user/secret/delete:
+  /secret/delete:
     post:
       description: "Delete an authorized users key"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "secrets"
       responses:
         200:
           description: "Succesfully deleted parameters"
@@ -24,113 +24,81 @@ paths:
           description: "Could not delete parameters"
         500:
           description: "Failed to delete user key"
-  /user/server/betacode:
+  /server/betacode:
     post:
       description: "Verify beta code"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "auth"
       responses:
         200:
           description: "Information regarding user beta code"
         400:
           description: "Could not find beta code"
-  /user/login:
+  /login:
     post:
       description: "User login"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "auth"
       responses:
         200:
           description: "logged in"
         400:
           description: "error"
-  /user/login_authorization_code:
+  /login_authorization_code:
     post:
       description: "User login"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "auth"
       responses:
         200:
           description: "logged in"
         400:
           description: "error"
-  /user/authorization_code_email:
+  /authorization_code_email:
     post:
       description: "User login"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "auth"
       responses:
         200:
           description: "get authorization code by email"
         400:
           description: "error"
-  /user/refresh_token:
+  /refresh_token:
     post:
       description: "User refresh token"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "auth"
       responses:
         200:
           description: "refresh token successful"
         400:
           description: "error"
-  /user/resetpassword:
+  /resetpassword:
     post:
       description: "Reset Password"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "auth"
       responses:
         200:
           description: "email sent"
         400:
           description: "error"
-  /user/signup:
+  /signup:
     post:
       description: "User signup"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "auth"
       responses:
         200:
           description: "registration succeeded"
         400:
           description: "error"
-  /user/reset_pwd:
+  /reset_pwd:
     post:
       description: "reset_grpc_client_present_working_directory"
       tags:
-      - "user"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
+        - "auth"
       responses:
         200:
           description: "Succesfully reset_grpc_client_pwd"
@@ -138,15 +106,11 @@ paths:
           description: "Could not reset_grpc_client_pwd"
         500:
           description: "Failed to reset_grpc_client_pwd"
-  /user/secret/protect:
+  /secret/protect:
     post:
       description: "Protect an authorized users key"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "secrets"
       responses:
         200:
           description: "Succesfully updated parameters"
@@ -154,15 +118,11 @@ paths:
           description: "Could not update parameters"
         500:
           description: "Failed to lock user key"
-  /user/secret/protect_link:
+  /secret/protect_link:
     post:
       description: "Protect an authorized users key through a link"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "secrets"
       responses:
         200:
           description: "Succesfully updated parameters"
@@ -170,15 +130,11 @@ paths:
           description: "Could not update parameters"
         500:
           description: "Failed to lock user key"
-  /user/secret/update_expiration:
+  /secret/update_expiration:
     post:
       description: "Update expiration date for authorized request"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "secrets"
       responses:
         200:
           description: "Succesfully updated expiration date"
@@ -186,15 +142,11 @@ paths:
           description: "Could not update expiration date"
         500:
           description: "Failed to update expiration date"
-  /user/secret/update_description:
+  /secret/update_description:
     post:
       description: "Update description for authorized request"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "secrets"
       responses:
         200:
           description: "Succesfully updated description date"
@@ -202,15 +154,11 @@ paths:
           description: "Could not update description date"
         500:
           description: "Failed to update description date"
-  /user/secret/update_classification:
+  /secret/update_classification:
     post:
       description: "Update classification for authorized request"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "secrets"
       responses:
         200:
           description: "Succesfully updated classification"
@@ -218,15 +166,11 @@ paths:
           description: "Could not update classification"
         500:
           description: "Failed to update classification"
-  /user/secret/expose:
+  /secret/expose:
     post:
       description: "Expose an authorized users key"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "secrets"
       responses:
         200:
           description: "Succesfully updated parameters"
@@ -234,15 +178,11 @@ paths:
           description: "Could not update parameters"
         500:
           description: "Failed to restore user key"
-  /user/secret/expose_link:
+  /secret/expose_link:
     post:
       description: "Expose an authorized users key through a link"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "secrets"
       responses:
         200:
           description: "Succesfully updated parameters"
@@ -250,15 +190,11 @@ paths:
           description: "Could not update parameters"
         500:
           description: "Failed to restore user key"
-  /user/secret/share:
+  /secret/share:
     post:
       description: "share_key_to_other_usrid_authorized"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "secrets"
       parameters:
         - name: sharing_parameters
           description: JSON parameters
@@ -272,15 +208,11 @@ paths:
           description: "Could not share a key to specified users"
         500:
           description: "Failed to share a key to specified users"
-  /user/secret/unshare:
+  /secret/unshare:
     post:
       description: "unshare_a_key_authorized"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "secrets"
       responses:
         200:
           description: "Succesfully unshare_a_key"
@@ -288,15 +220,11 @@ paths:
           description: "Could not unshare_a_key"
         500:
           description: "Failed to unshare_a_key"
-  /user/secret/version_expose:
+  /secret/version_expose:
     post:
       description: "Expose a authorized user key current version"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "secrets"
       responses:
         200:
           description: "Succesfully expose user key current version"
@@ -304,15 +232,11 @@ paths:
           description: "Could not expose user key current version"
         500:
           description: "Failed to get user key current version"
-  /user/secret/version_expose_link:
+  /secret/version_expose_link:
     post:
       description: "Expose a authorized user key current version"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "secrets"
       responses:
         200:
           description: "Succesfully expose user key current version"
@@ -320,15 +244,11 @@ paths:
           description: "Could not expose user key current version"
         500:
           description: "Failed to get user key current version"
-  /user/secret/expose_expiration_time:
+  /secret/expose_expiration_time:
     post:
       description: "Expose user key version current expiration time for authorized request"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "secrets"
       responses:
         200:
           description: "Succesfully expose user key version expiration time"
@@ -336,15 +256,11 @@ paths:
           description: "Could not expose user key version expiration time"
         500:
           description: "Failed to get user key version expiration time"
-  /user/secret/list:
+  /secret/list:
     post:
       description: "List an authorized users secrets"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "secrets"
       responses:
         200:
           description: "Succesfully updated parameters"
@@ -352,31 +268,25 @@ paths:
           description: "Could not update parameters"
         500:
           description: "Failed to restore user secret"
-  /user/secret/list_no_dup:
+  /secret/list_no_dup:
     post:
       description: "List an authorized users secrets"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "secrets"
       responses:
         200:
-          description: "Succesfully updated parameters"
+          description: Returns a list of keys
+          schema:
+            $ref: "#/definitions/ListNoDupResponse"
         400:
           description: "Could not update parameters"
         500:
           description: "Failed to restore user secret"
-  /user/secret/version_list:
+  /secret/version_list:
     post:
       description: "List user secrets versions for authorized request"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "secrets"
       responses:
         200:
           description: "Succesfully list all versions of current key"
@@ -384,15 +294,11 @@ paths:
           description: "Could not list all versions of current key"
         500:
           description: "Failed to list all versions of user secret"
-  /user/secret/version_list_for_link:
+  /secret/version_list_for_link:
     post:
       description: "List user secrets versions for link for authorized request"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "secrets"
       responses:
         200:
           description: "Succesfully list all versions of current key"
@@ -400,15 +306,11 @@ paths:
           description: "Could not list all versions of current key"
         500:
           description: "Failed to list all versions of user secret"
-  /user/secret/update_key_metadata:
+  /secret/update_key_metadata:
     post:
       description: "Update user key metadata for authorized request"
       tags:
-        - "user"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
+        - "secrets"
       responses:
         200:
           description: "Succesfully update user metadata versions of current key"
@@ -416,15 +318,11 @@ paths:
           description: "Failed to update user key metadata"
         500:
           description: "Failed to update user key metadata"
-  /user/secret/update_user_metadata:
+  /secret/update_user_metadata:
       post:
         description: "Update user metadata for authorized request"
         tags:
-          - "user"
-        consumes:
-          - "application/json"
-        produces:
-          - "application/json"
+          - "secrets"
         responses:
           200:
             description: "Succesfully update user metadata versions of current key"
@@ -432,15 +330,11 @@ paths:
             description: "Failed to update user  metadata"
           500:
             description: "Failed to update user  metadata"
-  /user/secret/user_metadata:
+  /secret/user_metadata:
       post:
         description: "Get user metadata for authorized request"
         tags:
-          - "user"
-        consumes:
-          - "application/json"
-        produces:
-          - "application/json"
+          - "secrets"
         responses:
           200:
             description: "Succesfully get user metadata versions of current key"
@@ -448,14 +342,10 @@ paths:
             description: "Failed to get user metadata"
           500:
             description: "Failed to get user metadata"
-  /user/upload:
+  /upload:
     post:
       tags:
-      - "user"
-      consumes:
-      - "multipart/form-data"
-      produces:
-      - "multipart/form-data"
+        - "files"
       responses:
         200:
           description: "Got file succesfully"
@@ -576,3 +466,23 @@ definitions:
       usr_id_to:
           type: string
           description: The email of the sharee
+  ListNoDupResponse:
+    type: object
+    properties:
+      keys:
+        description: Keys created by the user
+        type: object
+        properties:
+          keyName:
+            type: string
+            description: Unique key name
+      links:
+        description: Keys shared to or from the user
+        type: object
+        properties:
+          keyName:
+            type: string
+            description: Unique key name
+      status:
+        description: Status from the server
+        type: string
