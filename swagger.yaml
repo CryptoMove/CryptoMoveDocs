@@ -94,18 +94,6 @@ paths:
           description: "registration succeeded"
         400:
           description: "error"
-  /reset_pwd:
-    post:
-      description: "reset_grpc_client_present_working_directory"
-      tags:
-        - "auth"
-      responses:
-        200:
-          description: "Succesfully reset_grpc_client_pwd"
-        400:
-          description: "Could not reset_grpc_client_pwd"
-        500:
-          description: "Failed to reset_grpc_client_pwd"
   /secret/protect:
     post:
       description: "Protect an authorized users key"
