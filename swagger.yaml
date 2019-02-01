@@ -330,15 +330,6 @@ paths:
             description: "Failed to get user metadata"
           500:
             description: "Failed to get user metadata"
-  /upload:
-    post:
-      tags:
-        - "files"
-      responses:
-        200:
-          description: "Got file succesfully"
-        400:
-          description: "Could not get file"
 
 definitions:
   ProtectionGroup:
