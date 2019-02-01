@@ -341,32 +341,6 @@ paths:
           description: "Could not get file"
 
 definitions:
-  ServerConfig:
-    type: "object"
-    properties:
-      status:
-        type: "string"
-        description: "Whether the server is running or not"
-        enum:
-          - "up"
-          - "down"
-      initialized?:
-        type: "boolean"
-        description: "Whether the server has been initialized"
-      developer_token:
-        type: "string"
-  UserProtectionStatus:
-    type: "object"
-    properties:
-      protection_status:
-        type: "string"
-        description: "Protected or exposed"
-        enum:
-          - "protected"
-          - "exposed"
-      resource:
-        type: "string"
-        description: "A file or directory resource"
   ProtectionGroup:
     type: "object"
     properties:
@@ -380,70 +354,17 @@ definitions:
           - "low"
           - "medium"
           - "high"
-  AdminUsers:
-    type: "object"
-    description: ""
-    properties:
-      id:
-        type: "string"
-        description: "hashed id"
-      email:
-        type: "string"
-        description: "new admin's email"
-      users:
-        type: "array"
-        description: "list of admin user hashed okta id and email"
-        items:
-          $ref: "#/definitions/UserCredential"
-  GenerateDataKeys:
-    type: "object"
-    description: ""
-    properties:
-      admin_id:
-        type: "string"
-        description: "admin user id"
-      group_id:
-        type: "string"
-        description: "unique okta group name"
-      user_credentials:
-        type: "array"
-        items:
-          $ref: "#/definitions/UserCredential"
-  StoreDataKey:
-    type: "object"
-    description: "User data key"
-    properties:
-      email:
-        type: "string"
-        description: "User email address"
-      pass_phrase:
-        type: "string"
-        description: "pass phrase used to encrypt/decrypt the key to/from the vault"
-      data_key:
-        type: "string"
-        description: "data key. may be signed"
-  UserCredential:
-    type: "object"
-    description: "User credential"
-    properties:
-      login:
-        type: "string"
-        description: "okta login handle, could be same as email"
-      email:
-        type: "string"
-        description: "okta primary email"
-      id:
-        type: "string"
-        description: "okta id string"
   SharingRequestParameters:
     type: object
     properties:
       key_name:
         type: string
         description: Plaintext name of the key
+        required: true
       permission:
         type: string
         description: Write or Read Permissions
+        required: true
         enum:
           - R
           - W
@@ -451,9 +372,11 @@ definitions:
       usr_id_from:
         type: string
         description: The email of the sharer
+        required: true
       usr_id_to:
-          type: string
-          description: The email of the sharee
+        type: string
+        description: The email of the sharee
+        required: true
   ListNoDupResponse:
     type: object
     properties:
