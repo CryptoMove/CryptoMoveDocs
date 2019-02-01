@@ -4,7 +4,7 @@ info:
   version: "1.0.0"
   title: "CryptoMove API"
 basePath: "/v1/user"
-host: api.cryptomove.com
+host: http://cryptomove-api.getsandbox.com
 schemes:
   - "https"
 consumes:
