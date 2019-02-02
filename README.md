@@ -2,4 +2,9 @@
 
 ## Welcome to Cryptomove Documentation
 
+### Updating the Sandbox
 
+We use [Sandbox](https://getsandbox.com) to create a mock version of our
+endpoints. To update our API, navigate to our getsandbox page,
+https://getsandbox.com/sandboxes/cryptomove-api#overview, and upload the
+newest version of the Swagger file there.
