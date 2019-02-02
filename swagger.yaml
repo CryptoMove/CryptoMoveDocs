@@ -14,7 +14,7 @@ produces:
 paths:
   /user/secret/delete:
     post:
-      description: "Delete an authorized users key"
+      description: "Deletes a secret."
       tags:
         - "secrets"
       responses:
@@ -76,7 +76,7 @@ paths:
           description: "error"
   /user/resetpassword:
     post:
-      description: "Reset Password"
+      description: "Resets a user's password."
       tags:
         - "auth"
       responses:
@@ -86,7 +86,7 @@ paths:
           description: "error"
   /user/signup:
     post:
-      description: "User signup"
+      description: "Creates a new user."
       tags:
         - "auth"
       responses:
@@ -96,7 +96,7 @@ paths:
           description: "error"
   /user/secret/protect:
     post:
-      description: "Protect an authorized users key"
+      description: "Stores a new key-value pair as a secret."
       tags:
         - "secrets"
       responses:
@@ -108,7 +108,7 @@ paths:
           description: "Failed to lock user key"
   /user/secret/protect_link:
     post:
-      description: "Protect an authorized users key through a link"
+      description: "Stores a new key-value pair as a secret. The key name is specified with a link."
       tags:
         - "secrets"
       responses:
@@ -156,7 +156,7 @@ paths:
           description: "Failed to update classification"
   /user/secret/expose:
     post:
-      description: "Expose an authorized users key"
+      description: "Exposes the value of a secret."
       tags:
         - "secrets"
       responses:
@@ -168,7 +168,7 @@ paths:
           description: "Failed to restore user key"
   /user/secret/expose_link:
     post:
-      description: "Expose an authorized users key through a link"
+      description: "Exposes the value of a secret. The secret is identified by a key name that contains a link."
       tags:
         - "secrets"
       responses:
@@ -180,7 +180,7 @@ paths:
           description: "Failed to restore user key"
   /user/secret/share:
     post:
-      description: "share_key_to_other_usrid_authorized"
+      description: "Shares the key of a secret with another user. "
       tags:
         - "secrets"
       parameters:
@@ -198,7 +198,7 @@ paths:
           description: "Failed to share a key to specified users"
   /user/secret/unshare:
     post:
-      description: "unshare_a_key_authorized"
+      description: "Unshares a secret with the specified users. "
       tags:
         - "secrets"
       responses:
@@ -210,7 +210,7 @@ paths:
           description: "Failed to unshare_a_key"
   /user/secret/version_expose:
     post:
-      description: "Expose a authorized user key current version"
+      description: "Exposes the value of a specific version of a secret. To get a list of all versions, use /secret/version_list."
       tags:
         - "secrets"
       responses:
@@ -222,7 +222,7 @@ paths:
           description: "Failed to get user key current version"
   /user/secret/version_expose_link:
     post:
-      description: "Expose a authorized user key current version"
+      description: "Exposes the value of a specific version of a secret. The secret is identified by a key name that contains a link."
       tags:
         - "secrets"
       responses:
@@ -246,7 +246,7 @@ paths:
           description: "Failed to get user key version expiration time"
   /user/secret/list:
     post:
-      description: "List an authorized users secrets"
+      description: "Lists a user's secrets. "
       tags:
         - "secrets"
       responses:
@@ -258,7 +258,7 @@ paths:
           description: "Failed to restore user secret"
   /user/secret/list_no_dup:
     post:
-      description: "List an authorized users secrets"
+      description: "Lists a user's secrets."
       tags:
         - "secrets"
       responses:
@@ -270,7 +270,7 @@ paths:
           description: "Failed to restore user secret"
   /user/secret/version_list:
     post:
-      description: "List user secrets versions for authorized request"
+      description: "Lists information about all versions of a secret."
       tags:
         - "secrets"
       responses:
@@ -282,7 +282,7 @@ paths:
           description: "Failed to list all versions of user secret"
   /user/secret/version_list_for_link:
     post:
-      description: "List user secrets versions for link for authorized request"
+      description: "Lists information about all versions of a secret. The secret is identified by a key name that contains a link."
       tags:
         - "secrets"
       responses:
