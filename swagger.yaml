@@ -31,7 +31,11 @@ paths:
           description: "Could not delete parameters"
         500:
           description: "Failed to delete user key"
+<<<<<<< HEAD
   /user/server/betacode:
+=======
+  /server/betacode:
+>>>>>>> 6ce508b... Uncomment endpoints per Nick's PR comment
     post:
       description: "Verify beta code"
       tags:
@@ -41,7 +45,11 @@ paths:
           description: "Information regarding user beta code"
         400:
           description: "Could not find beta code"
+<<<<<<< HEAD
   /user/login:
+=======
+  /login:
+>>>>>>> 6ce508b... Uncomment endpoints per Nick's PR comment
     post:
       description: "User login"
       tags:
@@ -51,7 +59,11 @@ paths:
           description: "logged in"
         400:
           description: "error"
+<<<<<<< HEAD
   /user/login_authorization_code:
+=======
+  /login_authorization_code:
+>>>>>>> 6ce508b... Uncomment endpoints per Nick's PR comment
     post:
       description: "User login"
       tags:
@@ -61,7 +73,11 @@ paths:
           description: "logged in"
         400:
           description: "error"
+<<<<<<< HEAD
   /user/authorization_code_email:
+=======
+  /authorization_code_email:
+>>>>>>> 6ce508b... Uncomment endpoints per Nick's PR comment
     post:
       description: "User login"
       tags:
@@ -71,7 +87,11 @@ paths:
           description: "get authorization code by email"
         400:
           description: "error"
+<<<<<<< HEAD
   /user/refresh_token:
+=======
+  /refresh_token:
+>>>>>>> 6ce508b... Uncomment endpoints per Nick's PR comment
     post:
       description: "User refresh token"
       tags:
@@ -81,7 +101,11 @@ paths:
           description: "refresh token successful"
         400:
           description: "error"
+<<<<<<< HEAD
   /user/resetpassword:
+=======
+  /resetpassword:
+>>>>>>> 6ce508b... Uncomment endpoints per Nick's PR comment
     post:
       description: "Resets a user's password."
       tags:
