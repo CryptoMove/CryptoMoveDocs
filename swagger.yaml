@@ -17,6 +17,13 @@ paths:
       description: "Deletes a secret."
       tags:
         - "secrets"
+      parameters:
+        - name: delete_parameters
+          in: body
+          description: JSON parameters
+          schema: 
+            $ref: "#/definitions/DeleteRequestParamaters"
+
       responses:
         200:
           description: "Succesfully deleted parameters"
@@ -79,6 +86,12 @@ paths:
       description: "Resets a user's password."
       tags:
         - "auth"
+      paramaters:
+        - name: resetpassword_parameters
+          description: JSON paramaters
+          in: body
+          schema:
+              $ref: "#/definitions/ResetpasswordRequestParameters"
       responses:
         200:
           description: "email sent"
@@ -89,6 +102,12 @@ paths:
       description: "Creates a new user."
       tags:
         - "auth"
+      parameters:
+        - name: signup_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/SignupRequestParameters"
       responses:
         200:
           description: "registration succeeded"
@@ -99,6 +118,12 @@ paths:
       description: "Stores a new key-value pair as a secret."
       tags:
         - "secrets"
+      parameters: 
+        - name: protect_parameters
+          description: JSON parameters
+          in: body
+          schema: 
+            $ref: "#/definitions/ProtectRequestParameters"
       responses:
         200:
           description: "Succesfully updated parameters"
@@ -111,6 +136,12 @@ paths:
       description: "Stores a new key-value pair as a secret. The key name is specified with a link."
       tags:
         - "secrets"
+      parameters:
+        - name: protectLink_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/ProtectLinkRequestParameters"
       responses:
         200:
           description: "Succesfully updated parameters"
@@ -159,6 +190,12 @@ paths:
       description: "Exposes the value of a secret."
       tags:
         - "secrets"
+      parameters:
+        - name: expose_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/ExposeRequestParameters"
       responses:
         200:
           description: "Succesfully updated parameters"
@@ -171,6 +208,12 @@ paths:
       description: "Exposes the value of a secret. The secret is identified by a key name that contains a link."
       tags:
         - "secrets"
+      parameters:
+        - name: exposeLink_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/ExposeLinkRequestParameters"
       responses:
         200:
           description: "Succesfully updated parameters"
@@ -180,7 +223,7 @@ paths:
           description: "Failed to restore user key"
   /user/secret/share:
     post:
-      description: "Shares the key of a secret with another user. "
+      description: "Gives another user access to a secret. "
       tags:
         - "secrets"
       parameters:
@@ -198,9 +241,15 @@ paths:
           description: "Failed to share a key to specified users"
   /user/secret/unshare:
     post:
-      description: "Unshares a secret with the specified users. "
+      description: "Revokes a user's access to a secret."
       tags:
         - "secrets"
+      parameters: 
+        - name: unshare_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/UnshareRequestParameters"
       responses:
         200:
           description: "Succesfully unshare_a_key"
@@ -213,6 +262,12 @@ paths:
       description: "Exposes the value of a specific version of a secret. To get a list of all versions, use /secret/version_list."
       tags:
         - "secrets"
+      parameters:
+        - name: versionExpose_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/VersionExposeRequestParameters"
       responses:
         200:
           description: "Succesfully expose user key current version"
@@ -225,6 +280,12 @@ paths:
       description: "Exposes the value of a specific version of a secret. The secret is identified by a key name that contains a link."
       tags:
         - "secrets"
+      parameters:
+        - name: versionExposeLink_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/VersionExposeLinkRequestParameters"
       responses:
         200:
           description: "Succesfully expose user key current version"
@@ -249,6 +310,12 @@ paths:
       description: "Lists a user's secrets. "
       tags:
         - "secrets"
+      parameters:
+        - name: list_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/ListRequestParameters"
       responses:
         200:
           description: "Succesfully updated parameters"
@@ -261,6 +328,12 @@ paths:
       description: "Lists a user's secrets."
       tags:
         - "secrets"
+      parameters:
+        - name: listNoDup_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/ListNoDupRequestParameters"
       responses:
         200:
           description: Returns a list of keys
@@ -273,6 +346,12 @@ paths:
       description: "Lists information about all versions of a secret."
       tags:
         - "secrets"
+      parameters:
+        - name: versionList_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/VersionListRequestParameters"
       responses:
         200:
           description: "Succesfully list all versions of current key"
@@ -285,6 +364,12 @@ paths:
       description: "Lists information about all versions of a secret. The secret is identified by a key name that contains a link."
       tags:
         - "secrets"
+      parameters:
+        - name: versionListLink_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/VersionListLinkRequestParameters"
       responses:
         200:
           description: "Succesfully list all versions of current key"
@@ -343,25 +428,213 @@ definitions:
           - "low"
           - "medium"
           - "high"
+  DeleteRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of authorized user."
+        required: true
+      key_name:
+        type: string
+        description: "Name of the secret's key."
+        required: true
+  ResetpasswordRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of user."
+        required: true
+      connection:
+        type: string
+        description: "Name of the CryptoMove Tholos database."
+        required: true
+  SignupRequestParameters:
+    type: object
+    properties:
+      email: 
+        type: string
+        description: "Email of the new user."
+        required: true
+      password: 
+        type: string
+        description: "Password of the new user."
+        required: true
+      beta_code: 
+        type: string
+        description: "Identifier for beta version of CryptoMove Tholos."
+        required: true
+  ProtectRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of authorized user."
+        required: true
+      key_name: 
+        type: string
+        description: "Key of the new secret."
+        required: true
+      key_value:
+        type: string
+        description: "Value of the new secret."
+        required: true
+      without_list: 
+        type: boolean
+        description: "Prevents the response from listing the keys for all of the user's secrets."
+        required: false
+  ProtectLinkRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of authorized user."
+        required: true
+      key_name: 
+        type: string
+        description: "Key of the new secret."
+        required: true
+      key_value:
+        type: string
+        description: "Value of the new secret."
+        required: true
+  ExposeRequestParameters:
+    type: object
+    properties:
+      email: 
+        type: string
+        description: "Email of authorized user."
+        required: true
+      key_name: 
+        type: string
+        description: "Name of the secret's key."
+        required: true
+  ExposeLinkRequestParameters:
+    type: object
+    properties: 
+      email: 
+        type: string
+        description: "Email of authorized user."
+        required: true
+      key_name: 
+        type: string
+        description: "Name of the secret's key."
+        required: true
   SharingRequestParameters:
     type: object
     properties:
       key_name:
         type: string
+<<<<<<< HEAD
         description: Plaintext name of the key
       permission:
         type: string
         description: Write or Read Permissions
+=======
+        description: Name of the secret's key.
+        required: true
+      permission:
+        type: string
+        description: Permissions to be granted to user. Write (W), Read (R), or both (RW).
+        required: true
+>>>>>>> 2e43c07... Update swagger.yaml
         enum:
           - R
           - W
           - RW
       usr_id_from:
         type: string
+<<<<<<< HEAD
         description: The email of the sharer
       usr_id_to:
         type: string
         description: The email of the sharee
+=======
+        description: Email of the sharer.
+        required: true
+      usr_id_to:
+        type: string
+        description: Email of the sharee.
+        required: true
+  UnshareRequestParameters:
+    type: object
+    properties:
+      usr_id_from: 
+        type: string
+        description: "Email of user who will no longer have access to the secret."
+        required: true
+      key_name: 
+        type: string
+        description: "Name of secret's key."
+        required: true
+  VersionExposeRequestParameters:
+    type: object
+    properties:
+      email: 
+        type: string
+        description: "Email of authorized user."
+        required: true
+      key_name: 
+        type: string
+        description: "Name of the secret's key."
+        required: true
+      key_version: 
+        type: string
+        description: "A version number of the secret."
+        required: true
+  VersionExposeLinkRequestParameters:
+    type: object
+    properties:
+      email: 
+        type: string
+        description: "Email of authorized user."
+        required: true
+      key_name: 
+        type: string
+        description: "Name of the secret's key."
+        required: true
+      key_version: 
+        type: string
+        description: "A version number of the secret."
+        required: true
+  ListRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of user with access to secrets."
+        required: true
+  ListNoDupRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of user with access to secrets."
+        required: true
+  VersionListRequestParameters:
+    type: object
+    properties:
+      email: 
+        type: string
+        description: "Email of authorized user."
+        required: true
+      key_name:
+        type: string
+        description: "Name of secret's key."  
+        required: true    
+  VersionListLinkRequestParameters:
+    type: object
+    properties:
+      email: 
+        type: string
+        description: "Email of authorized user."
+        required: true
+      key_name:
+        type: string
+        description: "Name of secret's key."  
+        required: true   
+>>>>>>> 2e43c07... Update swagger.yaml
   ListNoDupResponse:
     type: object
     properties:
@@ -382,3 +655,5 @@ definitions:
       status:
         description: Status from the server
         type: string
+
+  
