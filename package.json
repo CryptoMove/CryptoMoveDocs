@@ -5,7 +5,8 @@
   "scripts": {
     "createJson": "yaml2json --save swagger.yaml",
     "deploy": "yarn run createJson && yarn run deployJson",
-    "deployJson": "rdme swagger swagger.json --key=$RDME_KY --id=$RDME_ID 1>/dev/null"
+    "deployJson": "rdme swagger swagger.json --key=$RDME_KY --id=$RDME_ID 1>/dev/null",
+    "test": "swagger-spec-validator swagger.yaml"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,8 @@
   "devDependencies": {
     "rdme": "^2.2.2",
     "yamljs": "^0.3.0"
+  },
+  "dependencies": {
+    "swagger-spec-validator": "^3.0.1"
   }
 }

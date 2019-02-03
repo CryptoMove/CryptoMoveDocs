@@ -351,11 +351,9 @@ definitions:
       key_name:
         type: string
         description: Plaintext name of the key
-        required: true
       permission:
         type: string
         description: Write or Read Permissions
-        required: true
         enum:
           - R
           - W
@@ -363,11 +361,9 @@ definitions:
       usr_id_from:
         type: string
         description: The email of the sharer
-        required: true
       usr_id_to:
         type: string
         description: The email of the sharee
-        required: true
   ListNoDupResponse:
     type: object
     properties:
