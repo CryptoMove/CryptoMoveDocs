@@ -3,7 +3,7 @@ info:
   description: "CryptoMove API"
   version: "1.0.0"
   title: "CryptoMove API"
-basePath: "/v1/user"
+basePath: "/v1"
 host: cryptomove-api.getsandbox.com
 schemes:
   - "http"
@@ -12,7 +12,7 @@ consumes:
 produces:
   - "application/json"
 paths:
-  /secret/delete:
+  /user/secret/delete:
     post:
       description: "Delete an authorized users key"
       tags:
@@ -24,7 +24,7 @@ paths:
           description: "Could not delete parameters"
         500:
           description: "Failed to delete user key"
-  /server/betacode:
+  /user/server/betacode:
     post:
       description: "Verify beta code"
       tags:
@@ -34,7 +34,7 @@ paths:
           description: "Information regarding user beta code"
         400:
           description: "Could not find beta code"
-  /login:
+  /user/login:
     post:
       description: "User login"
       tags:
@@ -44,7 +44,7 @@ paths:
           description: "logged in"
         400:
           description: "error"
-  /login_authorization_code:
+  /user/login_authorization_code:
     post:
       description: "User login"
       tags:
@@ -54,7 +54,7 @@ paths:
           description: "logged in"
         400:
           description: "error"
-  /authorization_code_email:
+  /user/authorization_code_email:
     post:
       description: "User login"
       tags:
@@ -64,7 +64,7 @@ paths:
           description: "get authorization code by email"
         400:
           description: "error"
-  /refresh_token:
+  /user/refresh_token:
     post:
       description: "User refresh token"
       tags:
@@ -74,7 +74,7 @@ paths:
           description: "refresh token successful"
         400:
           description: "error"
-  /resetpassword:
+  /user/resetpassword:
     post:
       description: "Reset Password"
       tags:
@@ -84,7 +84,7 @@ paths:
           description: "email sent"
         400:
           description: "error"
-  /signup:
+  /user/signup:
     post:
       description: "User signup"
       tags:
@@ -94,7 +94,7 @@ paths:
           description: "registration succeeded"
         400:
           description: "error"
-  /secret/protect:
+  /user/secret/protect:
     post:
       description: "Protect an authorized users key"
       tags:
@@ -106,7 +106,7 @@ paths:
           description: "Could not update parameters"
         500:
           description: "Failed to lock user key"
-  /secret/protect_link:
+  /user/secret/protect_link:
     post:
       description: "Protect an authorized users key through a link"
       tags:
@@ -118,7 +118,7 @@ paths:
           description: "Could not update parameters"
         500:
           description: "Failed to lock user key"
-  /secret/update_expiration:
+  /user/secret/update_expiration:
     post:
       description: "Update expiration date for authorized request"
       tags:
@@ -130,7 +130,7 @@ paths:
           description: "Could not update expiration date"
         500:
           description: "Failed to update expiration date"
-  /secret/update_description:
+  /user/secret/update_description:
     post:
       description: "Update description for authorized request"
       tags:
@@ -142,7 +142,7 @@ paths:
           description: "Could not update description date"
         500:
           description: "Failed to update description date"
-  /secret/update_classification:
+  /user/secret/update_classification:
     post:
       description: "Update classification for authorized request"
       tags:
@@ -154,7 +154,7 @@ paths:
           description: "Could not update classification"
         500:
           description: "Failed to update classification"
-  /secret/expose:
+  /user/secret/expose:
     post:
       description: "Expose an authorized users key"
       tags:
@@ -166,7 +166,7 @@ paths:
           description: "Could not update parameters"
         500:
           description: "Failed to restore user key"
-  /secret/expose_link:
+  /user/secret/expose_link:
     post:
       description: "Expose an authorized users key through a link"
       tags:
@@ -178,7 +178,7 @@ paths:
           description: "Could not update parameters"
         500:
           description: "Failed to restore user key"
-  /secret/share:
+  /user/secret/share:
     post:
       description: "share_key_to_other_usrid_authorized"
       tags:
@@ -196,7 +196,7 @@ paths:
           description: "Could not share a key to specified users"
         500:
           description: "Failed to share a key to specified users"
-  /secret/unshare:
+  /user/secret/unshare:
     post:
       description: "unshare_a_key_authorized"
       tags:
@@ -208,7 +208,7 @@ paths:
           description: "Could not unshare_a_key"
         500:
           description: "Failed to unshare_a_key"
-  /secret/version_expose:
+  /user/secret/version_expose:
     post:
       description: "Expose a authorized user key current version"
       tags:
@@ -220,7 +220,7 @@ paths:
           description: "Could not expose user key current version"
         500:
           description: "Failed to get user key current version"
-  /secret/version_expose_link:
+  /user/secret/version_expose_link:
     post:
       description: "Expose a authorized user key current version"
       tags:
@@ -232,7 +232,7 @@ paths:
           description: "Could not expose user key current version"
         500:
           description: "Failed to get user key current version"
-  /secret/expose_expiration_time:
+  /user/secret/expose_expiration_time:
     post:
       description: "Expose user key version current expiration time for authorized request"
       tags:
@@ -244,7 +244,7 @@ paths:
           description: "Could not expose user key version expiration time"
         500:
           description: "Failed to get user key version expiration time"
-  /secret/list:
+  /user/secret/list:
     post:
       description: "List an authorized users secrets"
       tags:
@@ -256,7 +256,7 @@ paths:
           description: "Could not update parameters"
         500:
           description: "Failed to restore user secret"
-  /secret/list_no_dup:
+  /user/secret/list_no_dup:
     post:
       description: "List an authorized users secrets"
       tags:
@@ -264,13 +264,11 @@ paths:
       responses:
         200:
           description: Returns a list of keys
-          schema:
-            $ref: "#/definitions/ListNoDupResponse"
         400:
           description: "Could not update parameters"
         500:
           description: "Failed to restore user secret"
-  /secret/version_list:
+  /user/secret/version_list:
     post:
       description: "List user secrets versions for authorized request"
       tags:
@@ -282,7 +280,7 @@ paths:
           description: "Could not list all versions of current key"
         500:
           description: "Failed to list all versions of user secret"
-  /secret/version_list_for_link:
+  /user/secret/version_list_for_link:
     post:
       description: "List user secrets versions for link for authorized request"
       tags:
@@ -294,7 +292,7 @@ paths:
           description: "Could not list all versions of current key"
         500:
           description: "Failed to list all versions of user secret"
-  /secret/update_key_metadata:
+  /user/secret/update_key_metadata:
     post:
       description: "Update user key metadata for authorized request"
       tags:
@@ -306,7 +304,7 @@ paths:
           description: "Failed to update user key metadata"
         500:
           description: "Failed to update user key metadata"
-  /secret/update_user_metadata:
+  /user/secret/update_user_metadata:
       post:
         description: "Update user metadata for authorized request"
         tags:
@@ -318,7 +316,7 @@ paths:
             description: "Failed to update user  metadata"
           500:
             description: "Failed to update user  metadata"
-  /secret/user_metadata:
+  /user/secret/user_metadata:
       post:
         description: "Get user metadata for authorized request"
         tags:
