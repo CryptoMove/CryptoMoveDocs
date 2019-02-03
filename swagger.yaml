@@ -21,7 +21,7 @@ paths:
         - name: delete_parameters
           in: body
           description: JSON parameters
-          schema: 
+          schema:
             $ref: "#/definitions/DeleteRequestParamaters"
 
       responses:
@@ -31,11 +31,7 @@ paths:
           description: "Could not delete parameters"
         500:
           description: "Failed to delete user key"
-<<<<<<< HEAD
   /user/server/betacode:
-=======
-  /server/betacode:
->>>>>>> 6ce508b... Uncomment endpoints per Nick's PR comment
     post:
       description: "Verify beta code"
       tags:
@@ -45,11 +41,7 @@ paths:
           description: "Information regarding user beta code"
         400:
           description: "Could not find beta code"
-<<<<<<< HEAD
   /user/login:
-=======
-  /login:
->>>>>>> 6ce508b... Uncomment endpoints per Nick's PR comment
     post:
       description: "User login"
       tags:
@@ -59,11 +51,7 @@ paths:
           description: "logged in"
         400:
           description: "error"
-<<<<<<< HEAD
   /user/login_authorization_code:
-=======
-  /login_authorization_code:
->>>>>>> 6ce508b... Uncomment endpoints per Nick's PR comment
     post:
       description: "User login"
       tags:
@@ -73,11 +61,7 @@ paths:
           description: "logged in"
         400:
           description: "error"
-<<<<<<< HEAD
   /user/authorization_code_email:
-=======
-  /authorization_code_email:
->>>>>>> 6ce508b... Uncomment endpoints per Nick's PR comment
     post:
       description: "User login"
       tags:
@@ -87,11 +71,7 @@ paths:
           description: "get authorization code by email"
         400:
           description: "error"
-<<<<<<< HEAD
   /user/refresh_token:
-=======
-  /refresh_token:
->>>>>>> 6ce508b... Uncomment endpoints per Nick's PR comment
     post:
       description: "User refresh token"
       tags:
@@ -101,11 +81,7 @@ paths:
           description: "refresh token successful"
         400:
           description: "error"
-<<<<<<< HEAD
   /user/resetpassword:
-=======
-  /resetpassword:
->>>>>>> 6ce508b... Uncomment endpoints per Nick's PR comment
     post:
       description: "Resets a user's password."
       tags:
@@ -142,11 +118,11 @@ paths:
       description: "Stores a new key-value pair as a secret."
       tags:
         - "secrets"
-      parameters: 
+      parameters:
         - name: protect_parameters
           description: JSON parameters
           in: body
-          schema: 
+          schema:
             $ref: "#/definitions/ProtectRequestParameters"
       responses:
         200:
@@ -157,7 +133,9 @@ paths:
           description: "Failed to lock user key"
   /user/secret/protect_link:
     post:
-      description: "Stores a new key-value pair as a secret. The key name is specified with a link."
+      description: >
+        Stores a new key-value pair as a secret.
+        The key name is specified with a link.
       tags:
         - "secrets"
       parameters:
@@ -229,7 +207,9 @@ paths:
           description: "Failed to restore user key"
   /user/secret/expose_link:
     post:
-      description: "Exposes the value of a secret. The secret is identified by a key name that contains a link."
+      description: >
+        Exposes the value of a secret.
+        The secret is identified by a key name that contains a link.
       tags:
         - "secrets"
       parameters:
@@ -268,7 +248,7 @@ paths:
       description: "Revokes a user's access to a secret."
       tags:
         - "secrets"
-      parameters: 
+      parameters:
         - name: unshare_parameters
           description: JSON parameters
           in: body
@@ -283,7 +263,9 @@ paths:
           description: "Failed to unshare_a_key"
   /user/secret/version_expose:
     post:
-      description: "Exposes the value of a specific version of a secret. To get a list of all versions, use /secret/version_list."
+      description: >
+        Exposes the value of a specific version of a secret.
+        To get a list of all versions, use /secret/version_list.
       tags:
         - "secrets"
       parameters:
@@ -301,7 +283,9 @@ paths:
           description: "Failed to get user key current version"
   /user/secret/version_expose_link:
     post:
-      description: "Exposes the value of a specific version of a secret. The secret is identified by a key name that contains a link."
+      description: >
+        Exposes the value of a specific version of a secret.
+        The secret is identified by a key name that contains a link.
       tags:
         - "secrets"
       parameters:
@@ -385,7 +369,9 @@ paths:
           description: "Failed to list all versions of user secret"
   /user/secret/version_list_for_link:
     post:
-      description: "Lists information about all versions of a secret. The secret is identified by a key name that contains a link."
+      description: >
+        Lists information about all versions of a secret.
+        The secret is identified by a key name that contains a link.
       tags:
         - "secrets"
       parameters:
@@ -458,207 +444,162 @@ definitions:
       email:
         type: string
         description: "Email of authorized user."
-        required: true
       key_name:
         type: string
         description: "Name of the secret's key."
-        required: true
   ResetpasswordRequestParameters:
     type: object
     properties:
       email:
         type: string
         description: "Email of user."
-        required: true
       connection:
         type: string
         description: "Name of the CryptoMove Tholos database."
-        required: true
   SignupRequestParameters:
     type: object
     properties:
-      email: 
+      email:
         type: string
         description: "Email of the new user."
-        required: true
-      password: 
+      password:
         type: string
         description: "Password of the new user."
-        required: true
-      beta_code: 
+      beta_code:
         type: string
         description: "Identifier for beta version of CryptoMove Tholos."
-        required: true
   ProtectRequestParameters:
     type: object
     properties:
       email:
         type: string
         description: "Email of authorized user."
-        required: true
-      key_name: 
+      key_name:
         type: string
         description: "Key of the new secret."
-        required: true
       key_value:
         type: string
         description: "Value of the new secret."
-        required: true
-      without_list: 
+      without_list:
         type: boolean
-        description: "Prevents the response from listing the keys for all of the user's secrets."
-        required: false
+        description: >
+          Prevents the response from listing the keys for all of
+          the user's secrets.
   ProtectLinkRequestParameters:
     type: object
     properties:
       email:
         type: string
         description: "Email of authorized user."
-        required: true
-      key_name: 
+      key_name:
         type: string
         description: "Key of the new secret."
-        required: true
       key_value:
         type: string
         description: "Value of the new secret."
-        required: true
   ExposeRequestParameters:
     type: object
     properties:
-      email: 
+      email:
         type: string
         description: "Email of authorized user."
-        required: true
-      key_name: 
+      key_name:
         type: string
         description: "Name of the secret's key."
-        required: true
   ExposeLinkRequestParameters:
     type: object
-    properties: 
-      email: 
+    properties:
+      email:
         type: string
         description: "Email of authorized user."
-        required: true
-      key_name: 
+      key_name:
         type: string
         description: "Name of the secret's key."
-        required: true
   SharingRequestParameters:
     type: object
     properties:
       key_name:
         type: string
-<<<<<<< HEAD
-        description: Plaintext name of the key
-      permission:
-        type: string
-        description: Write or Read Permissions
-=======
         description: Name of the secret's key.
-        required: true
       permission:
         type: string
-        description: Permissions to be granted to user. Write (W), Read (R), or both (RW).
+        description: >
+          Permissions to be granted to user.
+          Write (W), Read (R), or both (RW).
         required: true
->>>>>>> 2e43c07... Update swagger.yaml
         enum:
           - R
           - W
           - RW
       usr_id_from:
         type: string
-<<<<<<< HEAD
-        description: The email of the sharer
-      usr_id_to:
-        type: string
-        description: The email of the sharee
-=======
         description: Email of the sharer.
-        required: true
       usr_id_to:
         type: string
         description: Email of the sharee.
-        required: true
   UnshareRequestParameters:
     type: object
     properties:
-      usr_id_from: 
+      usr_id_from:
         type: string
         description: "Email of user who will no longer have access to the secret."
-        required: true
-      key_name: 
+      key_name:
         type: string
         description: "Name of secret's key."
-        required: true
   VersionExposeRequestParameters:
     type: object
     properties:
-      email: 
+      email:
         type: string
         description: "Email of authorized user."
-        required: true
-      key_name: 
+      key_name:
         type: string
         description: "Name of the secret's key."
-        required: true
-      key_version: 
+      key_version:
         type: string
         description: "A version number of the secret."
-        required: true
   VersionExposeLinkRequestParameters:
     type: object
     properties:
-      email: 
+      email:
         type: string
         description: "Email of authorized user."
-        required: true
-      key_name: 
+      key_name:
         type: string
         description: "Name of the secret's key."
-        required: true
-      key_version: 
+      key_version:
         type: string
         description: "A version number of the secret."
-        required: true
   ListRequestParameters:
     type: object
     properties:
       email:
         type: string
         description: "Email of user with access to secrets."
-        required: true
   ListNoDupRequestParameters:
     type: object
     properties:
       email:
         type: string
         description: "Email of user with access to secrets."
-        required: true
   VersionListRequestParameters:
     type: object
     properties:
-      email: 
+      email:
         type: string
         description: "Email of authorized user."
-        required: true
       key_name:
         type: string
-        description: "Name of secret's key."  
-        required: true    
+        description: "Name of secret's key."
   VersionListLinkRequestParameters:
     type: object
     properties:
-      email: 
+      email:
         type: string
         description: "Email of authorized user."
-        required: true
       key_name:
         type: string
-        description: "Name of secret's key."  
-        required: true   
->>>>>>> 2e43c07... Update swagger.yaml
+        description: "Name of secret's key."
   ListNoDupResponse:
     type: object
     properties:
@@ -679,5 +620,3 @@ definitions:
       status:
         description: Status from the server
         type: string
-
-  
