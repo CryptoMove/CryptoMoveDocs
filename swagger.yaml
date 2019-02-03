@@ -22,7 +22,7 @@ paths:
           in: body
           description: JSON parameters
           schema:
-            $ref: "#/definitions/DeleteRequestParamaters"
+            $ref: "#/definitions/DeleteRequestParameters"
 
       responses:
         200:
@@ -86,9 +86,9 @@ paths:
       description: "Resets a user's password."
       tags:
         - "auth"
-      paramaters:
+      parameters:
         - name: resetpassword_parameters
-          description: JSON paramaters
+          description: JSON parameters
           in: body
           schema:
               $ref: "#/definitions/ResetpasswordRequestParameters"
