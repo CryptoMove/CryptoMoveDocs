@@ -14,9 +14,15 @@ produces:
 paths:
   /user/secret/delete:
     post:
-      description: "Delete an authorized users key"
+      description: "Deletes a secret."
       tags:
         - "secrets"
+      parameters:
+        - name: delete_parameters
+          in: body
+          description: JSON parameters
+          schema:
+            $ref: "#/definitions/DeleteRequestParameters"
       responses:
         200:
           description: "Succesfully deleted parameters"
@@ -76,9 +82,15 @@ paths:
           description: "error"
   /user/resetpassword:
     post:
-      description: "Reset Password"
+      description: "Resets a user's password."
       tags:
         - "auth"
+      parameters:
+        - name: resetpassword_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/ResetpasswordRequestParameters"
       responses:
         200:
           description: "email sent"
@@ -86,9 +98,15 @@ paths:
           description: "error"
   /user/signup:
     post:
-      description: "User signup"
+      description: "Creates a new user."
       tags:
         - "auth"
+      parameters:
+        - name: signup_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/SignupRequestParameters"
       responses:
         200:
           description: "registration succeeded"
@@ -96,9 +114,15 @@ paths:
           description: "error"
   /user/secret/protect:
     post:
-      description: "Protect an authorized users key"
+      description: "Stores a new key-value pair as a secret."
       tags:
         - "secrets"
+      parameters:
+        - name: protect_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/ProtectRequestParameters"
       responses:
         200:
           description: "Succesfully updated parameters"
@@ -108,9 +132,17 @@ paths:
           description: "Failed to lock user key"
   /user/secret/protect_link:
     post:
-      description: "Protect an authorized users key through a link"
+      description: >
+        Stores a new key-value pair as a secret.
+        The key name is specified with a link.
       tags:
         - "secrets"
+      parameters:
+        - name: protectLink_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/ProtectLinkRequestParameters"
       responses:
         200:
           description: "Succesfully updated parameters"
@@ -156,9 +188,15 @@ paths:
           description: "Failed to update classification"
   /user/secret/expose:
     post:
-      description: "Expose an authorized users key"
+      description: "Exposes the value of a secret."
       tags:
         - "secrets"
+      parameters:
+        - name: expose_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/ExposeRequestParameters"
       responses:
         200:
           description: "Succesfully updated parameters"
@@ -168,9 +206,17 @@ paths:
           description: "Failed to restore user key"
   /user/secret/expose_link:
     post:
-      description: "Expose an authorized users key through a link"
+      description: >
+        Exposes the value of a secret.
+        The secret is identified by a key name that contains a link.
       tags:
         - "secrets"
+      parameters:
+        - name: exposeLink_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/ExposeLinkRequestParameters"
       responses:
         200:
           description: "Succesfully updated parameters"
@@ -180,7 +226,7 @@ paths:
           description: "Failed to restore user key"
   /user/secret/share:
     post:
-      description: "share_key_to_other_usrid_authorized"
+      description: "Gives another user access to a secret. "
       tags:
         - "secrets"
       parameters:
@@ -198,9 +244,15 @@ paths:
           description: "Failed to share a key to specified users"
   /user/secret/unshare:
     post:
-      description: "unshare_a_key_authorized"
+      description: "Revokes a user's access to a secret."
       tags:
         - "secrets"
+      parameters:
+        - name: unshare_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/UnshareRequestParameters"
       responses:
         200:
           description: "Succesfully unshare_a_key"
@@ -210,9 +262,17 @@ paths:
           description: "Failed to unshare_a_key"
   /user/secret/version_expose:
     post:
-      description: "Expose a authorized user key current version"
+      description: >
+        Exposes the value of a specific version of a secret.
+        To get a list of all versions, use /secret/version_list.
       tags:
         - "secrets"
+      parameters:
+        - name: versionExpose_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/VersionExposeRequestParameters"
       responses:
         200:
           description: "Succesfully expose user key current version"
@@ -222,9 +282,17 @@ paths:
           description: "Failed to get user key current version"
   /user/secret/version_expose_link:
     post:
-      description: "Expose a authorized user key current version"
+      description: >
+        Exposes the value of a specific version of a secret.
+        The secret is identified by a key name that contains a link.
       tags:
         - "secrets"
+      parameters:
+        - name: versionExposeLink_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/VersionExposeLinkRequestParameters"
       responses:
         200:
           description: "Succesfully expose user key current version"
@@ -246,9 +314,15 @@ paths:
           description: "Failed to get user key version expiration time"
   /user/secret/list:
     post:
-      description: "List an authorized users secrets"
+      description: "Lists a user's secrets. "
       tags:
         - "secrets"
+      parameters:
+        - name: list_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/ListRequestParameters"
       responses:
         200:
           description: "Succesfully updated parameters"
@@ -258,9 +332,15 @@ paths:
           description: "Failed to restore user secret"
   /user/secret/list_no_dup:
     post:
-      description: "List an authorized users secrets"
+      description: "Lists a user's secrets."
       tags:
         - "secrets"
+      parameters:
+        - name: listNoDup_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/ListNoDupRequestParameters"
       responses:
         200:
           description: Returns a list of keys
@@ -270,9 +350,15 @@ paths:
           description: "Failed to restore user secret"
   /user/secret/version_list:
     post:
-      description: "List user secrets versions for authorized request"
+      description: "Lists information about all versions of a secret."
       tags:
         - "secrets"
+      parameters:
+        - name: versionList_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/VersionListRequestParameters"
       responses:
         200:
           description: "Succesfully list all versions of current key"
@@ -282,9 +368,17 @@ paths:
           description: "Failed to list all versions of user secret"
   /user/secret/version_list_for_link:
     post:
-      description: "List user secrets versions for link for authorized request"
+      description: >
+        Lists information about all versions of a secret.
+        The secret is identified by a key name that contains a link.
       tags:
         - "secrets"
+      parameters:
+        - name: versionListLink_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/VersionListLinkRequestParameters"
       responses:
         200:
           description: "Succesfully list all versions of current key"
@@ -343,25 +437,167 @@ definitions:
           - "low"
           - "medium"
           - "high"
+  DeleteRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of authorized user."
+      key_name:
+        type: string
+        description: "Name of the secret's key."
+  ResetpasswordRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of user."
+      connection:
+        type: string
+        description: "Name of the CryptoMove Tholos database."
+  SignupRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of the new user."
+      password:
+        type: string
+        description: "Password of the new user."
+      beta_code:
+        type: string
+        description: "Identifier for beta version of CryptoMove Tholos."
+  ProtectRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of authorized user."
+      key_name:
+        type: string
+        description: "Key of the new secret."
+      key_value:
+        type: string
+        description: "Value of the new secret."
+      without_list:
+        type: boolean
+        description: >
+          Prevents the response from listing the keys for all of
+          the user's secrets.
+  ProtectLinkRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of authorized user."
+      key_name:
+        type: string
+        description: "Key of the new secret."
+      key_value:
+        type: string
+        description: "Value of the new secret."
+  ExposeRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of authorized user."
+      key_name:
+        type: string
+        description: "Name of the secret's key."
+  ExposeLinkRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of authorized user."
+      key_name:
+        type: string
+        description: "Name of the secret's key."
   SharingRequestParameters:
     type: object
     properties:
       key_name:
         type: string
-        description: Plaintext name of the key
+        description: Name of the secret's key.
       permission:
         type: string
-        description: Write or Read Permissions
+        description: >
+          Permissions to be granted to user.
+          Write (W), Read (R), or both (RW).
         enum:
           - R
           - W
           - RW
       usr_id_from:
         type: string
-        description: The email of the sharer
+        description: Email of the sharer.
       usr_id_to:
         type: string
-        description: The email of the sharee
+        description: Email of the sharee.
+  UnshareRequestParameters:
+    type: object
+    properties:
+      usr_id_from:
+        type: string
+        description: "Email of user who will no longer have access to the secret."
+      key_name:
+        type: string
+        description: "Name of secret's key."
+  VersionExposeRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of authorized user."
+      key_name:
+        type: string
+        description: "Name of the secret's key."
+      key_version:
+        type: string
+        description: "A version number of the secret."
+  VersionExposeLinkRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of authorized user."
+      key_name:
+        type: string
+        description: "Name of the secret's key."
+      key_version:
+        type: string
+        description: "A version number of the secret."
+  ListRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of user with access to secrets."
+  ListNoDupRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of user with access to secrets."
+  VersionListRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of authorized user."
+      key_name:
+        type: string
+        description: "Name of secret's key."
+  VersionListLinkRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of authorized user."
+      key_name:
+        type: string
+        description: "Name of secret's key."
   ListNoDupResponse:
     type: object
     properties:
