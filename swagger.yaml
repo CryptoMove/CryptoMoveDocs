@@ -30,6 +30,24 @@ paths:
           description: "Could not delete parameters"
         500:
           description: "Failed to delete user key"
+  /user/secret/version_delete:
+    post:
+      description: "Deletes a specific version of a secret."
+      tags:
+        - "secrets"
+      parameters:
+        - name: VersionDelete_parameters
+          in: body
+          description: JSON parameters
+          schema:
+            $ref: "#/definitions/VersionDeleteRequestParameters"
+      responses:
+        200:
+          description: "Succesfully deleted parameters"
+        400:
+          description: "Could not delete parameters"
+        500:
+          description: "Failed to delete user key"
   /user/server/betacode:
     post:
       description: "Verify beta code"
@@ -152,9 +170,15 @@ paths:
           description: "Failed to lock user key"
   /user/secret/update_expiration:
     post:
-      description: "Update expiration date for authorized request"
+      description: "Updates the expiration date of a specific version of a secret."
       tags:
         - "secrets"
+      parameters:
+        - name: updateExpiration_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/UpdateExpirationRequestParameters"
       responses:
         200:
           description: "Succesfully updated expiration date"
@@ -164,9 +188,15 @@ paths:
           description: "Failed to update expiration date"
   /user/secret/update_description:
     post:
-      description: "Update description for authorized request"
+      description: "Update the description of a specifc version of a secret."
       tags:
         - "secrets"
+      parameters:
+        - name: updateDescription_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/updateDescriptionRequestParameters"
       responses:
         200:
           description: "Succesfully updated description date"
@@ -176,9 +206,16 @@ paths:
           description: "Failed to update description date"
   /user/secret/update_classification:
     post:
-      description: "Update classification for authorized request"
+      description: "Update the classification of a secret."
       tags:
         - "secrets"
+      parameters:
+        - name: updateClassification_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/UpdateClassificationRequestParameters"
+
       responses:
         200:
           description: "Succesfully updated classification"
@@ -442,10 +479,22 @@ definitions:
     properties:
       email:
         type: string
-        description: "Email of authorized user."
+        description: "Email of an authorized user."
       key_name:
         type: string
         description: "Name of the secret's key."
+  VersionDeleteRequestParameters:
+    type: object
+    properties:
+      email: 
+        type: string
+        description: Email of an authorized user.
+      key_name:
+        type: string
+        description: Name of the secret's key.
+      key_version:
+        type: integer
+        description: Version of the secret that you want to delete.
   ResetpasswordRequestParameters:
     type: object
     properties:
@@ -472,7 +521,7 @@ definitions:
     properties:
       email:
         type: string
-        description: "Email of authorized user."
+        description: "Email of an authorized user."
       key_name:
         type: string
         description: "Key of the new secret."
@@ -489,7 +538,7 @@ definitions:
     properties:
       email:
         type: string
-        description: "Email of authorized user."
+        description: "Email of an authorized user."
       key_name:
         type: string
         description: "Key of the new secret."
@@ -501,7 +550,7 @@ definitions:
     properties:
       email:
         type: string
-        description: "Email of authorized user."
+        description: "Email of an authorized user."
       key_name:
         type: string
         description: "Name of the secret's key."
@@ -510,7 +559,7 @@ definitions:
     properties:
       email:
         type: string
-        description: "Email of authorized user."
+        description: "Email of an authorized user."
       key_name:
         type: string
         description: "Name of the secret's key."
@@ -543,13 +592,13 @@ definitions:
         description: "Email of user who will no longer have access to the secret."
       key_name:
         type: string
-        description: "Name of secret's key."
+        description: "Name of the secret's key."
   VersionExposeRequestParameters:
     type: object
     properties:
       email:
         type: string
-        description: "Email of authorized user."
+        description: "Email of an authorized user."
       key_name:
         type: string
         description: "Name of the secret's key."
@@ -561,7 +610,7 @@ definitions:
     properties:
       email:
         type: string
-        description: "Email of authorized user."
+        description: "Email of an authorized user."
       key_name:
         type: string
         description: "Name of the secret's key."
@@ -585,19 +634,64 @@ definitions:
     properties:
       email:
         type: string
-        description: "Email of authorized user."
+        description: "Email of an authorized user."
       key_name:
         type: string
-        description: "Name of secret's key."
+        description: "Name of the secret's key."
   VersionListLinkRequestParameters:
     type: object
     properties:
       email:
         type: string
-        description: "Email of authorized user."
+        description: "Email of an authorized user."
       key_name:
         type: string
-        description: "Name of secret's key."
+        description: "Name of the secret's key."
+  UpdateClassificationRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: Email of an authorized user.
+      key_name: 
+        type: string
+        description: Name of the secret's key.
+      Classification: 
+        type: string
+        description: New classification of the secret.
+        enum:
+          - sec
+          - top
+  UpdateExpirationRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: Email of an authorized user.
+      key_name:
+        type: string
+        description: Name of the secret's key.
+      Key_version:
+        type: integer
+        description: A version of the secret.
+      expiration_time:
+        type: integer
+        description: The number of days before the version of the secret will expire.
+  updateDescriptionRequestParameters:
+    type: object
+    properties:
+      email: 
+        type: string
+        description: Email of an authorized user.
+      key_name: 
+        type: string
+        description: Name of the secret's key.
+      description:
+        type: string
+        description: New description of the secret.
+      key_version:
+        type: integer
+        description: A version of the secret.
   ListNoDupResponse:
     type: object
     properties:
