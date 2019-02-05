@@ -479,7 +479,7 @@ definitions:
     properties:
       email:
         type: string
-        description: "Email of authorized user."
+        description: "Email of an authorized user."
       key_name:
         type: string
         description: "Name of the secret's key."
@@ -488,10 +488,10 @@ definitions:
     properties:
       email: 
         type: string
-        description: Email of authorized user.
+        description: Email of an authorized user.
       key_name:
         type: string
-        description: Name of secret's key.
+        description: Name of the secret's key.
       key_version:
         type: integer
         description: Version of the secret that you want to delete.
@@ -521,7 +521,7 @@ definitions:
     properties:
       email:
         type: string
-        description: "Email of authorized user."
+        description: "Email of an authorized user."
       key_name:
         type: string
         description: "Key of the new secret."
@@ -538,7 +538,7 @@ definitions:
     properties:
       email:
         type: string
-        description: "Email of authorized user."
+        description: "Email of an authorized user."
       key_name:
         type: string
         description: "Key of the new secret."
@@ -550,7 +550,7 @@ definitions:
     properties:
       email:
         type: string
-        description: "Email of authorized user."
+        description: "Email of an authorized user."
       key_name:
         type: string
         description: "Name of the secret's key."
@@ -559,7 +559,7 @@ definitions:
     properties:
       email:
         type: string
-        description: "Email of authorized user."
+        description: "Email of an authorized user."
       key_name:
         type: string
         description: "Name of the secret's key."
@@ -592,13 +592,13 @@ definitions:
         description: "Email of user who will no longer have access to the secret."
       key_name:
         type: string
-        description: "Name of secret's key."
+        description: "Name of the secret's key."
   VersionExposeRequestParameters:
     type: object
     properties:
       email:
         type: string
-        description: "Email of authorized user."
+        description: "Email of an authorized user."
       key_name:
         type: string
         description: "Name of the secret's key."
@@ -610,7 +610,7 @@ definitions:
     properties:
       email:
         type: string
-        description: "Email of authorized user."
+        description: "Email of an authorized user."
       key_name:
         type: string
         description: "Name of the secret's key."
@@ -634,28 +634,28 @@ definitions:
     properties:
       email:
         type: string
-        description: "Email of authorized user."
+        description: "Email of an authorized user."
       key_name:
         type: string
-        description: "Name of secret's key."
+        description: "Name of the secret's key."
   VersionListLinkRequestParameters:
     type: object
     properties:
       email:
         type: string
-        description: "Email of authorized user."
+        description: "Email of an authorized user."
       key_name:
         type: string
-        description: "Name of secret's key."
+        description: "Name of the secret's key."
   UpdateClassificationRequestParameters:
     type: object
     properties:
       email:
         type: string
-        description: Email of authorized user.
+        description: Email of an authorized user.
       key_name: 
         type: string
-        description: Name of secret's key.
+        description: Name of the secret's key.
       Classification: 
         type: string
         description:
@@ -667,10 +667,10 @@ definitions:
     properties:
       email:
         type: string
-        description: Email of authorized user.
+        description: Email of an authorized user.
       key_name:
         type: string
-        description: Name of secret's key.
+        description: Name of the secret's key.
       Key_version:
         type: integer
         description: A version of the secret.
@@ -682,10 +682,10 @@ definitions:
     properties:
       email: 
         type: string
-        description: Email of authorized user.
+        description: Email of an authorized user.
       key_name: 
         type: string
-        description: Name of secret's key.
+        description: Name of the secret's key.
       description:
         type: string
         description: New description of the secret.
