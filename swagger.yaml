@@ -658,7 +658,7 @@ definitions:
         description: Name of the secret's key.
       Classification: 
         type: string
-        description:
+        description: New classification of the secret.
         enum:
           - sec
           - top
