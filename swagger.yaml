@@ -12,124 +12,6 @@ consumes:
 produces:
   - "application/json"
 paths:
-  /user/secret/delete:
-    post:
-      description: "Deletes a secret."
-      tags:
-        - "secrets"
-      parameters:
-        - name: delete_parameters
-          in: body
-          description: JSON parameters
-          schema:
-            $ref: "#/definitions/DeleteRequestParameters"
-      responses:
-        200:
-          description: "Succesfully deleted parameters"
-        400:
-          description: "Could not delete parameters"
-        500:
-          description: "Failed to delete user key"
-  /user/secret/version_delete:
-    post:
-      description: "Deletes a specific version of a secret."
-      tags:
-        - "secrets"
-      parameters:
-        - name: VersionDelete_parameters
-          in: body
-          description: JSON parameters
-          schema:
-            $ref: "#/definitions/VersionDeleteRequestParameters"
-      responses:
-        200:
-          description: "Succesfully deleted parameters"
-        400:
-          description: "Could not delete parameters"
-        500:
-          description: "Failed to delete user key"
-  /user/server/betacode:
-    post:
-      description: "Verify beta code"
-      tags:
-        - "auth"
-      responses:
-        200:
-          description: "Information regarding user beta code"
-        400:
-          description: "Could not find beta code"
-  /user/login:
-    post:
-      description: "User login"
-      tags:
-        - "auth"
-      responses:
-        200:
-          description: "logged in"
-        400:
-          description: "error"
-  /user/login_authorization_code:
-    post:
-      description: "User login"
-      tags:
-        - "auth"
-      responses:
-        200:
-          description: "logged in"
-        400:
-          description: "error"
-  /user/authorization_code_email:
-    post:
-      description: "User login"
-      tags:
-        - "auth"
-      responses:
-        200:
-          description: "get authorization code by email"
-        400:
-          description: "error"
-  /user/refresh_token:
-    post:
-      description: "User refresh token"
-      tags:
-        - "auth"
-      responses:
-        200:
-          description: "refresh token successful"
-        400:
-          description: "error"
-  /user/resetpassword:
-    post:
-      description: "Resets a user's password."
-      tags:
-        - "auth"
-      parameters:
-        - name: resetpassword_parameters
-          description: JSON parameters
-          in: body
-          schema:
-            $ref: "#/definitions/ResetpasswordRequestParameters"
-      responses:
-        200:
-          description: "email sent"
-        400:
-          description: "error"
-  /user/signup:
-    post:
-      description: "Creates a new user."
-      tags:
-        - "auth"
-      parameters:
-        - name: signup_parameters
-          description: JSON parameters
-          in: body
-          schema:
-            $ref: "#/definitions/SignupRequestParameters"
-      responses:
-        200:
-          description: "registration succeeded"
-        400:
-          description: "error"
   /user/secret/protect:
     post:
       description: "Stores a new key-value pair as a secret."
@@ -167,65 +49,10 @@ paths:
         400:
           description: "Could not update parameters"
         500:
-          description: "Failed to lock user key"
-  /user/secret/update_expiration:
-    post:
-      description: "Updates the expiration date of a specific version of a secret."
-      tags:
-        - "secrets"
-      parameters:
-        - name: updateExpiration_parameters
-          description: JSON parameters
-          in: body
-          schema:
-            $ref: "#/definitions/UpdateExpirationRequestParameters"
-      responses:
-        200:
-          description: "Succesfully updated expiration date"
-        400:
-          description: "Could not update expiration date"
-        500:
-          description: "Failed to update expiration date"
-  /user/secret/update_description:
-    post:
-      description: "Update the description of a specifc version of a secret."
-      tags:
-        - "secrets"
-      parameters:
-        - name: updateDescription_parameters
-          description: JSON parameters
-          in: body
-          schema:
-            $ref: "#/definitions/updateDescriptionRequestParameters"
-      responses:
-        200:
-          description: "Succesfully updated description date"
-        400:
-          description: "Could not update description date"
-        500:
-          description: "Failed to update description date"
-  /user/secret/update_classification:
-    post:
-      description: "Update the classification of a secret."
-      tags:
-        - "secrets"
-      parameters:
-        - name: updateClassification_parameters
-          description: JSON parameters
-          in: body
-          schema:
-            $ref: "#/definitions/UpdateClassificationRequestParameters"
-
-      responses:
-        200:
-          description: "Succesfully updated classification"
-        400:
-          description: "Could not update classification"
-        500:
-          description: "Failed to update classification"
+          description: "Failed to lock user key" 
   /user/secret/expose:
     post:
-      description: "Exposes the value of a secret."
+      description: "Exposes the most recent value of a secret."
       tags:
         - "secrets"
       parameters:
@@ -244,7 +71,7 @@ paths:
   /user/secret/expose_link:
     post:
       description: >
-        Exposes the value of a secret.
+        Exposes the most recent value of a secret.
         The secret is identified by a key name that contains a link.
       tags:
         - "secrets"
@@ -261,6 +88,84 @@ paths:
           description: "Could not update parameters"
         500:
           description: "Failed to restore user key"
+  /user/secret/version_expose:
+    post:
+      description: >
+        Exposes the value of a specific version of a secret.
+        To get a list of all versions, use /user/secret/version_list.
+      tags:
+        - "secrets"
+      parameters:
+        - name: versionExpose_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/VersionExposeRequestParameters"
+      responses:
+        200:
+          description: "Succesfully expose user key current version"
+        400:
+          description: "Could not expose user key current version"
+        500:
+          description: "Failed to get user key current version"
+  /user/secret/version_expose_link:
+    post:
+      description: >
+        Exposes the value of a specific version of a secret.
+        The secret is identified by a key name that contains a link.
+      tags:
+        - "secrets"
+      parameters:
+        - name: versionExposeLink_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/VersionExposeLinkRequestParameters"
+      responses:
+        200:
+          description: "Succesfully expose user key current version"
+        400:
+          description: "Could not expose user key current version"
+        500:
+          description: "Failed to get user key current version"
+  /user/secret/delete:
+    post:
+      description: >
+        "Deletes all versions of a secret. To delete 
+        only a specific version of the secret, use /user/secret/version_delete"
+      tags:
+        - "secrets"
+      parameters:
+        - name: delete_parameters
+          in: body
+          description: JSON parameters
+          schema:
+            $ref: "#/definitions/DeleteRequestParameters"
+      responses:
+        200:
+          description: "Succesfully deleted parameters"
+        400:
+          description: "Could not delete parameters"
+        500:
+          description: "Failed to delete user key"
+  /user/secret/version_delete:
+    post:
+      description: "Deletes a specific version of a secret."
+      tags:
+        - "secrets"
+      parameters:
+        - name: VersionDelete_parameters
+          in: body
+          description: JSON parameters
+          schema:
+            $ref: "#/definitions/VersionDeleteRequestParameters"
+      responses:
+        200:
+          description: "Succesfully deleted parameters"
+        400:
+          description: "Could not delete parameters"
+        500:
+          description: "Failed to delete user key"
   /user/secret/share:
     post:
       description: "Gives another user access to a secret. "
@@ -297,76 +202,60 @@ paths:
           description: "Could not unshare_a_key"
         500:
           description: "Failed to unshare_a_key"
-  /user/secret/version_expose:
+  /user/secret/update_description:
     post:
-      description: >
-        Exposes the value of a specific version of a secret.
-        To get a list of all versions, use /secret/version_list.
+      description: "Update the description of a specifc version of a secret."
       tags:
         - "secrets"
       parameters:
-        - name: versionExpose_parameters
+        - name: updateDescription_parameters
           description: JSON parameters
           in: body
           schema:
-            $ref: "#/definitions/VersionExposeRequestParameters"
+            $ref: "#/definitions/updateDescriptionRequestParameters"
       responses:
         200:
-          description: "Succesfully expose user key current version"
+          description: "Succesfully updated description date"
         400:
-          description: "Could not expose user key current version"
+          description: "Could not update description date"
         500:
-          description: "Failed to get user key current version"
-  /user/secret/version_expose_link:
+          description: "Failed to update description date"
+  /user/secret/update_classification:
     post:
-      description: >
-        Exposes the value of a specific version of a secret.
-        The secret is identified by a key name that contains a link.
+      description: "Update the classification of a secret."
       tags:
         - "secrets"
       parameters:
-        - name: versionExposeLink_parameters
+        - name: updateClassification_parameters
           description: JSON parameters
           in: body
           schema:
-            $ref: "#/definitions/VersionExposeLinkRequestParameters"
+            $ref: "#/definitions/UpdateClassificationRequestParameters"
       responses:
         200:
-          description: "Succesfully expose user key current version"
+          description: "Succesfully updated classification"
         400:
-          description: "Could not expose user key current version"
+          description: "Could not update classification"
         500:
-          description: "Failed to get user key current version"
-  /user/secret/expose_expiration_time:
+          description: "Failed to update classification"
+  /user/secret/update_expiration:
     post:
-      description: "Expose user key version current expiration time for authorized request"
-      tags:
-        - "secrets"
-      responses:
-        200:
-          description: "Succesfully expose user key version expiration time"
-        400:
-          description: "Could not expose user key version expiration time"
-        500:
-          description: "Failed to get user key version expiration time"
-  /user/secret/list:
-    post:
-      description: "Lists a user's secrets. "
+      description: "Updates the expiration date of a specific version of a secret."
       tags:
         - "secrets"
       parameters:
-        - name: list_parameters
+        - name: updateExpiration_parameters
           description: JSON parameters
           in: body
           schema:
-            $ref: "#/definitions/ListRequestParameters"
+            $ref: "#/definitions/UpdateExpirationRequestParameters"
       responses:
         200:
-          description: "Succesfully updated parameters"
+          description: "Succesfully updated expiration date"
         400:
-          description: "Could not update parameters"
+          description: "Could not update expiration date"
         500:
-          description: "Failed to restore user secret"
+          description: "Failed to update expiration date"
   /user/secret/list_no_dup:
     post:
       description: "Lists a user's secrets."
@@ -387,7 +276,7 @@ paths:
           description: "Failed to restore user secret"
   /user/secret/version_list:
     post:
-      description: "Lists information about all versions of a secret."
+      description: "Lists details about all versions of a secret."
       tags:
         - "secrets"
       parameters:
@@ -423,43 +312,133 @@ paths:
           description: "Could not list all versions of current key"
         500:
           description: "Failed to list all versions of user secret"
-  /user/secret/update_key_metadata:
+  /user/signup:
     post:
-      description: "Update user key metadata for authorized request"
+      description: "Creates a new user."
       tags:
-        - "secrets"
+        - "auth"
+      parameters:
+        - name: signup_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/SignupRequestParameters"
       responses:
         200:
-          description: "Succesfully update user metadata versions of current key"
+          description: "registration succeeded"
         400:
-          description: "Failed to update user key metadata"
-        500:
-          description: "Failed to update user key metadata"
-  /user/secret/update_user_metadata:
-      post:
-        description: "Update user metadata for authorized request"
-        tags:
-          - "secrets"
+          description: "error"
+  /user/secret/logout:
+    post:
+      description: "Logs the user out of the system."
+      tags:
+        - "auth"
+      parameters:
+        - name: logout_parameters
+        description: JSON parameters
+        in: auth
+        schema:
+          $ref: "#/definitions/LogoutRequestParameters"
         responses:
           200:
-            description: "Succesfully update user metadata versions of current key"
-          400:
-            description: "Failed to update user  metadata"
-          500:
-            description: "Failed to update user  metadata"
-  /user/secret/user_metadata:
-      post:
-        description: "Get user metadata for authorized request"
-        tags:
-          - "secrets"
-        responses:
-          200:
-            description: "Succesfully get user metadata versions of current key"
-          400:
-            description: "Failed to get user metadata"
-          500:
-            description: "Failed to get user metadata"
-
+            description: "success"
+  /user/resetpassword:
+    post:
+      description: "Resets a user's password."
+      tags:
+        - "auth"
+      parameters:
+        - name: resetpassword_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/ResetpasswordRequestParameters"
+      responses:
+        200:
+          description: "We've just sent you an email to reset your password."
+        400:
+          description: "error"
+  /user/analytics:
+    get:
+      description: "Returns a report about a user's secrets. The user is identified by the authentication id in the header."
+      tags:
+        - "analytics"
+  # /user/refresh_token:
+  #   post:
+  #     description: "User refresh token"
+  #     tags:
+  #       - "auth"
+  #     responses:
+  #       200:
+  #         description: "refresh token successful"
+  #       400:
+  #         description: "error"
+  # /user/login_authorization_code:
+  #   post:
+  #     description: "User login"
+  #     tags:
+  #       - "auth"
+  #     responses:
+  #       200:
+  #         description: "logged in"
+  #       400:
+  #         description: "error"
+  # /user/authorization_code_email:
+  #   post:
+  #     description: "User login"
+  #     tags:
+  #       - "auth"
+  #     responses:
+  #       200:
+  #         description: "get authorization code by email"
+  #       400:
+  #         description: "error"  
+  # /user/secret/update_key_metadata:
+  #   post:
+  #     description: "Update user key metadata for authorized request"
+  #     tags:
+  #       - "secrets"
+  #     responses:
+  #       200:
+  #         description: "Succesfully update user metadata versions of current key"
+  #       400:
+  #         description: "Failed to update user key metadata"
+  #       500:
+  #         description: "Failed to update user key metadata"
+  # /user/secret/update_user_metadata:
+  #     post:
+  #       description: "Update user metadata for authorized request"
+  #       tags:
+  #         - "secrets"
+  #       responses:
+  #         200:
+  #           description: "Succesfully update user metadata versions of current key"
+  #         400:
+  #           description: "Failed to update user  metadata"
+  #         500:
+  #           description: "Failed to update user  metadata"
+  # /user/secret/user_metadata:
+  #     post:
+  #       description: "Get user metadata for authorized request"
+  #       tags:
+  #         - "secrets"
+  #       responses:
+  #         200:
+  #           description: "Succesfully get user metadata versions of current key"
+  #         400:
+  #           description: "Failed to get user metadata"
+  #         500:
+  #           description: "Failed to get user metadata"
+  # /user/server/betacode:
+  #   post:
+  #     description: "Verify beta code"
+  #     tags:
+  #       - "auth"
+  #     responses:
+  #       200:
+  #         description: "Information regarding user beta code"
+  #       400:
+  #         description: "Could not find beta code"
 definitions:
   ProtectionGroup:
     type: "object"
