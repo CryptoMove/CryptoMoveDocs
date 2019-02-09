@@ -339,9 +339,9 @@ paths:
           in: auth
           schema:
             $ref: "#/definitions/LogoutRequestParameters"
-        responses:
-          200:
-            description: "success"
+      responses:
+         200:
+           description: "success"
   /user/resetpassword:
     post:
       description: "Resets a user's password."
