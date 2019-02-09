@@ -335,10 +335,10 @@ paths:
         - "auth"
       parameters:
         - name: logout_parameters
-        description: JSON parameters
-        in: auth
-        schema:
-          $ref: "#/definitions/LogoutRequestParameters"
+          description: JSON parameters
+          in: auth
+          schema:
+            $ref: "#/definitions/LogoutRequestParameters"
         responses:
           200:
             description: "success"
