@@ -453,6 +453,12 @@ definitions:
           - "low"
           - "medium"
           - "high"
+  LogoutRequestParameters:
+    type: object
+    properties:
+      email:
+        type: string
+        description: "Email of the user who will be logged out."
   DeleteRequestParameters:
     type: object
     properties:
