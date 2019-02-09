@@ -131,8 +131,9 @@ paths:
   /user/secret/delete:
     post:
       description: >
-        "Deletes all versions of a secret. To delete 
-        only a specific version of the secret, use /user/secret/version_delete"
+        Deletes all versions of a secret. To delete 
+        only a specific version of the secret, use /user/secret/version_delete.
+        Only the user who created a secret can delete it.
       tags:
         - "secrets"
       parameters:
@@ -150,7 +151,9 @@ paths:
           description: "Failed to delete user key"
   /user/secret/version_delete:
     post:
-      description: "Deletes a specific version of a secret."
+      description: >
+        Deletes a specific version of a secret.
+        Only the user who created a secret can delete it.
       tags:
         - "secrets"
       parameters:
@@ -168,7 +171,9 @@ paths:
           description: "Failed to delete user key"
   /user/secret/share:
     post:
-      description: "Gives another user access to a secret. "
+      description: >
+        Gives another user access to a secret. Only the user who created 
+        the secret can share it with other users.
       tags:
         - "secrets"
       parameters:
@@ -481,7 +486,7 @@ definitions:
         type: string
         description: Name of the secret's key.
       key_version:
-        type: integer
+        type: string
         description: Version of the secret that you want to delete.
   ResetpasswordRequestParameters:
     type: object
@@ -516,11 +521,20 @@ definitions:
       key_value:
         type: string
         description: "Value of the new secret."
+      classification: 
+        type: string
+        description: The classification of the new secret. 
+      description: 
+        type: string
+        description: Description of the new secret.
+      expiration_time: 
+        type: integer
+        description: Number of days until the secret expires. 
       without_list:
-        type: boolean
+        type: integer
         description: >
-          Prevents the response from listing the keys for all of
-          the user's secrets.
+          Setting this parameter to 1 prevents the response from listing 
+          the keys for all of the user's existing secrets. Optional parameter. 
   ProtectLinkRequestParameters:
     type: object
     properties:
@@ -533,6 +547,15 @@ definitions:
       key_value:
         type: string
         description: "Value of the new secret."
+      classification: 
+        type: string
+        description: The classification of the new secret. 
+      description: 
+        type: string
+        description: Description of the new secret.
+      expiration_time: 
+        type: integer
+        description: Number of days until the secret expires. 
   ExposeRequestParameters:
     type: object
     properties:
@@ -568,10 +591,17 @@ definitions:
           - RW
       usr_id_from:
         type: string
-        description: Email of the sharer.
+        description: >
+          Email of the user who is sharing the secret. 
+          Must be the user who created the secret.
       usr_id_to:
         type: string
-        description: Email of the sharee.
+        description: Email of the user who will have shared access to the secret.
+      email:
+        type: string
+        description: >
+          Email of the user who created the secret. 
+          Same value as usr_id_from 
   UnshareRequestParameters:
     type: object
     properties:
@@ -660,7 +690,7 @@ definitions:
         type: string
         description: Name of the secret's key.
       Key_version:
-        type: integer
+        type: string
         description: A version of the secret.
       expiration_time:
         type: integer
@@ -678,7 +708,7 @@ definitions:
         type: string
         description: New description of the secret.
       key_version:
-        type: integer
+        type: string
         description: A version of the secret.
   ListNoDupResponse:
     type: object
