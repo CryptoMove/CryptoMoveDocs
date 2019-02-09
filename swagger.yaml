@@ -336,7 +336,7 @@ paths:
       parameters:
         - name: logout_parameters
           description: JSON parameters
-          in: auth
+          in: body
           schema:
             $ref: "#/definitions/LogoutRequestParameters"
       responses:
@@ -363,6 +363,9 @@ paths:
       description: "Returns a report about a user's secrets. The user is identified by the authentication id in the header."
       tags:
         - "analytics"
+      responses:
+        200:
+          description: "success"
   # /user/refresh_token:
   #   post:
   #     description: "User refresh token"
