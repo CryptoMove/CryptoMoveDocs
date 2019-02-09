@@ -131,9 +131,9 @@ paths:
   /user/secret/delete:
     post:
       description: >
-        "Deletes all versions of a secret. To delete 
+        Deletes all versions of a secret. To delete 
         only a specific version of the secret, use /user/secret/version_delete.
-        Only the user who created a secret can delete it."
+        Only the user who created a secret can delete it.
       tags:
         - "secrets"
       parameters:
@@ -152,8 +152,8 @@ paths:
   /user/secret/version_delete:
     post:
       description: >
-        "Deletes a specific version of a secret.
-        Only the user who created a secret can delete it."
+        Deletes a specific version of a secret.
+        Only the user who created a secret can delete it.
       tags:
         - "secrets"
       parameters:
@@ -172,8 +172,8 @@ paths:
   /user/secret/share:
     post:
       description: >
-        "Gives another user access to a secret. Only the user who created 
-        the secret can share it with other users."
+        Gives another user access to a secret. Only the user who created 
+        the secret can share it with other users.
       tags:
         - "secrets"
       parameters:
