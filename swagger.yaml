@@ -277,6 +277,8 @@ paths:
       responses:
         200:
           description: Returns a list of keys
+          schema:
+            $ref: "#/definitions/ListNoDupResponse"
         400:
           description: "Could not update parameters"
         500:
