@@ -14,7 +14,9 @@ produces:
 paths:
   /user/secret/protect:
     post:
-      description: "Stores a new key-value pair as a secret."
+      description: >
+        Stores a new key-value pair as a secret. To update the value of secret, 
+        call this endpoint with an existing key and new value.
       tags:
         - "secrets"
       parameters:
@@ -363,14 +365,14 @@ paths:
           description: "We've just sent you an email to reset your password."
         400:
           description: "error"
-  /user/analytics:
-    get:
-      description: "Returns a report about a user's secrets. The user is identified by the authentication id in the header."
-      tags:
-        - "analytics"
-      responses:
-        200:
-          description: "success"
+  # /user/analytics:
+  #   get:
+  #     description: "Returns a report about a user's secrets. The user is identified by the authentication id in the header."
+  #     tags:
+  #       - "analytics"
+  #     responses:
+  #       200:
+  #         description: "success"
   # /user/refresh_token:
   #   post:
   #     description: "User refresh token"
@@ -523,18 +525,18 @@ definitions:
         description: "Value of the new secret."
       classification: 
         type: string
-        description: The classification of the new secret. 
+        description: Classification of the new secret. Accepts any string. Optional.
       description: 
         type: string
-        description: Description of the new secret.
+        description: Description of the new secret. Optional.
       expiration_time: 
         type: integer
-        description: Number of days until the secret expires. 
+        description: Number of days until the secret expires. Optional; defaults to 10 days.
       without_list:
         type: integer
         description: >
           Setting this parameter to 1 prevents the response from listing 
-          the keys for all of the user's existing secrets. Optional parameter. 
+          the keys for all of the user's existing secrets. Optional. 
   ProtectLinkRequestParameters:
     type: object
     properties:
@@ -549,13 +551,13 @@ definitions:
         description: "Value of the new secret."
       classification: 
         type: string
-        description: The classification of the new secret. 
+        description: Classification of the new secret. Accepts any string. Optional.
       description: 
         type: string
-        description: Description of the new secret.
+        description: Description of the new secret. Optional.
       expiration_time: 
         type: integer
-        description: Number of days until the secret expires. 
+        description: Number of days until the secret expires. Optional. Defaults to 10 days.
   ExposeRequestParameters:
     type: object
     properties:
@@ -674,7 +676,7 @@ definitions:
       key_name: 
         type: string
         description: Name of the secret's key.
-      Classification: 
+      classification: 
         type: string
         description: New classification of the secret.
         enum:
@@ -689,7 +691,7 @@ definitions:
       key_name:
         type: string
         description: Name of the secret's key.
-      Key_version:
+      key_version:
         type: string
         description: A version of the secret.
       expiration_time:
