@@ -35,8 +35,8 @@ paths:
   /user/secret/protect_link:
     post:
       description: >
-        Stores a new key-value pair as a secret.
-        The key name is specified with a link.
+        Updates a shared secret. The user must have Write access to the secret. 
+        Use the list_no_dup endpoint to find the linked key name of the secret.
       tags:
         - "secrets"
       parameters:
@@ -73,8 +73,9 @@ paths:
   /user/secret/expose_link:
     post:
       description: >
-        Exposes the most recent value of a secret.
-        The secret is identified by a key name that contains a link.
+        Exposes the most recent value of a shared secret. 
+        User must have Read access to the secret.
+        Use the list_no_dup endpoint to find the linked key name of the secret.
       tags:
         - "secrets"
       parameters:
@@ -113,8 +114,9 @@ paths:
   /user/secret/version_expose_link:
     post:
       description: >
-        Exposes the value of a specific version of a secret.
-        The secret is identified by a key name that contains a link.
+        Exposes the value of a specific version of a shared secret.
+        User must have Read access to the secret.
+        Use the list_no_dup endpoint to find the linked key name of the secret.
       tags:
         - "secrets"
       parameters:
@@ -304,8 +306,7 @@ paths:
   /user/secret/version_list_for_link:
     post:
       description: >
-        Lists information about all versions of a secret.
-        The secret is identified by a key name that contains a link.
+        Lists information about all versions of a shared secret. 
       tags:
         - "secrets"
       parameters:
@@ -544,22 +545,22 @@ definitions:
     properties:
       email:
         type: string
-        description: "Email of an authorized user."
+        description: "Email of a user with Write access to the shared secret."
       key_name:
         type: string
-        description: "Key of the new secret."
+        description: "Linked key name of the shared secret."
       key_value:
         type: string
-        description: "Value of the new secret."
+        description: "New value of the shared secret."
       classification: 
         type: string
-        description: Classification of the new secret. Accepts any string. Optional.
+        description: Updated classification of the shared secret. Accepts any string. Optional.
       description: 
         type: string
-        description: Description of the new secret. Optional.
+        description: New description of the shared secret. Optional.
       expiration_time: 
         type: integer
-        description: Number of days until the secret expires. Optional. Defaults to 10 days.
+        description: Number of days until the shared secret expires. Optional. Defaults to 10 days.
   ExposeRequestParameters:
     type: object
     properties:
@@ -574,10 +575,10 @@ definitions:
     properties:
       email:
         type: string
-        description: "Email of an authorized user."
+        description: "Email of a user with Read access to the shared secret."
       key_name:
         type: string
-        description: "Name of the secret's key."
+        description: "Linked name of the shared secret's key."
   SharingRequestParameters:
     type: object
     properties:
@@ -632,13 +633,13 @@ definitions:
     properties:
       email:
         type: string
-        description: "Email of an authorized user."
+        description: "Email of a user with Read access to the shared secret."
       key_name:
         type: string
-        description: "Name of the secret's key."
+        description: "Linked key name of the shared secret."
       key_version:
         type: string
-        description: "A version number of the secret."
+        description: "A version number of the shared secret."
   ListRequestParameters:
     type: object
     properties:
@@ -665,10 +666,10 @@ definitions:
     properties:
       email:
         type: string
-        description: "Email of an authorized user."
+        description: "Email of a user with Read access to the shared secret."
       key_name:
         type: string
-        description: "Name of the secret's key."
+        description: "Linked key name of the shared secret."
   UpdateClassificationRequestParameters:
     type: object
     properties:
@@ -681,9 +682,6 @@ definitions:
       classification: 
         type: string
         description: New classification of the secret.
-        enum:
-          - sec
-          - top
   UpdateExpirationRequestParameters:
     type: object
     properties:
