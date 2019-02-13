@@ -368,6 +368,25 @@ paths:
           description: "We've just sent you an email to reset your password."
         400:
           description: "error"
+  /user/refresh_token:
+    post:
+      description: >
+        Acquires a new access token by passing a refresh token in the 
+        body of the request. For details on obtaining a refresh token, 
+        see [Authentication](https://docs.cryptomove.com/docs/authentication).
+      tags:
+        - "auth"
+      parameters:
+        - name: refreshtoken_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/RefreshTokenParameters"
+      responses:
+        200:
+          description: "refresh token successful"
+        400:
+          description: "error"
   # /user/analytics:
   #   get:
   #     description: "Returns a report about a user's secrets. The user is identified by the authentication id in the header."
@@ -376,16 +395,7 @@ paths:
   #     responses:
   #       200:
   #         description: "success"
-  # /user/refresh_token:
-  #   post:
-  #     description: "User refresh token"
-  #     tags:
-  #       - "auth"
-  #     responses:
-  #       200:
-  #         description: "refresh token successful"
-  #       400:
-  #         description: "error"
+
   # /user/login_authorization_code:
   #   post:
   #     description: "User login"
@@ -712,6 +722,12 @@ definitions:
       key_version:
         type: string
         description: A version of the secret.
+  RefreshTokenParameters:
+    type: object
+    properties:
+      refresh_token: 
+        type: string
+        description: Valid refresh token.
   ListNoDupResponse:
     type: object
     properties:
