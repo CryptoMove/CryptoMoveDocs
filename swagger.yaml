@@ -373,7 +373,7 @@ paths:
       description: >
         Acquires a new access token by passing a refresh token in the 
         body of the request. For details on obtaining a refresh token, 
-        see [Authentication](https://docs.cryptomove.com/docs/authentication).
+        see [Authentication](https://docs.cryptomove.com/docs/getting-started#section-authentication).
       tags:
         - "auth"
       parameters:
