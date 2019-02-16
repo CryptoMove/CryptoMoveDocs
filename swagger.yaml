@@ -43,7 +43,8 @@ paths:
     post:
       description: >
         Updates a shared secret. The user must have write access to the secret. 
-        Use the list_no_dup endpoint to find the linked key name of the secret.
+        Use the [list_no_dup](https://docs.cryptomove.com/reference#post_user-secret-list-no-dup) 
+        endpoint to find the linked key name of the secret.
       tags:
         - "secrets"
       security:
@@ -86,7 +87,8 @@ paths:
       description: >
         Exposes the most recent value of a shared secret. 
         User must have read access to the secret.
-        Use the list_no_dup endpoint to find the linked key name of the secret.
+        Use the [list_no_dup](https://docs.cryptomove.com/reference#post_user-secret-list-no-dup)
+        endpoint to find the linked key name of the secret.
       tags:
         - "secrets"
       security:
@@ -131,7 +133,8 @@ paths:
       description: >
         Exposes the value of a specific version of a shared secret.
         User must have read access to the secret.
-        Use the list_no_dup endpoint to find the linked key name of the secret.
+        Use the [list_no_dup](https://docs.cryptomove.com/reference#post_user-secret-list-no-dup) 
+        endpoint to find the linked key name of the secret.
       tags:
         - "secrets"
       security:
