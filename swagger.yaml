@@ -20,8 +20,8 @@ paths:
   /user/secret/protect:
     post:
       description: >
-        Stores a new key-value pair as a secret. To update the value of secret, 
-        call this endpoint with an existing key and new value.
+        Stores a new secret. To update the value of secret, 
+        call this endpoint with an existing name and new value.
       tags:
         - "secrets"
       security:
@@ -44,7 +44,7 @@ paths:
       description: >
         Updates a shared secret. The user must have write access to the secret. 
         Use the [list_no_dup](https://docs.cryptomove.com/reference#post_user-secret-list-no-dup) 
-        endpoint to find the linked key name of the secret.
+        endpoint to find the link name of the secret.
       tags:
         - "secrets"
       security:
@@ -88,7 +88,7 @@ paths:
         Exposes the most recent value of a shared secret. 
         User must have read access to the secret.
         Use the [list_no_dup](https://docs.cryptomove.com/reference#post_user-secret-list-no-dup)
-        endpoint to find the linked key name of the secret.
+        endpoint to find the link name of the secret.
       tags:
         - "secrets"
       security:
@@ -134,7 +134,7 @@ paths:
         Exposes the value of a specific version of a shared secret.
         User must have read access to the secret.
         Use the [list_no_dup](https://docs.cryptomove.com/reference#post_user-secret-list-no-dup) 
-        endpoint to find the linked key name of the secret.
+        endpoint to find the link name of the secret.
       tags:
         - "secrets"
       security:
@@ -530,7 +530,7 @@ definitions:
         description: "Email of an authorized user."
       key_name:
         type: string
-        description: "Name of the secret's key."
+        description: "Name of the secret."
   VersionDeleteRequestParameters:
     type: object
     properties:
@@ -539,7 +539,7 @@ definitions:
         description: Email of an authorized user.
       key_name:
         type: string
-        description: Name of the secret's key.
+        description: Name of the secret.
       key_version:
         type: string
         description: Version of the secret that you want to delete.
@@ -572,7 +572,7 @@ definitions:
         description: "Email of an authorized user."
       key_name:
         type: string
-        description: "Key of the new secret."
+        description: "Name of the new secret."
       key_value:
         type: string
         description: "Value of the new secret."
@@ -589,7 +589,7 @@ definitions:
         type: integer
         description: >
           Setting this parameter to 1 prevents the response from listing 
-          the keys for all of the user's existing secrets. Optional. 
+          all of the user's existing secrets. Optional. 
   ProtectLinkRequestParameters:
     type: object
     properties:
@@ -598,7 +598,7 @@ definitions:
         description: "Email of a user with write access to the shared secret."
       key_name:
         type: string
-        description: "Linked key name of the shared secret."
+        description: "Link name of the shared secret."
       key_value:
         type: string
         description: "New value of the shared secret."
@@ -619,7 +619,7 @@ definitions:
         description: "Email of an authorized user."
       key_name:
         type: string
-        description: "Name of the secret's key."
+        description: "Name of the secret."
   ExposeLinkRequestParameters:
     type: object
     properties:
@@ -628,13 +628,13 @@ definitions:
         description: "Email of a user with read access to the shared secret."
       key_name:
         type: string
-        description: "Linked name of the shared secret's key."
+        description: "Link name of the shared secret."
   SharingRequestParameters:
     type: object
     properties:
       key_name:
         type: string
-        description: Name of the secret's key.
+        description: Name of the secret.
       permission:
         type: string
         description: >
@@ -665,7 +665,7 @@ definitions:
         description: "Email of user who will no longer have access to the secret."
       key_name:
         type: string
-        description: "Name of the secret's key."
+        description: "Name of the secret."
   VersionExposeRequestParameters:
     type: object
     properties:
@@ -674,7 +674,7 @@ definitions:
         description: "Email of an authorized user."
       key_name:
         type: string
-        description: "Name of the secret's key."
+        description: "Name of the secret."
       key_version:
         type: string
         description: "A version number of the secret."
@@ -686,7 +686,7 @@ definitions:
         description: "Email of a user with read access to the shared secret."
       key_name:
         type: string
-        description: "Linked key name of the shared secret."
+        description: "Link name of the shared secret."
       key_version:
         type: string
         description: "A version number of the shared secret."
@@ -710,7 +710,7 @@ definitions:
         description: "Email of an authorized user."
       key_name:
         type: string
-        description: "Name of the secret's key."
+        description: "Name of the secret."
   VersionListLinkRequestParameters:
     type: object
     properties:
@@ -719,7 +719,7 @@ definitions:
         description: "Email of a user with read access to the shared secret."
       key_name:
         type: string
-        description: "Linked key name of the shared secret."
+        description: "Link name of the shared secret."
   UpdateClassificationRequestParameters:
     type: object
     properties:
@@ -728,7 +728,7 @@ definitions:
         description: Email of an authorized user.
       key_name: 
         type: string
-        description: Name of the secret's key.
+        description: Name of the secret.
       classification: 
         type: string
         description: New classification of the secret.
@@ -740,7 +740,7 @@ definitions:
         description: Email of an authorized user.
       key_name:
         type: string
-        description: Name of the secret's key.
+        description: Name of the secret.
       key_version:
         type: string
         description: A version of the secret.
@@ -755,7 +755,7 @@ definitions:
         description: Email of an authorized user.
       key_name: 
         type: string
-        description: Name of the secret's key.
+        description: Name of the secret.
       description:
         type: string
         description: New description of the secret.
@@ -772,19 +772,19 @@ definitions:
     type: object
     properties:
       keys:
-        description: Keys created by the user
+        description: Secrets created by the user
         type: object
         properties:
           keyName:
             type: string
-            description: Unique key name
+            description: Unique secret name
       links:
-        description: Keys shared to or from the user
+        description: Secrets shared to or from the user
         type: object
         properties:
           keyName:
             type: string
-            description: Unique key name
+            description: Unique secret name
       status:
         description: Status from the server
         type: string
