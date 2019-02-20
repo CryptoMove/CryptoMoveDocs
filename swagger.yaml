@@ -1,10 +1,10 @@
 swagger: "2.0"
 info:
   description: "CryptoMove API"
-  version: "1.0.0"
+  version: "1.2.0"
   title: "CryptoMove API"
 basePath: "/v1"
-host: cryptomove-api.getsandbox.com
+host: staging-api.cryptomove.com
 schemes:
   - "http"
 consumes:
@@ -20,7 +20,7 @@ paths:
   /user/secret/protect:
     post:
       description: >
-        Stores a new secret. To update the value of secret, 
+        Stores a new secret. To update the value of secret,
         call this endpoint with an existing name and new value.
       tags:
         - "secrets"
@@ -46,8 +46,8 @@ paths:
   /user/secret/protect_link:
     post:
       description: >
-        Updates a shared secret. The user must have write access to the secret. 
-        Use the [list_no_dup](https://docs.cryptomove.com/reference#post_user-secret-list-no-dup) 
+        Updates a shared secret. The user must have write access to the secret.
+        Use the [list_no_dup](https://docs.cryptomove.com/reference#post_user-secret-list-no-dup)
         endpoint to find the link name of the secret.
       tags:
         - "secrets"
@@ -57,7 +57,7 @@ paths:
         - name: Authorization
           in: header
           type: string
-          required: true        
+          required: true
         - name: protectLink_parameters
           description: JSON parameters
           in: body
@@ -69,7 +69,7 @@ paths:
         400:
           description: "Could not update parameters"
         500:
-          description: "Failed to lock user key" 
+          description: "Failed to lock user key"
   /user/secret/expose:
     post:
       description: "Exposes the most recent value of a secret."
@@ -81,7 +81,7 @@ paths:
         - name: Authorization
           in: header
           type: string
-          required: true        
+          required: true
         - name: expose_parameters
           description: JSON parameters
           in: body
@@ -97,19 +97,19 @@ paths:
   /user/secret/expose_link:
     post:
       description: >
-        Exposes the most recent value of a shared secret. 
+        Exposes the most recent value of a shared secret.
         User must have read access to the secret.
         Use the [list_no_dup](https://docs.cryptomove.com/reference#post_user-secret-list-no-dup)
         endpoint to find the link name of the secret.
       tags:
         - "secrets"
       # security:
-      #   - APIKeyHeader: []      
+      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
           type: string
-          required: true        
+          required: true
         - name: exposeLink_parameters
           description: JSON parameters
           in: body
@@ -130,12 +130,12 @@ paths:
       tags:
         - "secrets"
       # security:
-      #   - APIKeyHeader: []      
+      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
           type: string
-          required: true        
+          required: true
         - name: versionExpose_parameters
           description: JSON parameters
           in: body
@@ -153,17 +153,17 @@ paths:
       description: >
         Exposes the value of a specific version of a shared secret.
         User must have read access to the secret.
-        Use the [list_no_dup](https://docs.cryptomove.com/reference#post_user-secret-list-no-dup) 
+        Use the [list_no_dup](https://docs.cryptomove.com/reference#post_user-secret-list-no-dup)
         endpoint to find the link name of the secret.
       tags:
         - "secrets"
       # security:
-      #   - APIKeyHeader: []      
+      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
           type: string
-          required: true        
+          required: true
         - name: versionExposeLink_parameters
           description: JSON parameters
           in: body
@@ -179,18 +179,18 @@ paths:
   /user/secret/delete:
     post:
       description: >
-        Deletes all versions of a secret. To delete 
+        Deletes all versions of a secret. To delete
         only a specific version of the secret, use /user/secret/version_delete.
         Only the user who created a secret can delete it.
       tags:
         - "secrets"
       # security:
-      #   - APIKeyHeader: []      
+      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
           type: string
-          required: true        
+          required: true
         - name: delete_parameters
           in: body
           description: JSON parameters
@@ -211,12 +211,12 @@ paths:
       tags:
         - "secrets"
       # security:
-      #   - APIKeyHeader: [] 
+      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
           type: string
-          required: true        
+          required: true
         - name: VersionDelete_parameters
           in: body
           description: JSON parameters
@@ -232,17 +232,17 @@ paths:
   /user/secret/share:
     post:
       description: >
-        Gives another user access to a secret. Only the user who created 
+        Gives another user access to a secret. Only the user who created
         the secret can share it with other users.
       tags:
         - "secrets"
       # security:
-      #   - APIKeyHeader: [] 
+      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
           type: string
-          required: true        
+          required: true
         - name: sharing_parameters
           description: JSON parameters
           in: body
@@ -261,12 +261,12 @@ paths:
       tags:
         - "secrets"
       # security:
-      #   - APIKeyHeader: [] 
+      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
           type: string
-          required: true        
+          required: true
         - name: unshare_parameters
           description: JSON parameters
           in: body
@@ -285,12 +285,12 @@ paths:
       tags:
         - "secrets"
       # security:
-      #   - APIKeyHeader: [] 
+      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
           type: string
-          required: true        
+          required: true
         - name: updateDescription_parameters
           description: JSON parameters
           in: body
@@ -309,12 +309,12 @@ paths:
       tags:
         - "secrets"
       # security:
-      #   - APIKeyHeader: [] 
+      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
           type: string
-          required: true        
+          required: true
         - name: updateClassification_parameters
           description: JSON parameters
           in: body
@@ -333,12 +333,12 @@ paths:
       tags:
         - "secrets"
       # security:
-      #   - APIKeyHeader: [] 
+      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
           type: string
-          required: true        
+          required: true
         - name: updateExpiration_parameters
           description: JSON parameters
           in: body
@@ -357,12 +357,12 @@ paths:
       tags:
         - "secrets"
       # security:
-      #   - APIKeyHeader: [] 
+      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
           type: string
-          required: true        
+          required: true
         - name: listNoDup_parameters
           description: JSON parameters
           in: body
@@ -383,12 +383,12 @@ paths:
       tags:
         - "secrets"
       # security:
-      #   - APIKeyHeader: [] 
+      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
           type: string
-          required: true        
+          required: true
         - name: versionList_parameters
           description: JSON parameters
           in: body
@@ -404,16 +404,16 @@ paths:
   /user/secret/version_list_for_link:
     post:
       description: >
-        Lists information about all versions of a shared secret. 
+        Lists information about all versions of a shared secret.
       tags:
         - "secrets"
       # security:
-      #   - APIKeyHeader: [] 
+      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
           type: string
-          required: true        
+          required: true
         - name: versionListLink_parameters
           description: JSON parameters
           in: body
@@ -475,8 +475,8 @@ paths:
   /user/refresh_token:
     post:
       description: >
-        Acquires a new access token by passing a refresh token in the 
-        body of the request. For details on obtaining a refresh token, 
+        Acquires a new access token by passing a refresh token in the
+        body of the request. For details on obtaining a refresh token,
         see [Authentication](https://docs.cryptomove.com/docs/getting-started#section-authentication).
       tags:
         - "auth"
@@ -519,7 +519,7 @@ paths:
   #       200:
   #         description: "get authorization code by email"
   #       400:
-  #         description: "error"  
+  #         description: "error"
   # /user/secret/update_key_metadata:
   #   post:
   #     description: "Update user key metadata for authorized request"
@@ -598,7 +598,7 @@ definitions:
   VersionDeleteRequestParameters:
     type: object
     properties:
-      email: 
+      email:
         type: string
         description: Email of an authorized user.
       key_name:
@@ -640,20 +640,20 @@ definitions:
       key_value:
         type: string
         description: "Value of the new secret."
-      classification: 
+      classification:
         type: string
         description: Classification of the new secret. Accepts any string. Optional.
-      description: 
+      description:
         type: string
         description: Description of the new secret. Optional.
-      expiration_time: 
+      expiration_time:
         type: integer
         description: Number of days until the secret expires. Optional; defaults to 10 days.
       without_list:
         type: integer
         description: >
-          Setting this parameter to 1 prevents the response from listing 
-          all of the user's existing secrets. Optional. 
+          Setting this parameter to 1 prevents the response from listing
+          all of the user's existing secrets. Optional.
   ProtectLinkRequestParameters:
     type: object
     properties:
@@ -666,13 +666,13 @@ definitions:
       key_value:
         type: string
         description: "New value of the shared secret."
-      classification: 
+      classification:
         type: string
         description: Updated classification of the shared secret. Accepts any string. Optional.
-      description: 
+      description:
         type: string
         description: New description of the shared secret. Optional.
-      expiration_time: 
+      expiration_time:
         type: integer
         description: Number of days until the shared secret expires. Optional. Defaults to 10 days.
   ExposeRequestParameters:
@@ -711,7 +711,7 @@ definitions:
       usr_id_from:
         type: string
         description: >
-          Email of the user who is sharing the secret. 
+          Email of the user who is sharing the secret.
           Must be the user who created the secret.
       usr_id_to:
         type: string
@@ -719,8 +719,8 @@ definitions:
       email:
         type: string
         description: >
-          Email of the user who created the secret. 
-          Same value as usr_id_from 
+          Email of the user who created the secret.
+          Same value as usr_id_from
   UnshareRequestParameters:
     type: object
     properties:
@@ -790,10 +790,10 @@ definitions:
       email:
         type: string
         description: Email of an authorized user.
-      key_name: 
+      key_name:
         type: string
         description: Name of the secret.
-      classification: 
+      classification:
         type: string
         description: New classification of the secret.
   UpdateExpirationRequestParameters:
@@ -814,10 +814,10 @@ definitions:
   updateDescriptionRequestParameters:
     type: object
     properties:
-      email: 
+      email:
         type: string
         description: Email of an authorized user.
-      key_name: 
+      key_name:
         type: string
         description: Name of the secret.
       description:
@@ -829,7 +829,7 @@ definitions:
   RefreshTokenParameters:
     type: object
     properties:
-      refresh_token: 
+      refresh_token:
         type: string
         description: Valid refresh token.
   ListNoDupResponse:
