@@ -43,33 +43,33 @@ paths:
           description: "Could not update parameters"
         500:
           description: "Failed to lock user key"
-  /user/secret/protect_link:
-    post:
-      description: >
-        Updates a shared secret. The user must have write access to the secret.
-        Use the [list_no_dup](https://docs.cryptomove.com/reference#post_user-secret-list-no-dup)
-        endpoint to find the link name of the secret.
-      tags:
-        - "secrets"
-      # security:
-      #   - APIKeyHeader: []
-      parameters:
-        - name: Authorization
-          in: header
-          type: string
-          required: true
-        - name: protectLink_parameters
-          description: JSON parameters
-          in: body
-          schema:
-            $ref: "#/definitions/ProtectLinkRequestParameters"
-      responses:
-        200:
-          description: "Succesfully updated parameters"
-        400:
-          description: "Could not update parameters"
-        500:
-          description: "Failed to lock user key"
+  # /user/secret/protect_link:
+  #   post:
+  #     description: >
+  #       Updates a shared secret. You must have write access to the secret.
+  #       Use the [list_no_dup](https://docs.cryptomove.com/reference#post_user-secret-list-no-dup)
+  #       endpoint to find the link name of the secret.
+  #     tags:
+  #       - "secrets"
+  #     # security:
+  #     #   - APIKeyHeader: []
+  #     parameters:
+  #       - name: Authorization
+  #         in: header
+  #         type: string
+  #         required: true
+  #       - name: protectLink_parameters
+  #         description: JSON parameters
+  #         in: body
+  #         schema:
+  #           $ref: "#/definitions/ProtectLinkRequestParameters"
+  #     responses:
+  #       200:
+  #         description: "Succesfully updated parameters"
+  #       400:
+  #         description: "Could not update parameters"
+  #       500:
+  #         description: "Failed to lock user key"
   /user/secret/expose:
     post:
       description: "Exposes the most recent value of a secret."
@@ -255,30 +255,30 @@ paths:
           description: "Could not share a key to specified users"
         500:
           description: "Failed to share a key to specified users"
-  /user/secret/unshare:
-    post:
-      description: "Revokes a user's access to a secret."
-      tags:
-        - "secrets"
-      # security:
-      #   - APIKeyHeader: []
-      parameters:
-        - name: Authorization
-          in: header
-          type: string
-          required: true
-        - name: unshare_parameters
-          description: JSON parameters
-          in: body
-          schema:
-            $ref: "#/definitions/UnshareRequestParameters"
-      responses:
-        200:
-          description: "Succesfully unshare_a_key"
-        400:
-          description: "Could not unshare_a_key"
-        500:
-          description: "Failed to unshare_a_key"
+  # /user/secret/unshare:
+  #   post:
+  #     description: "Revokes a user's access to a secret."
+  #     tags:
+  #       - "secrets"
+  #     # security:
+  #     #   - APIKeyHeader: []
+  #     parameters:
+  #       - name: Authorization
+  #         in: header
+  #         type: string
+  #         required: true
+  #       - name: unshare_parameters
+  #         description: JSON parameters
+  #         in: body
+  #         schema:
+  #           $ref: "#/definitions/UnshareRequestParameters"
+  #     responses:
+  #       200:
+  #         description: "Succesfully unshare_a_key"
+  #       400:
+  #         description: "Could not unshare_a_key"
+  #       500:
+  #         description: "Failed to unshare_a_key"
   /user/secret/update_description:
     post:
       description: "Update the description of a specifc version of a secret."
