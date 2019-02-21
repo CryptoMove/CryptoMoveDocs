@@ -20,8 +20,11 @@ paths:
   /user/secret/protect:
     post:
       description: >
-        Stores a new secret. To update the value of secret,
-        call this endpoint with an existing name and new value.
+        Stores a new secret. To create a new version of a secret,
+        call this endpoint with an existing name and new value. The
+        metadata object in the request body is optional. If excluded,
+        the default metadata values are used. You can add custom key-value
+        pairs in the metadata object. 
       tags:
         - "secrets"
       # security:
