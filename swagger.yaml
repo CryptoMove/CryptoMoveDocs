@@ -6,7 +6,7 @@ info:
 basePath: "/v1"
 host: api.cryptomove.com
 schemes:
-  - "http"
+  - "https"
 consumes:
   - "application/json"
 produces:
@@ -640,20 +640,34 @@ definitions:
       key_value:
         type: string
         description: "Value of the new secret."
-      classification:
-        type: string
-        description: Classification of the new secret. Accepts any string. Optional.
-      description:
-        type: string
-        description: Description of the new secret. Optional.
-      expiration_time:
-        type: integer
-        description: Number of days until the secret expires. Optional; defaults to 10 days.
       without_list:
         type: integer
         description: >
           Setting this parameter to 1 prevents the response from listing
           all of the user's existing secrets. Optional.
+      metadata:
+        type: object
+        properties:
+          application_type:
+            type: string
+            description: Optional. Defaults to "container".
+          classification:
+            type: string
+            description: >
+              Classification of the new secret. Optional. Defaults to "top".
+          cloud_type:
+            type: string
+            description: Optional. Defaults to "aws".
+          description:
+            type: string
+            description: Description of the new secret. Optional.
+          environment_type:
+            type: string
+            description: Optional. Defaults to "dev".
+          expiration_time:
+            type: integer
+            description: Number of days until the secret expires. Optional. Defaults to 10 days.
+      
   ProtectLinkRequestParameters:
     type: object
     properties:
