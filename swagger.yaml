@@ -478,8 +478,8 @@ paths:
     post:
       description: >
         Deletes a specific version of a file or all versions of a file,
-        depending on whether the version parameter is specified. To delete
-        all of a user's files at once,
+        depending on whether the version parameter is specified. Only the user who uploaded
+        a file can delete it. To delete all of a user's files at once,
         use [delete_all_files](https://docs.cryptomove.com/reference#post_user-delete-all-files).
       tags:
         - "files"
@@ -501,7 +501,7 @@ paths:
   /user/delete_all_files:
     post:
       description: >
-        Deletes all of the user's files. 
+        Deletes all of the user's files. Only the user who uploaded a file can delete it.
         To delete a single file, use [delete_file](https://docs.cryptomove.com/reference#post_user-delete-file).
       tags:
         - "files"
