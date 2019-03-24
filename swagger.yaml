@@ -11,11 +11,6 @@ consumes:
   - "application/json"
 produces:
   - "application/json"
-# securityDefinitions:
-#   APIKeyHeader:
-#     type: apiKey
-#     in: header
-#     name: Authorization
 paths:
   /user/secret/protect:
     post:
@@ -27,8 +22,6 @@ paths:
         pairs in the metadata object. 
       tags:
         - "secrets"
-      # security:
-      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
@@ -50,8 +43,6 @@ paths:
   #   post:
   #     description: >
   #       Updates a shared secret. You must have write access to the secret.
-  #       Use the [list_no_dup](https://docs.cryptomove.com/reference#post_user-secret-list-no-dup)
-  #       endpoint to find the link name of the secret.
   #     tags:
   #       - "secrets"
   #     # security:
@@ -78,8 +69,6 @@ paths:
       description: "Exposes the most recent value of a secret."
       tags:
         - "secrets"
-      # security:
-      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
@@ -102,12 +91,8 @@ paths:
       description: >
         Exposes the most recent value of a shared secret.
         User must have read access to the secret.
-        Use the [list_no_dup](https://docs.cryptomove.com/reference#post_user-secret-list-no-dup)
-        endpoint to find the link name of the secret.
       tags:
         - "secrets"
-      # security:
-      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
@@ -132,8 +117,6 @@ paths:
         To get a list of all versions, use /user/secret/version_list.
       tags:
         - "secrets"
-      # security:
-      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
@@ -156,12 +139,8 @@ paths:
       description: >
         Exposes the value of a specific version of a shared secret.
         User must have read access to the secret.
-        Use the [list_no_dup](https://docs.cryptomove.com/reference#post_user-secret-list-no-dup)
-        endpoint to find the link name of the secret.
       tags:
         - "secrets"
-      # security:
-      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
@@ -187,8 +166,6 @@ paths:
         Only the user who created a secret can delete it.
       tags:
         - "secrets"
-      # security:
-      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
@@ -213,8 +190,6 @@ paths:
         Only the user who created a secret can delete it.
       tags:
         - "secrets"
-      # security:
-      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
@@ -239,8 +214,6 @@ paths:
         the secret can share it with other users.
       tags:
         - "secrets"
-      # security:
-      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
@@ -287,8 +260,6 @@ paths:
       description: "Update the description of a specifc version of a secret."
       tags:
         - "secrets"
-      # security:
-      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
@@ -311,8 +282,6 @@ paths:
       description: "Update the classification of a secret."
       tags:
         - "secrets"
-      # security:
-      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
@@ -335,8 +304,6 @@ paths:
       description: "Updates the expiration date of a specific version of a secret."
       tags:
         - "secrets"
-      # security:
-      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
@@ -359,8 +326,6 @@ paths:
       description: "Lists a user's secrets."
       tags:
         - "secrets"
-      # security:
-      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
@@ -385,8 +350,6 @@ paths:
       description: "Lists details about all versions of a secret."
       tags:
         - "secrets"
-      # security:
-      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
@@ -410,8 +373,6 @@ paths:
         Lists information about all versions of a shared secret.
       tags:
         - "secrets"
-      # security:
-      #   - APIKeyHeader: []
       parameters:
         - name: Authorization
           in: header
@@ -429,6 +390,161 @@ paths:
           description: "Could not list all versions of current key"
         500:
           description: "Failed to list all versions of user secret"
+  /user/protect_file:
+    post:
+      description: >
+        Uploads files for protection in the Tholos vault. Use the CountOfFiles
+        parameter to upload multiple files in a single request.
+      tags:
+        - "files"
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+        - name: email
+          in: header
+          type: string
+          required: true
+          description: Email of the user who will own the file in Tholos.
+        - name: CountOfFiles 
+          in: header
+          type: string
+          required: true
+          description: Number of files to be uploaded.
+        - name: upfile
+          in: formData
+          type: file
+          required: true
+          description: File to upload to Tholos.
+      responses:
+        200:
+          description: "success"
+  /user/download_file:
+    post:
+      description: >
+        Downloads a file from Tholos as an http octet-stream response.
+        By default, the latest version of the file is downloaded. Use
+        the version parameter to download a different version. If you 
+        set the version parameter to 0, the latest version is downloaded. 
+      tags:
+        - "files"
+      parameters: 
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+        - name: downloadFile_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/DownloadFileRequestParameters"
+      responses:
+        200:
+          description: "success"
+  /user/list_file:
+    post:
+      description: Lists names and version numbers of the user's files currently in Tholos.
+      tags:
+        - "files"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+        - name: listFile_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            type: object
+            required: 
+              - email
+            properties:
+              email:
+                type: string
+                description: Email of an authorized user.
+      responses:
+        200:
+          description: "success"      
+  /user/delete_file:
+    post:
+      description: >
+        Deletes a specific version of a file or all versions of a file,
+        depending on whether the version parameter is specified. Only the user who uploaded
+        a file can delete it. To delete all of a user's files at once,
+        use [delete_all_files](https://docs.cryptomove.com/reference#post_user-delete-all-files).
+      tags:
+        - "files"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+        - name: deleteFile_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/DeleteFileRequestParameters"
+      responses:
+        200:
+          description: "success"                 
+  /user/delete_all_files:
+    post:
+      description: >
+        Deletes all of the user's files. Only the user who uploaded a file can delete it.
+        To delete a single file, use [delete_file](https://docs.cryptomove.com/reference#post_user-delete-file).
+      tags:
+        - "files"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+        - name: deleteAlFiles_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            type: object
+            required: 
+              - email
+            properties:
+              email:
+                type: string
+                description: >
+                  Email of an authorized user.
+                  All of the user's files will be deleted.
+      responses:
+        200:
+          description: "success"          
+  /user/analytics:
+    get:
+      description: >
+        Returns a report about a user's secrets and files in Tholos.
+        The user is identified by the access token in the header.
+      tags:
+        - "analytics"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+      responses:
+        200:
+          description: "success" 
   /user/signup:
     post:
       description: "Creates a new user."
@@ -494,14 +610,7 @@ paths:
           description: "refresh token successful"
         400:
           description: "error"
-  # /user/analytics:
-  #   get:
-  #     description: "Returns a report about a user's secrets. The user is identified by the authentication id in the header."
-  #     tags:
-  #       - "analytics"
-  #     responses:
-  #       200:
-  #         description: "success"
+
 
   # /user/login_authorization_code:
   #   post:
@@ -843,6 +952,40 @@ definitions:
       key_version:
         type: string
         description: A version of the secret.
+  DownloadFileRequestParameters:
+    type: object
+    required:
+      - email
+      - filename
+    properties:
+      email: 
+        type: string
+        description: Email of an authorized user.
+      filename: 
+        type: string
+        description: Name of the file that you want to download.
+      version:
+        type: integer
+        description: >
+          If specified, downloads a particular version of the file.
+          Without this parameter (or if "version":0), the latest version is downloaded.
+  DeleteFileRequestParameters:
+    type: object
+    required:
+      - email
+      - filename
+    properties:
+      email: 
+        type: string
+        description: Email of an authorized user.
+      filename: 
+        type: string
+        description: Name of the file you want to delete.
+      version: 
+        type: integer
+        description: >
+          If specified, deletes a particular version of the fie.
+          Without this parameter (or if "version":0), all versions of the file are deleted.
   RefreshTokenParameters:
     type: object
     properties:
