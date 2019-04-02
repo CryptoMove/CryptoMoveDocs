@@ -66,7 +66,10 @@ paths:
   #         description: "Failed to lock user key"
   /user/secret/expose:
     post:
-      description: "Exposes the most recent value of a secret."
+      description: >
+          Reveals the most recent value of a secret. If you need to reveal the
+          value of a shared secret, use the [expose_link](https://docs.cryptomove.com/reference#post_user-secret-expose-link)
+          endpoint.
       tags:
         - "secrets"
       parameters:
@@ -113,8 +116,10 @@ paths:
   /user/secret/version_expose:
     post:
       description: >
-        Exposes the value of a specific version of a secret.
-        To get a list of all versions, use /user/secret/version_list.
+        Reveals the value of a specific version of a secret.
+        To get a list of all versions, use /user/secret/version_list. To
+        reveal the value of a specific version of a shared secret, use the
+        version_expose_link endpoint. 
       tags:
         - "secrets"
       parameters:
@@ -137,7 +142,7 @@ paths:
   /user/secret/version_expose_link:
     post:
       description: >
-        Exposes the value of a specific version of a shared secret.
+        Reveals the value of a specific version of a shared secret.
         User must have read access to the secret.
       tags:
         - "secrets"
@@ -545,6 +550,85 @@ paths:
       responses:
         200:
           description: "success" 
+  /user/secret/set_user_aws_access_setting:
+    post:
+      description: >
+        Provides Tholos with the access key ID and secret access key of your AWS
+        access key. This access key must belong to the IAM user who will create your EC2 instances.
+        Also specifies the region of your EC2 instances. You must set this information before calling
+        the generate_aws_key endpoint to create a new AWS key pair. If you obtain a new AWS access key,
+        simply call this endpoint again with the new access key ID and secret access key.
+      tags:
+        - "integrations"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+        - name: setAWS_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/SetAWSAccessParameters"
+      responses:
+        200: 
+          description: "success"
+  /user/secret/get_user_aws_access_setting:
+    post:
+      description: Obtains the AWS access key ID and secret access key associated with
+        a Tholos user. If you need to update the credentials, call the set_user_aws_access_setting
+        endpoint with a new access key ID and secret access key.
+      tags:
+        - "integrations"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+        - name: getAWS_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            type: object
+            required: 
+              - email
+            properties:
+              email:
+                type: string
+                description: Email of an authorized user.
+      responses:
+        200:
+          description: "success"
+  /user/secret/generate_aws_key:
+    post:
+      description: >
+        Generates a new AWS key pair that is needed to create a new EC2 instance. 
+        The public key is automatically stored in AWS and the name of the key pair
+        becomes available when creating a new EC2 instance. The private key needed to access
+        the new instance once it is created is automatically stored in Tholos. When you need
+        to access your EC2 instance, obtain the private key from Tholos using the 
+        [expose](https://docs.cryptomove.com/reference#post_user-secret-expose) endpoint.
+      tags:
+        - "auth"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+        - name: generateAWS_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/GenerateAWSParameters"
+      responses:
+        200: 
+          description: "success"
   /user/signup:
     post:
       description: "Creates a new user."
@@ -719,6 +803,48 @@ definitions:
       key_version:
         type: string
         description: Version of the secret that you want to delete.
+  SetAWSAccessParameters:
+    type: object
+    required:
+      - email
+      - aws_access_key_id
+      - aws_secret_access_key
+      - region
+    properties:
+      email:
+        type: string
+        description: Email of an authorized user.
+      aws_access_key_id:
+        type: string
+        description: >
+          AWS access key ID associated with the IAM account
+          that will be creating EC2 instances.
+      aws_secret_access_key:
+        type: string
+        description: >
+          AWS secret access key associated with the IAM account that
+          will be creating EC2 instances.
+      region: 
+        type: string
+        description: >
+          Code associated with the region of your EC2 instances. 
+          You can find the code at [AWS Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html).
+          For example, us-east-2 refers to instances in the US East (Ohio).
+  GenerateAWSParameters:
+    type: object
+    required:
+      - email
+      - key_name
+    properties:
+      email:
+        type: string
+        description: Email of an authorized user.
+      key_name:
+        type: string
+        description: >
+          Name of the AWS key pair. This value appears in AWS when creating a new EC2 instance. This value
+          is also used as the name of a secret in Tholos; the value of this Tholos secret is the private key
+          needed to access your EC2 instance.
   ResetpasswordRequestParameters:
     type: object
     properties:
