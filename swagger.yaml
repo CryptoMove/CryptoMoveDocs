@@ -613,7 +613,7 @@ paths:
         to access your EC2 instance, obtain the private key from Tholos using the 
         [expose](https://docs.cryptomove.com/reference#post_user-secret-expose) endpoint.
       tags:
-        - "auth"
+        - "integrations"
       parameters:
         - name: Authorization
           in: header
