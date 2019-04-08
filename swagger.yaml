@@ -559,7 +559,7 @@ paths:
         the generate_aws_key endpoint to create a new AWS key pair. If you obtain a new AWS access key,
         simply call this endpoint again with the new access key ID and secret access key.
       tags:
-        - "integrations"
+        - "AWS integration"
       parameters:
         - name: Authorization
           in: header
@@ -581,7 +581,7 @@ paths:
         a Tholos user. If you need to update the credentials, call the set_user_aws_access_setting
         endpoint with a new access key ID and secret access key.
       tags:
-        - "integrations"
+        - "AWS integration"
       parameters:
         - name: Authorization
           in: header
@@ -613,7 +613,7 @@ paths:
         to access your EC2 instance, obtain the private key from Tholos using the 
         [expose](https://docs.cryptomove.com/reference#post_user-secret-expose) endpoint.
       tags:
-        - "auth"
+        - "AWS integration"
       parameters:
         - name: Authorization
           in: header
