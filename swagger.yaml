@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: "CryptoMove API"
-  version: "1.2.0"
+  version: api
   title: "CryptoMove API"
 basePath: "/v1"
 host: api.cryptomove.com
@@ -19,7 +19,7 @@ paths:
         call this endpoint with an existing name and new value. The
         metadata object in the request body is optional. If excluded,
         the default metadata values are used. You can add custom key-value
-        pairs in the metadata object. 
+        pairs in the metadata object.
       tags:
         - "secrets"
       parameters:
@@ -67,9 +67,9 @@ paths:
   /user/secret/expose:
     post:
       description: >
-          Reveals the most recent value of a secret. If you need to reveal the
-          value of a shared secret, use the [expose_link](https://docs.cryptomove.com/reference#post_user-secret-expose-link)
-          endpoint.
+        Reveals the most recent value of a secret. If you need to reveal the
+        value of a shared secret, use the [expose_link](https://docs.cryptomove.com/reference#post_user-secret-expose-link)
+        endpoint.
       tags:
         - "secrets"
       parameters:
@@ -119,7 +119,7 @@ paths:
         Reveals the value of a specific version of a secret.
         To get a list of all versions, use /user/secret/version_list. To
         reveal the value of a specific version of a shared secret, use the
-        version_expose_link endpoint. 
+        version_expose_link endpoint.
       tags:
         - "secrets"
       parameters:
@@ -416,7 +416,7 @@ paths:
           type: string
           required: true
           description: Email of the user who will own the file in Tholos.
-        - name: CountOfFiles 
+        - name: CountOfFiles
           in: header
           type: string
           required: true
@@ -434,11 +434,11 @@ paths:
       description: >
         Downloads a file from Tholos as an http octet-stream response.
         By default, the latest version of the file is downloaded. Use
-        the version parameter to download a different version. If you 
-        set the version parameter to 0, the latest version is downloaded. 
+        the version parameter to download a different version. If you
+        set the version parameter to 0, the latest version is downloaded.
       tags:
         - "files"
-      parameters: 
+      parameters:
         - name: Authorization
           in: header
           type: string
@@ -470,7 +470,7 @@ paths:
           in: body
           schema:
             type: object
-            required: 
+            required:
               - email
             properties:
               email:
@@ -478,7 +478,7 @@ paths:
                 description: Email of an authorized user.
       responses:
         200:
-          description: "success"      
+          description: "success"
   /user/delete_file:
     post:
       description: >
@@ -502,7 +502,7 @@ paths:
             $ref: "#/definitions/DeleteFileRequestParameters"
       responses:
         200:
-          description: "success"                 
+          description: "success"
   /user/delete_all_files:
     post:
       description: >
@@ -522,7 +522,7 @@ paths:
           in: body
           schema:
             type: object
-            required: 
+            required:
               - email
             properties:
               email:
@@ -532,7 +532,7 @@ paths:
                   All of the user's files will be deleted.
       responses:
         200:
-          description: "success"          
+          description: "success"
   /user/analytics:
     get:
       description: >
@@ -549,7 +549,7 @@ paths:
             Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
       responses:
         200:
-          description: "success" 
+          description: "success"
   /user/secret/set_user_aws_access_setting:
     post:
       description: >
@@ -573,11 +573,12 @@ paths:
           schema:
             $ref: "#/definitions/SetAWSAccessParameters"
       responses:
-        200: 
+        200:
           description: "success"
   /user/secret/get_user_aws_access_setting:
     post:
-      description: Obtains the AWS access key ID and secret access key associated with
+      description:
+        Obtains the AWS access key ID and secret access key associated with
         a Tholos user. If you need to update the credentials, call the set_user_aws_access_setting
         endpoint with a new access key ID and secret access key.
       tags:
@@ -594,7 +595,7 @@ paths:
           in: body
           schema:
             type: object
-            required: 
+            required:
               - email
             properties:
               email:
@@ -606,11 +607,11 @@ paths:
   /user/secret/generate_aws_key:
     post:
       description: >
-        Generates a new AWS key pair that is needed to create a new EC2 instance. 
+        Generates a new AWS key pair that is needed to create a new EC2 instance.
         The public key is automatically stored in AWS and the name of the key pair
         becomes available when creating a new EC2 instance. The private key needed to access
         the new instance once it is created is automatically stored in Tholos. When you need
-        to access your EC2 instance, obtain the private key from Tholos using the 
+        to access your EC2 instance, obtain the private key from Tholos using the
         [expose](https://docs.cryptomove.com/reference#post_user-secret-expose) endpoint.
       tags:
         - "AWS integration"
@@ -627,7 +628,7 @@ paths:
           schema:
             $ref: "#/definitions/GenerateAWSParameters"
       responses:
-        200: 
+        200:
           description: "success"
   /user/signup:
     post:
@@ -657,8 +658,8 @@ paths:
           schema:
             $ref: "#/definitions/LogoutRequestParameters"
       responses:
-         200:
-           description: "success"
+        200:
+          description: "success"
   /user/resetpassword:
     post:
       description: "Resets a user's password."
@@ -694,7 +695,6 @@ paths:
           description: "refresh token successful"
         400:
           description: "error"
-
 
   # /user/login_authorization_code:
   #   post:
@@ -824,10 +824,10 @@ definitions:
         description: >
           AWS secret access key associated with the IAM account that
           will be creating EC2 instances.
-      region: 
+      region:
         type: string
         description: >
-          Code associated with the region of your EC2 instances. 
+          Code associated with the region of your EC2 instances.
           You can find the code at [AWS Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html).
           For example, us-east-2 refers to instances in the US East (Ohio).
   GenerateAWSParameters:
@@ -905,7 +905,7 @@ definitions:
           expiration_time:
             type: integer
             description: Number of days until the secret expires. Optional. Defaults to 10 days.
-      
+
   ProtectLinkRequestParameters:
     type: object
     properties:
@@ -1084,10 +1084,10 @@ definitions:
       - email
       - filename
     properties:
-      email: 
+      email:
         type: string
         description: Email of an authorized user.
-      filename: 
+      filename:
         type: string
         description: Name of the file that you want to download.
       version:
@@ -1101,13 +1101,13 @@ definitions:
       - email
       - filename
     properties:
-      email: 
+      email:
         type: string
         description: Email of an authorized user.
-      filename: 
+      filename:
         type: string
         description: Name of the file you want to delete.
-      version: 
+      version:
         type: integer
         description: >
           If specified, deletes a particular version of the fie.
