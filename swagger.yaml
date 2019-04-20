@@ -27,6 +27,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: protect_parameters
           description: JSON parameters
           in: body
@@ -45,13 +47,13 @@ paths:
   #       Updates a shared secret. You must have write access to the secret.
   #     tags:
   #       - "secrets"
-  #     # security:
-  #     #   - APIKeyHeader: []
   #     parameters:
   #       - name: Authorization
   #         in: header
   #         type: string
   #         required: true
+  #         description: >
+  #           Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
   #       - name: protectLink_parameters
   #         description: JSON parameters
   #         in: body
@@ -77,6 +79,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: expose_parameters
           description: JSON parameters
           in: body
@@ -101,6 +105,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: exposeLink_parameters
           description: JSON parameters
           in: body
@@ -127,6 +133,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: versionExpose_parameters
           description: JSON parameters
           in: body
@@ -151,6 +159,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: versionExposeLink_parameters
           description: JSON parameters
           in: body
@@ -176,6 +186,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: delete_parameters
           in: body
           description: JSON parameters
@@ -200,6 +212,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: VersionDelete_parameters
           in: body
           description: JSON parameters
@@ -224,6 +238,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: sharing_parameters
           description: JSON parameters
           in: body
@@ -241,13 +257,13 @@ paths:
   #     description: "Revokes a user's access to a secret."
   #     tags:
   #       - "secrets"
-  #     # security:
-  #     #   - APIKeyHeader: []
   #     parameters:
   #       - name: Authorization
   #         in: header
   #         type: string
   #         required: true
+  #         description: >
+  #           Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
   #       - name: unshare_parameters
   #         description: JSON parameters
   #         in: body
@@ -270,6 +286,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: updateDescription_parameters
           description: JSON parameters
           in: body
@@ -292,6 +310,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: updateClassification_parameters
           description: JSON parameters
           in: body
@@ -314,6 +334,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: updateExpiration_parameters
           description: JSON parameters
           in: body
@@ -336,6 +358,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: listNoDup_parameters
           description: JSON parameters
           in: body
@@ -360,6 +384,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: versionList_parameters
           description: JSON parameters
           in: body
@@ -383,6 +409,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: versionListLink_parameters
           description: JSON parameters
           in: body
