@@ -123,9 +123,10 @@ paths:
     post:
       description: >
         Reveals the value of a specific version of a secret.
-        To get a list of all versions, use /user/secret/version_list. To
-        reveal the value of a specific version of a shared secret, use the
-        version_expose_link endpoint.
+        To get a list of all versions, use [version_list](https://docs.cryptomove.com/reference#post_user-secret-version-list).
+        To reveal the value of a specific version of a shared secret, use the
+        [version_expose_link](https://docs.cryptomove.com/reference#post_user-secret-version-expose-link)
+        endpoint.
       tags:
         - "secrets"
       parameters:
@@ -177,7 +178,8 @@ paths:
     post:
       description: >
         Deletes all versions of a secret. To delete
-        only a specific version of the secret, use /user/secret/version_delete.
+        only a specific version of the secret, use 
+        [version_delete](https://docs.cryptomove.com/reference#post_user-secret-version-delete).
         Only the user who created a secret can delete it.
       tags:
         - "secrets"
@@ -203,7 +205,8 @@ paths:
   /user/secret/version_delete:
     post:
       description: >
-        Deletes a specific version of a secret.
+        Deletes a specific version of a secret. To delete all versions of a secret, use the
+        [delete](https://docs.cryptomove.com/reference#post_user-secret-delete) endpoint.
         Only the user who created a secret can delete it.
       tags:
         - "secrets"
@@ -278,7 +281,7 @@ paths:
   #         description: "Failed to unshare_a_key"
   /user/secret/update_description:
     post:
-      description: "Update the description of a specifc version of a secret."
+      description: "Updates the description of a specifc version of a secret."
       tags:
         - "secrets"
       parameters:
@@ -302,7 +305,7 @@ paths:
           description: "Failed to update description date"
   /user/secret/update_classification:
     post:
-      description: "Update the classification of a secret."
+      description: "Updates the classification of a secret."
       tags:
         - "secrets"
       parameters:
@@ -350,7 +353,10 @@ paths:
           description: "Failed to update expiration date"
   /user/secret/list_no_dup:
     post:
-      description: "Lists a user's secrets."
+      description: >
+        Lists a user's secrets and shared secrets. To list all versions of each secret,
+        use the [version_list](https://docs.cryptomove.com/reference#post_user-secret-version-list)
+        endpoint.
       tags:
         - "secrets"
       parameters:
@@ -376,7 +382,12 @@ paths:
           description: "Failed to restore user secret"
   /user/secret/version_list:
     post:
-      description: "Lists details about all versions of a secret."
+      description: >
+        Lists details about all versions of a secret. To list secrets without listing
+        each version, use the [list_no_dup](https://docs.cryptomove.com/reference#post_user-secret-list-no-dup)
+        endpoint. To list information about all versions of a shared secret, use the
+        [version_list_for_link](https://docs.cryptomove.com/reference#post_user-secret-version-list-for-link)
+        endpoint.
       tags:
         - "secrets"
       parameters:
