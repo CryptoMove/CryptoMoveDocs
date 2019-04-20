@@ -1240,7 +1240,7 @@ definitions:
         properties:
           keyName:
             type: string
-            description: Unique secret name
+            description: Unique shared secret name
       status:
         description: Status from the server
         type: string
