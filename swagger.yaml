@@ -27,6 +27,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: protect_parameters
           description: JSON parameters
           in: body
@@ -45,13 +47,13 @@ paths:
   #       Updates a shared secret. You must have write access to the secret.
   #     tags:
   #       - "secrets"
-  #     # security:
-  #     #   - APIKeyHeader: []
   #     parameters:
   #       - name: Authorization
   #         in: header
   #         type: string
   #         required: true
+  #         description: >
+  #           Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
   #       - name: protectLink_parameters
   #         description: JSON parameters
   #         in: body
@@ -77,6 +79,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: expose_parameters
           description: JSON parameters
           in: body
@@ -101,6 +105,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: exposeLink_parameters
           description: JSON parameters
           in: body
@@ -117,9 +123,10 @@ paths:
     post:
       description: >
         Reveals the value of a specific version of a secret.
-        To get a list of all versions, use /user/secret/version_list. To
-        reveal the value of a specific version of a shared secret, use the
-        version_expose_link endpoint.
+        To get a list of all versions, use [version_list](https://docs.cryptomove.com/reference#post_user-secret-version-list).
+        To reveal the value of a specific version of a shared secret, use the
+        [version_expose_link](https://docs.cryptomove.com/reference#post_user-secret-version-expose-link)
+        endpoint.
       tags:
         - "secrets"
       parameters:
@@ -127,6 +134,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: versionExpose_parameters
           description: JSON parameters
           in: body
@@ -151,6 +160,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: versionExposeLink_parameters
           description: JSON parameters
           in: body
@@ -167,7 +178,8 @@ paths:
     post:
       description: >
         Deletes all versions of a secret. To delete
-        only a specific version of the secret, use /user/secret/version_delete.
+        only a specific version of the secret, use 
+        [version_delete](https://docs.cryptomove.com/reference#post_user-secret-version-delete).
         Only the user who created a secret can delete it.
       tags:
         - "secrets"
@@ -176,6 +188,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: delete_parameters
           in: body
           description: JSON parameters
@@ -191,7 +205,8 @@ paths:
   /user/secret/version_delete:
     post:
       description: >
-        Deletes a specific version of a secret.
+        Deletes a specific version of a secret. To delete all versions of a secret, use the
+        [delete](https://docs.cryptomove.com/reference#post_user-secret-delete) endpoint.
         Only the user who created a secret can delete it.
       tags:
         - "secrets"
@@ -200,6 +215,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: VersionDelete_parameters
           in: body
           description: JSON parameters
@@ -224,6 +241,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: sharing_parameters
           description: JSON parameters
           in: body
@@ -241,13 +260,13 @@ paths:
   #     description: "Revokes a user's access to a secret."
   #     tags:
   #       - "secrets"
-  #     # security:
-  #     #   - APIKeyHeader: []
   #     parameters:
   #       - name: Authorization
   #         in: header
   #         type: string
   #         required: true
+  #         description: >
+  #           Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
   #       - name: unshare_parameters
   #         description: JSON parameters
   #         in: body
@@ -262,7 +281,7 @@ paths:
   #         description: "Failed to unshare_a_key"
   /user/secret/update_description:
     post:
-      description: "Update the description of a specifc version of a secret."
+      description: "Updates the description of a specifc version of a secret."
       tags:
         - "secrets"
       parameters:
@@ -270,6 +289,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: updateDescription_parameters
           description: JSON parameters
           in: body
@@ -284,7 +305,7 @@ paths:
           description: "Failed to update description date"
   /user/secret/update_classification:
     post:
-      description: "Update the classification of a secret."
+      description: "Updates the classification of a secret."
       tags:
         - "secrets"
       parameters:
@@ -292,6 +313,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: updateClassification_parameters
           description: JSON parameters
           in: body
@@ -314,6 +337,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: updateExpiration_parameters
           description: JSON parameters
           in: body
@@ -328,7 +353,10 @@ paths:
           description: "Failed to update expiration date"
   /user/secret/list_no_dup:
     post:
-      description: "Lists a user's secrets."
+      description: >
+        Lists a user's secrets and shared secrets. To list all versions of each secret,
+        use the [version_list](https://docs.cryptomove.com/reference#post_user-secret-version-list)
+        endpoint.
       tags:
         - "secrets"
       parameters:
@@ -336,6 +364,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: listNoDup_parameters
           description: JSON parameters
           in: body
@@ -352,7 +382,12 @@ paths:
           description: "Failed to restore user secret"
   /user/secret/version_list:
     post:
-      description: "Lists details about all versions of a secret."
+      description: >
+        Lists details about all versions of a secret. To list secrets without listing
+        each version, use the [list_no_dup](https://docs.cryptomove.com/reference#post_user-secret-list-no-dup)
+        endpoint. To list information about all versions of a shared secret, use the
+        [version_list_for_link](https://docs.cryptomove.com/reference#post_user-secret-version-list-for-link)
+        endpoint.
       tags:
         - "secrets"
       parameters:
@@ -360,6 +395,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: versionList_parameters
           description: JSON parameters
           in: body
@@ -383,6 +420,8 @@ paths:
           in: header
           type: string
           required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
         - name: versionListLink_parameters
           description: JSON parameters
           in: body
@@ -784,6 +823,9 @@ definitions:
         description: "Email of the user who will be logged out."
   DeleteRequestParameters:
     type: object
+    required:
+      - email
+      - key_name
     properties:
       email:
         type: string
@@ -793,6 +835,10 @@ definitions:
         description: "Name of the secret."
   VersionDeleteRequestParameters:
     type: object
+    required:
+      - email
+      - key_name
+      - key_version
     properties:
       email:
         type: string
@@ -847,15 +893,18 @@ definitions:
           needed to access your EC2 instance.
   ResetpasswordRequestParameters:
     type: object
+    required:
+      - email
     properties:
       email:
         type: string
         description: "Email of user."
-      connection:
-        type: string
-        description: "Name of the CryptoMove Tholos database."
   SignupRequestParameters:
     type: object
+    required:
+      - email
+      - password
+      - beta_code
     properties:
       email:
         type: string
@@ -868,6 +917,10 @@ definitions:
         description: "Identifier for beta version of CryptoMove Tholos."
   ProtectRequestParameters:
     type: object
+    required:
+      - email
+      - key_name
+      - key_value
     properties:
       email:
         type: string
@@ -908,6 +961,10 @@ definitions:
 
   ProtectLinkRequestParameters:
     type: object
+    required:
+      - email
+      - key_name
+      - key_value
     properties:
       email:
         type: string
@@ -929,6 +986,9 @@ definitions:
         description: Number of days until the shared secret expires. Optional. Defaults to 10 days.
   ExposeRequestParameters:
     type: object
+    required:
+      - email
+      - key_name
     properties:
       email:
         type: string
@@ -938,15 +998,24 @@ definitions:
         description: "Name of the secret."
   ExposeLinkRequestParameters:
     type: object
+    required:
+      - email
+      - key_name
     properties:
       email:
         type: string
         description: "Email of a user with read access to the shared secret."
       key_name:
         type: string
-        description: "Link name of the shared secret."
+        description: "Name of the shared secret."
   SharingRequestParameters:
     type: object
+    required:
+      - key_name
+      - permission
+      - usr_id_from
+      - usr_id_to
+      - email
     properties:
       key_name:
         type: string
@@ -975,6 +1044,9 @@ definitions:
           Same value as usr_id_from
   UnshareRequestParameters:
     type: object
+    required:
+      - usr_id_from
+      - key_name
     properties:
       usr_id_from:
         type: string
@@ -984,6 +1056,10 @@ definitions:
         description: "Name of the secret."
   VersionExposeRequestParameters:
     type: object
+    required:
+      - email
+      - key_name
+      - key_version
     properties:
       email:
         type: string
@@ -996,6 +1072,10 @@ definitions:
         description: "A version number of the secret."
   VersionExposeLinkRequestParameters:
     type: object
+    required:
+      - email
+      - key_name
+      - key_version
     properties:
       email:
         type: string
@@ -1007,6 +1087,8 @@ definitions:
         type: string
         description: "A version number of the shared secret."
   ListRequestParameters:
+    required:
+      - email
     type: object
     properties:
       email:
@@ -1014,12 +1096,17 @@ definitions:
         description: "Email of user with access to secrets."
   ListNoDupRequestParameters:
     type: object
+    required:
+      - email
     properties:
       email:
         type: string
         description: "Email of user with access to secrets."
   VersionListRequestParameters:
     type: object
+    required:
+      - email
+      - key_name
     properties:
       email:
         type: string
@@ -1029,6 +1116,9 @@ definitions:
         description: "Name of the secret."
   VersionListLinkRequestParameters:
     type: object
+    required:
+      - email
+      - key_name
     properties:
       email:
         type: string
@@ -1038,6 +1128,10 @@ definitions:
         description: "Link name of the shared secret."
   UpdateClassificationRequestParameters:
     type: object
+    required:
+      - email
+      - key_name
+      - classification
     properties:
       email:
         type: string
@@ -1050,6 +1144,11 @@ definitions:
         description: New classification of the secret.
   UpdateExpirationRequestParameters:
     type: object
+    required:
+      - email
+      - key_name
+      - key_version
+      - expiration_time
     properties:
       email:
         type: string
@@ -1065,6 +1164,11 @@ definitions:
         description: The number of days before the version of the secret will expire.
   updateDescriptionRequestParameters:
     type: object
+    required:
+      - email
+      - key_name
+      - description
+      - key_version
     properties:
       email:
         type: string
@@ -1114,6 +1218,8 @@ definitions:
           Without this parameter (or if "version":0), all versions of the file are deleted.
   RefreshTokenParameters:
     type: object
+    required:
+      - refresh_token
     properties:
       refresh_token:
         type: string
@@ -1134,7 +1240,7 @@ definitions:
         properties:
           keyName:
             type: string
-            description: Unique secret name
+            description: Unique shared secret name
       status:
         description: Status from the server
         type: string
