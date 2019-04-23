@@ -438,7 +438,7 @@ paths:
     post:
       description: >
         Uploads files for protection in the Tholos vault. Use the CountOfFiles
-        parameter to upload multiple files in a single request.
+        parameter to upload multiple files in a single request. This endpoint is a multipart/form-data POST request.
       tags:
         - "files"
       consumes:
