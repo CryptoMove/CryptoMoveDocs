@@ -904,7 +904,6 @@ definitions:
     required:
       - email
       - password
-      - beta_code
     properties:
       email:
         type: string
@@ -912,9 +911,6 @@ definitions:
       password:
         type: string
         description: "Password of the new user."
-      beta_code:
-        type: string
-        description: "Identifier for beta version of CryptoMove Tholos."
   ProtectRequestParameters:
     type: object
     required:
