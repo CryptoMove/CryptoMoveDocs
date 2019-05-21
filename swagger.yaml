@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: "CryptoMove API"
-  version: api
+  version: 1.8
   title: "CryptoMove API"
 basePath: "/v1"
 host: api.cryptomove.com
@@ -178,7 +178,7 @@ paths:
     post:
       description: >
         Deletes all versions of a secret. To delete
-        only a specific version of the secret, use 
+        only a specific version of the secret, use
         [version_delete](https://docs.cryptomove.com/reference#post_user-secret-version-delete).
         Only the user who created a secret can delete it.
       tags:

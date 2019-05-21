@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "[Hello Guide](https://github.com/cryptocharudatta/CryptoMoveDocs/tree/master/source/helloguide.rst)",
   "scripts": {
-    "createJson": "yaml2json --save swagger.yaml",
+    "createJson": "swagger-cli bundle swagger.yaml > swagger.json",
     "deploy": "yarn run createJson && yarn run deployJson",
     "deployJson": "rdme swagger swagger.json --key=$RDME_KY --id=$RDME_ID",
     "test": "swagger-cli validate swagger.yaml"
@@ -19,8 +19,7 @@
   },
   "homepage": "https://github.com/cryptomove/cryptomovedocs#readme",
   "devDependencies": {
-    "rdme": "^2.2.2",
-    "yamljs": "^0.3.0"
+    "rdme": "^3.0.1"
   },
   "dependencies": {
     "swagger-cli": "^2.2.1"
