@@ -715,6 +715,34 @@ paths:
           description: "We've just sent you an email to reset your password."
         400:
           description: "error"
+  /user/generate_access_token:
+    post:
+      description: >
+        Returns an access token that can be used to authenticate API calls to Tholos. The
+        "scope" parameter determines which secrets can be accessed by the API calls that are
+        authenticated with the generated access token. For example, the following scope
+        parameter generates a token that can be used to access secrets that have a
+        classification of sensitive and a cloud type of Azure:
+        
+        "scope":"cloud_type:azure,environment_type:all,application_type:all,classification:sensitive,secret_name:all"
+
+        In this example, listing a user's secrets with the new access token would not
+        return secrets with a classification of "top". Defining the value of every
+        attribute as "all" returns an access token that can be used to access all
+        of the user's secrets. 
+      tags:
+        - "auth"
+      parameters:
+        - name: generatetoken_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/GenerateAccessTokenParameters"
+      responses:
+        200:
+          description: "successful"
+        400:
+          description: "error"
   /user/refresh_token:
     post:
       description: >
@@ -1212,6 +1240,34 @@ definitions:
         description: >
           If specified, deletes a particular version of the fie.
           Without this parameter (or if "version":0), all versions of the file are deleted.
+  GenerateAccessTokenParameters:
+    type: object
+    required:
+      - email
+      - password
+      - scope
+      - expiration_hours
+    properties:
+      email:
+        type: string
+        description: >
+          Email of an authorized user. The generated token provides access to this user's
+          secrets.
+      password:
+        type: string
+        description: Password associated with the user with the specified email.
+      scope: 
+        type: string
+        description: >
+          A comma-delimited list of the attributes of the secrets that you want
+          to access with the generated access token. Define each attribute as
+          a key-value pair, for example, classification:sensitive. The attributes are cloud_type,
+          environment_type, application_type, classification, and secret_name. To generate an
+          access token that can access all of the user's secrets, define the values of the attributes
+          as 'all'. 
+      expiration_hours:
+        type: integer
+        description: Number of hours before the access token expires.
   RefreshTokenParameters:
     type: object
     required:
