@@ -1267,7 +1267,8 @@ definitions:
           as 'all'. 
       expiration_hours:
         type: integer
-        description: Number of hours before the access token expires.
+        description: >
+          Number of hours before the access token expires up to a maximum of 24 hours.
   RefreshTokenParameters:
     type: object
     required:
