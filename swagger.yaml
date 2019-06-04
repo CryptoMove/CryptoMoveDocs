@@ -1259,16 +1259,18 @@ definitions:
       scope: 
         type: string
         description: >
-          A comma-delimited list of the attributes of the secrets that you want
-          to access with the generated access token. Define each attribute as
-          a key-value pair, for example, classification:sensitive. The attributes are cloud_type,
-          environment_type, application_type, classification, and secret_name. To generate an
-          access token that can access all of the user's secrets, define the values of the attributes
-          as 'all'. 
+          A comma-delimited list, without spaces, of the attributes of the secrets
+          that you want to access with the generated access token. Define each
+          attribute as a key-value pair, for example, classification:sensitive
+          (without spaces). The attributes are cloud_type, environment_type,
+          application_type, classification, and secret_name. You can repeat an
+          attribute to specify multiple values, for example, "cloud_type:azure,cloud_type:aws".
+          To generate an access token that can access all of the user's secrets, define
+          the values of the attributes as "all". 
       expiration_hours:
         type: integer
         description: >
-          Number of hours before the access token expires up to a maximum of 24 hours.
+          Number of hours before the access token expires (maximum of 24 hours).
   RefreshTokenParameters:
     type: object
     required:
