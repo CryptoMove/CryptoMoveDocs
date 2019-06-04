@@ -28,7 +28,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: protect_parameters
           description: JSON parameters
           in: body
@@ -53,7 +53,7 @@ paths:
   #         type: string
   #         required: true
   #         description: >
-  #           Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+  #           Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
   #       - name: protectLink_parameters
   #         description: JSON parameters
   #         in: body
@@ -80,7 +80,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: expose_parameters
           description: JSON parameters
           in: body
@@ -106,7 +106,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: exposeLink_parameters
           description: JSON parameters
           in: body
@@ -135,7 +135,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: versionExpose_parameters
           description: JSON parameters
           in: body
@@ -161,7 +161,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: versionExposeLink_parameters
           description: JSON parameters
           in: body
@@ -189,7 +189,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: delete_parameters
           in: body
           description: JSON parameters
@@ -216,7 +216,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: VersionDelete_parameters
           in: body
           description: JSON parameters
@@ -242,7 +242,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: sharing_parameters
           description: JSON parameters
           in: body
@@ -266,7 +266,7 @@ paths:
   #         type: string
   #         required: true
   #         description: >
-  #           Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+  #           Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
   #       - name: unshare_parameters
   #         description: JSON parameters
   #         in: body
@@ -290,7 +290,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: updateDescription_parameters
           description: JSON parameters
           in: body
@@ -314,7 +314,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: updateClassification_parameters
           description: JSON parameters
           in: body
@@ -338,7 +338,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: updateExpiration_parameters
           description: JSON parameters
           in: body
@@ -365,7 +365,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: listNoDup_parameters
           description: JSON parameters
           in: body
@@ -396,7 +396,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: versionList_parameters
           description: JSON parameters
           in: body
@@ -421,7 +421,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: versionListLink_parameters
           description: JSON parameters
           in: body
@@ -449,7 +449,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: email
           in: header
           type: string
@@ -483,7 +483,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: downloadFile_parameters
           description: JSON parameters
           in: body
@@ -503,7 +503,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: listFile_parameters
           description: JSON parameters
           in: body
@@ -533,7 +533,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: deleteFile_parameters
           description: JSON parameters
           in: body
@@ -555,7 +555,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: deleteAlFiles_parameters
           description: JSON parameters
           in: body
@@ -585,7 +585,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
       responses:
         200:
           description: "success"
@@ -605,7 +605,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: setAWS_parameters
           description: JSON parameters
           in: body
@@ -628,7 +628,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: getAWS_parameters
           description: JSON parameters
           in: body
@@ -660,7 +660,7 @@ paths:
           type: string
           required: true
           description: >
-            Valid [access token](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: generateAWS_parameters
           description: JSON parameters
           in: body
@@ -748,7 +748,7 @@ paths:
       description: >
         Acquires a new access token by passing a refresh token in the
         body of the request. For details on obtaining a refresh token,
-        see [Authentication](https://docs.cryptomove.com/docs/getting-started#section-authentication).
+        see [Access Tokens](https://docs.cryptomove.com/docs/access-tokens).
       tags:
         - "auth"
       parameters:
