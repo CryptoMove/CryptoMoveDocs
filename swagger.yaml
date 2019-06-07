@@ -1275,10 +1275,14 @@ definitions:
     type: object
     required:
       - refresh_token
+      - used_access_token
     properties:
       refresh_token:
         type: string
         description: Valid refresh token.
+      used_access_token:
+        type: string
+        description: Previously valid access token. 
   ListNoDupResponse:
     type: object
     properties:
