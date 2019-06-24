@@ -437,7 +437,7 @@ paths:
   /user/protect_file:
     post:
       description: >
-        Uploads files for protection in the Tholos vault. Use the CountOfFiles
+        Uploads files for protection in the CryptoMove vault. Use the CountOfFiles
         parameter to upload multiple files in a single request. This endpoint is a multipart/form-data POST request.
       tags:
         - "files"
@@ -454,7 +454,7 @@ paths:
           in: header
           type: string
           required: true
-          description: Email of the user who will own the file in Tholos.
+          description: Email of the user who will own the file in CryptoMove.
         - name: CountOfFiles
           in: header
           type: string
@@ -464,14 +464,14 @@ paths:
           in: formData
           type: file
           required: true
-          description: File to upload to Tholos.
+          description: File to upload to CryptoMove.
       responses:
         200:
           description: "success"
   /user/download_file:
     post:
       description: >
-        Downloads a file from Tholos as an http octet-stream response.
+        Downloads a file from CryptoMove as an http octet-stream response.
         By default, the latest version of the file is downloaded. Use
         the version parameter to download a different version. If you
         set the version parameter to 0, the latest version is downloaded.
@@ -494,7 +494,7 @@ paths:
           description: "success"
   /user/list_file:
     post:
-      description: Lists names and version numbers of the user's files currently in Tholos.
+      description: Lists names and version numbers of the user's files currently in CryptoMove.
       tags:
         - "files"
       parameters:
@@ -575,8 +575,8 @@ paths:
   /user/analytics:
     get:
       description: >
-        Returns a report about a user's secrets and files in Tholos.
-        The user is identified by the access token in the header.
+        Returns a report about a user's secrets and files in the CryptoMove
+        key vault. The user is identified by the access token in the header.
       tags:
         - "analytics"
       parameters:
@@ -592,7 +592,7 @@ paths:
   /user/secret/set_user_aws_access_setting:
     post:
       description: >
-        Provides Tholos with the access key ID and secret access key of your AWS
+        Provides CryptoMove with the access key ID and secret access key of your AWS
         access key. This access key must belong to the IAM user who will create your EC2 instances.
         Also specifies the region of your EC2 instances. You must set this information before calling
         the generate_aws_key endpoint to create a new AWS key pair. If you obtain a new AWS access key,
@@ -618,7 +618,7 @@ paths:
     post:
       description:
         Obtains the AWS access key ID and secret access key associated with
-        a Tholos user. If you need to update the credentials, call the set_user_aws_access_setting
+        a CryptoMove user. If you need to update the credentials, call the set_user_aws_access_setting
         endpoint with a new access key ID and secret access key.
       tags:
         - "AWS integration"
@@ -649,8 +649,8 @@ paths:
         Generates a new AWS key pair that is needed to create a new EC2 instance.
         The public key is automatically stored in AWS and the name of the key pair
         becomes available when creating a new EC2 instance. The private key needed to access
-        the new instance once it is created is automatically stored in Tholos. When you need
-        to access your EC2 instance, obtain the private key from Tholos using the
+        the new instance once it is created is automatically stored in CryptoMove. When you need
+        to access your EC2 instance, obtain the private key from CryptoMove using the
         [expose](https://docs.cryptomove.com/reference#post_user-secret-expose) endpoint.
       tags:
         - "AWS integration"
@@ -718,7 +718,7 @@ paths:
   /user/generate_access_token:
     post:
       description: >
-        Returns an access token that can be used to authenticate API calls to Tholos. The
+        Returns an access token that can be used to authenticate API calls to CryptoMove. The
         "scope" parameter determines which secrets can be accessed by the API calls that are
         authenticated with the generated access token. For example, the following scope
         parameter generates a token that can be used to access secrets that have a
@@ -917,8 +917,8 @@ definitions:
         type: string
         description: >
           Name of the AWS key pair. This value appears in AWS when creating a new EC2 instance. This value
-          is also used as the name of a secret in Tholos; the value of this Tholos secret is the private key
-          needed to access your EC2 instance.
+          is also used as the name of a secret in the CryptoMove key vault; the value of this 
+          CryptoMove secret is the private key needed to access your EC2 instance.
   ResetpasswordRequestParameters:
     type: object
     required:
