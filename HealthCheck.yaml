@@ -1,0 +1,36 @@
+swagger: "2.0"
+info:
+  description: "Health Check API"
+  version: "1.5"
+  title: "Health Check API"
+host: healthcheck.cryptomove.com
+schemes:
+  - "https"
+produces:
+  - "application/json"
+paths:
+  /status:
+    get:
+      description: test
+      responses:
+        200:
+          description: "test"
+          schema:
+            $ref: "#/definitions/StatusResponse"
+        400:
+          description: "test"
+        500:
+          description: "test"
+definitions:
+  StatusResponse:
+     type: object
+     properties:
+       Website:
+         description: test
+         type: integer
+       API Service:
+         description: test
+         type: integer
+       Backend Service:
+         description: test
+         type: integer
