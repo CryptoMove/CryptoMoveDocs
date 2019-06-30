@@ -4,9 +4,10 @@
   "description": "[Hello Guide](https://github.com/cryptocharudatta/CryptoMoveDocs/tree/master/source/helloguide.rst)",
   "scripts": {
     "createJson": "swagger-cli bundle swagger.yaml > swagger.json",
-    "deploy": "yarn run createJson && yarn run deployJson",
+    "deploy": "yarn run createJson && yarn run deployJson & yarn run deployHealthCheck",
     "deployJson": "rdme swagger swagger.json --key=$RDME_KY --id=$RDME_ID",
-    "test": "swagger-cli validate swagger.yaml"
+    "deployHealthCheck": "rdme swagger HealthCheck.yaml --key=$RDME_KY --id=$RDME_ID",
+    "test": "swagger-cli validate swagger.yaml & swagger-cli validate HealthCheck.yaml"
   },
   "repository": {
     "type": "git",
