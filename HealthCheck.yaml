@@ -33,7 +33,7 @@ paths:
   /status_query:
     get:
       description: >
-        *Comming Soon* Returns a report showing health check statuses for the last 30 days. Status
+        *Coming Soon* Returns a report showing health check statuses for the last 30 days. Status
         history of the CryptoMove website, API services, and backend services is
         provided. The status codes returned in the JSON object are:
 
