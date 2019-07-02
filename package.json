@@ -6,7 +6,7 @@
     "createJson": "swagger-cli bundle swagger.yaml > swagger.json",
     "deploy": "yarn run createJson && yarn run deployJson & yarn run deployHealthCheck",
     "deployJson": "rdme swagger swagger.json --key=$RDME_KY --id=$RDME_ID",
-    "deployHealthCheck": "rdme swagger HealthCheck.yaml --key=$RDME_KY --id=$RDME_ID",
+    "deployHealthCheck": "rdme swagger HealthCheck.yaml --key=$RDME_KY --id=$RDME_HCID",
     "test": "swagger-cli validate swagger.yaml & swagger-cli validate HealthCheck.yaml"
   },
   "repository": {
