@@ -21,6 +21,8 @@ paths:
         **1** - Some services are currently unavailable, while others are available.
         
         **2** - All services are unavailable.  
+      tags:
+        - check status
       responses:
         200:
           description: "success"
@@ -40,6 +42,8 @@ paths:
         **1** - Some services were unavailable, while others were available.
 
         **2** - All services were unavailable.
+      tags:
+        - check status
       responses:
         200:
           description: "success"
