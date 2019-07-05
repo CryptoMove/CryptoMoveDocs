@@ -1,0 +1,53 @@
+swagger: "2.0"
+info:
+  description: "Health Check API"
+  version: "1.5"
+  title: "Health Check API"
+host: healthcheck.cryptomove.com
+schemes:
+  - "https"
+produces:
+  - "application/json"
+paths:
+  /status:
+    get:
+      description: >
+        *Coming Soon* Returns the current status of the CryptoMove website, API services, and 
+        backend services to help troubleshoot issues with CryptoMove. The status
+        codes returned in the JSON object are: 
+        
+        **0** - All services are available.
+        
+        **1** - Some services are currently unavailable, while others are available.
+        
+        **2** - All services are unavailable.  
+      tags:
+        - check status
+      responses:
+        200:
+          description: "success"
+        400:
+          description: "failure"
+        500:
+          description: "failure"
+  /status_query:
+    get:
+      description: >
+        *Coming Soon* Returns a report showing health check statuses for the last 30 days. Status
+        history of the CryptoMove website, API services, and backend services is
+        provided. The status codes returned in the JSON object are:
+
+        **0** - All services were available.
+
+        **1** - Some services were unavailable, while others were available.
+
+        **2** - All services were unavailable.
+      tags:
+        - check status
+      responses:
+        200:
+          description: "success"
+        400:
+          description: "failure"
+        500:
+          description: "failure"
