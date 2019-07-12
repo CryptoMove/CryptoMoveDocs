@@ -1238,7 +1238,7 @@ definitions:
       version:
         type: integer
         description: >
-          If specified, deletes a particular version of the fie.
+          If specified, deletes a particular version of the file.
           Without this parameter (or if "version":0), all versions of the file are deleted.
   GenerateAccessTokenParameters:
     type: object
