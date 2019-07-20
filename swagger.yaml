@@ -1263,7 +1263,8 @@ definitions:
           that you want to access with the generated access token. Define each
           attribute as a key-value pair, for example, classification:sensitive
           (without spaces). The attributes are cloud_type, environment_type,
-          application_type, classification, and secret_name. You can repeat an
+          application_type, classification, and secret_name. All five attributes
+          must be specified at least once, and you can repeat an
           attribute to specify multiple values, for example, "cloud_type:azure,cloud_type:aws".
           To generate an access token that can access all of the user's secrets, define
           the values of the attributes as \*. 
