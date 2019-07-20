@@ -724,11 +724,11 @@ paths:
         parameter generates a token that can be used to access secrets that have a
         classification of sensitive and a cloud type of Azure:
         
-        "scope":"cloud_type:azure,environment_type:*,application_type:*,classification:sensitive,secret_name:*"
+        "scope":"cloud_type:azure,environment_type:\*,application_type:\*,classification:sensitive,secret_name:\*"
 
         In this example, listing a user's secrets with the new access token would not
         return secrets with a classification of "top". Defining the value of every
-        attribute as `*` returns an access token that can be used to access all
+        attribute as \* returns an access token that can be used to access all
         of the user's secrets. 
       tags:
         - "auth"
@@ -1266,7 +1266,7 @@ definitions:
           application_type, classification, and secret_name. You can repeat an
           attribute to specify multiple values, for example, "cloud_type:azure,cloud_type:aws".
           To generate an access token that can access all of the user's secrets, define
-          the values of the attributes as `*`. 
+          the values of the attributes as \*. 
       expiration_hours:
         type: integer
         description: >
