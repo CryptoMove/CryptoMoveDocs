@@ -12,7 +12,7 @@ paths:
   /status:
     get:
       description: >
-        *Coming Soon* Returns the current status of the CryptoMove website, API services, and 
+        Returns the current status of the CryptoMove website, API services, and 
         backend services to help troubleshoot issues with CryptoMove. The status
         codes returned in the JSON object are: 
         
@@ -30,10 +30,10 @@ paths:
           description: "failure"
         500:
           description: "failure"
-  /status_query:
+  /query_status:
     get:
       description: >
-        *Coming Soon* Returns a report showing health check statuses for the last 30 days. Status
+        Returns a report showing health check statuses for the last 30 days. Status
         history of the CryptoMove website, API services, and backend services is
         provided. The status codes returned in the JSON object are:
 
