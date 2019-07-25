@@ -762,6 +762,214 @@ paths:
           description: "refresh token successful"
         400:
           description: "error"
+  /role/group_admin:
+    post:
+      description: >
+        Allows an org admin to designate a user as a group admin and grant the new admin
+        permissions to the group. Only an org admin with CREATE_GROUP_ADMIN
+        and UPDATE_PERMISSION permissions can use this endpoint. An org admin can call
+        this endpoint for an existing group admin to replace the admin's
+        existing permissions with the specified ones. 
+      tags: 
+        - "admin"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: groupadmin_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/GroupAdminParameters"
+      responses:
+        200:
+          description: success
+        400:
+          description: error  
+    delete:
+      description: >
+        Removes a user from being an admin for one or more groups. If a group is not specified,
+        the user stops being an admin for all groups in the domain.
+      tags:
+        - "admin"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: groupadmindelete_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/GroupAdminDeleteParameters"
+      responses:
+        200:
+          description: success
+        400:
+          description: error  
+    get: 
+      description: >
+        Lists the group admins for the specified groups along with their permissions.
+      tags: 
+        - "admin"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: groups
+          in: query          
+          type: string
+          description: Comma-delimited list of group names.
+      responses:
+        200:
+          description: success
+        400:
+          description: error  
+  /role/group:
+    post:
+      description: >
+        Creates a group and adds any specified users to the new group. You must have
+        UPDATE_GROUP permission to use this endpoint. 
+      tags:
+        - "admin"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: group_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/GroupParameters"
+      responses:
+        200: 
+          description: success
+        400:
+          description: error
+    delete:
+      description: >
+        Deletes the specified group. You must have the UPDATE_GROUP permission to use
+        this endpoint.
+      tags: 
+        - "admin"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: groupDelete_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/GroupDeleteParameters"
+      responses: 
+        200:
+          description: success
+        400:
+          description: error
+    get:
+      description: >
+        If at least one group is specified, returns a list of users who belong
+        to the specified groups. In this case, you must have either the LIST_GROUP_USERS
+        permission for the domain or the UPDATE_GROUP permission for the specified groups.
+        You can list all groups within your domain by calling this endpoint without
+        specifying any groups. In this case, you must have LIST_GROUP_USERS permission
+        for the domain. 
+      tags: 
+          - "admin"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: groups
+          in: query
+          type: string
+          description: Comma-delimited list of group names.
+      responses:
+        200:
+          description: success
+        400:
+          description: error  
+  /role/user:
+    post:
+      description: >
+        Adds users to an existing group. You must have the UPDATE_GROUP permission
+        to use this endpoint.
+      tags:
+        - "admin"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: user_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/UserParameters"
+      responses:
+        200: 
+          description: success
+        400:
+          description: error
+    delete:
+      description: >
+        Removes a user from the specified groups. You must have the UPDATE_GROUP permission
+        to use this endpoint.
+      tags: 
+        - "admin"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: UserDelete_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/UserDeleteParameters"
+      responses: 
+        200:
+          description: success
+        400:
+          description: error
+    get:
+      description: >
+        Returns a list of the groups that the specified user belongs to.
+        You must have LIST_GROUP_USERS permission for the domain to use this
+        endpoint.
+      tags: 
+        - "admin"
+      parameters:
+        - name: email
+          in: query
+          type: string
+          description: Login email of a user who belongs to at least one group.
+      responses:
+        200:
+          description: success
+        400:
+          description: error  
 
   # /user/login_authorization_code:
   #   post:
@@ -1284,6 +1492,86 @@ definitions:
       used_access_token:
         type: string
         description: Previously valid access token. 
+  GroupAdminParameters:
+    type: object
+    properties:
+      login:
+        type: string
+        description: Email of an existing user who will be a group admin.
+      array_of_objects:
+        type: array
+        items: 
+          type: object
+          properties:
+            group:
+              type: string
+              description: Name of an existing group.
+            permissions:
+              type: array
+              description: Array of permissions the user will have for the group.
+              items:
+                type: string  
+  GroupAdminDeleteParameters:
+    type: object
+    properties:
+      login:
+        type: string
+        description: Email of user who will stop being a group admin.
+      group:
+        type: array
+        items:
+          type: string
+          description: Array of groups for which the user will no longer be an admin.
+  GroupParameters:
+    type: object
+    required:
+      - group_name
+    properties:
+      group_name:
+        type: string
+        description: Name of the group that you want to create.
+      group_users:
+        type: array
+        description: >
+          Array of email addresses of the users that you want to add to the new group.
+        items:
+          type: string
+  GroupDeleteParameters:
+    type: object
+    required:
+      - group_name
+    properties:
+      group_name:
+        type: string
+        description: Name of the group that you want to delete.
+  UserParameters:
+    type: object
+    required:
+      - login
+      - groups
+    properties:
+      login:
+        type: string
+        description: Email address of the user you want to add to the specified groups.
+      groups: 
+        type: array
+        description: Array of the groups to which the user will be added.
+        items:
+          type: string
+  UserDeleteParameters:
+    type: object
+    required:
+      - login
+      - groups
+    properties:
+      login:
+        type: string
+        description: User that you want to remove from the specified groups.
+      groups:
+        type: array
+        description: Array of the groups from which the user will be removed.
+        items:
+          type: string
   ListNoDupResponse:
     type: object
     properties:
