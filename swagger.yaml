@@ -1498,7 +1498,7 @@ definitions:
       login:
         type: string
         description: Email of an existing user who will be a group admin.
-      array_of_objects:
+      groups:
         type: array
         items: 
           type: object
