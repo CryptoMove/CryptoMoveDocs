@@ -1157,12 +1157,15 @@ definitions:
       email:
         type: string
         description: "Email of an authorized user."
+        example: example@company.com
       key_name:
         type: string
         description: "Name of the new secret."
+        example: MySecret
       key_value:
         type: string
         description: "Value of the new secret."
+        example: HiddenValue
       without_list:
         type: integer
         description: >
