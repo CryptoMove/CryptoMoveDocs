@@ -1156,7 +1156,7 @@ definitions:
     properties:
       email:
         type: string
-        description: "Email of an authorized user."
+        description: "Email of an authorized user. Test Example"
         example: example@company.com
       key_name:
         type: string
