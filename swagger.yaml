@@ -202,6 +202,56 @@ paths:
           description: "Could not delete parameters"
         500:
           description: "Failed to delete user key"
+  /user/secret/delete_multiple_key:
+    post:
+      description: >
+        Deletes multiple secrets using a single endpoint call.
+        Only the user who created a secret can delete it.
+      tags:
+        - "secrets"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: deletemultiple_parameters
+          in: body
+          description: JSON parameters
+          schema:
+            $ref: "#/definitions/DeleteMultipleKeyRequestParameters"
+      responses:
+        200:
+          description: "success"
+        400:
+          description: "error"
+  /user/secret/delete_shared_key_link:
+    post:
+      description: >
+        Allows a user to remove a secret that has been shared with them from their
+        list of secrets. Calling this endpoint does not delete the shared secret; it
+        simply removes it from the user's list of secrets.
+      tags:
+        - "secrets"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: deleteshared_parameters
+          in: body
+          description: JSON parameters
+          schema:
+            $ref: "#/definitions/DeleteSharedKeyLinkRequestParameters"
+      responses:
+        200:
+          description: "success"
+        400:
+          description: "error"
+          
   /user/secret/version_delete:
     post:
       description: >
@@ -762,6 +812,50 @@ paths:
           description: "refresh token successful"
         400:
           description: "error"
+  /user/soft-delete-user:
+    post:
+      description: >
+        Allows users to deactivate their CryptoMove accounts. Deactivated users can
+        contact CryptoMove to re-activate their account at a later time. To delete
+        your account without the opportunity to recover the account later, use the
+        [hard-delete-user]((https://docs.cryptomove.com/reference#post_user-hard-delete-user)
+        endpoint.
+      tags:
+        - "auth"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+      responses:
+        200:
+          description: success
+        400:
+          description: error  
+  /user/hard-delete-user:
+    post:
+      description: >
+        Allows users to delete themselves from CryptoMove with no ability to recover
+        their accounts later. To deactivate yourself from CryptoMove, but reserve the
+        ability to recover your account later, use the
+        [soft-delete-user]((https://docs.cryptomove.com/reference#post_user-soft-delete-user)
+        endpoint.
+      tags:
+        - "auth"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+      responses:
+        200:
+          description: success
+        400:
+          description: error    
   /role/group_admin:
     post:
       description: >
@@ -1068,7 +1162,34 @@ definitions:
         description: "Email of an authorized user."
       key_name:
         type: string
-        description: "Name of the secret."
+        description: "Name of the secret you want to delete."
+  DeleteMultipleKeyRequestParameters:
+    type: object
+    required:
+      - email
+      - key_names
+    properties:
+      email:
+        type: string
+        description: Email of the authorized user who created the secrets to be deleted.
+      key_names:
+        type: array
+        items:
+          type: string
+          description: Array of the names of the secrets that you want to delete.
+  DeleteSharedKeyLinkRequestParameters:
+    type: object
+    required:
+      - email
+      - key_name
+    properties:
+      email:
+        type: string
+        description: Email of a user with the shared secret.
+      key_name:
+        type: string
+        description: >
+          Name of the shared secret that will be removed from the user's list of secrets.    
   VersionDeleteRequestParameters:
     type: object
     required:
