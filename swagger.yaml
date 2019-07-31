@@ -818,7 +818,7 @@ paths:
         Allows users to deactivate their CryptoMove accounts. Deactivated users can
         contact CryptoMove to re-activate their account at a later time. To delete
         your account without the opportunity to recover the account later, use the
-        [hard-delete-user]((https://docs.cryptomove.com/reference#post_user-hard-delete-user)
+        [hard-delete-user](https://docs.cryptomove.com/reference#post_user-hard-delete-user)
         endpoint.
       tags:
         - "auth"
@@ -840,7 +840,7 @@ paths:
         Allows users to delete themselves from CryptoMove with no ability to recover
         their accounts later. To deactivate yourself from CryptoMove, but reserve the
         ability to recover your account later, use the
-        [soft-delete-user]((https://docs.cryptomove.com/reference#post_user-soft-delete-user)
+        [soft-delete-user](https://docs.cryptomove.com/reference#post_user-soft-delete-user)
         endpoint.
       tags:
         - "auth"
