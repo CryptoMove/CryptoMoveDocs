@@ -646,7 +646,9 @@ paths:
         access key. This access key must belong to the IAM user who will create your EC2 instances.
         Also specifies the region of your EC2 instances. You must set this information before calling
         the generate_aws_key endpoint to create a new AWS key pair. If you obtain a new AWS access key,
-        simply call this endpoint again with the new access key ID and secret access key.
+        simply call this endpoint again with the new access key ID and secret access key. For an
+        overview of the CryptoMove-AWS integration, see
+        [AWS Integration](https://docs.cryptomove.com/docs/integrations).
       tags:
         - "AWS integration"
       parameters:
@@ -701,7 +703,11 @@ paths:
         becomes available when creating a new EC2 instance. The private key needed to access
         the new instance once it is created is automatically stored in CryptoMove. When you need
         to access your EC2 instance, obtain the private key from CryptoMove using the
-        [expose](https://docs.cryptomove.com/reference#post_user-secret-expose) endpoint.
+        [expose](https://docs.cryptomove.com/reference#post_user-secret-expose) endpoint. You must
+        call the `set_user_aws_access_setting` endpoint to provide CryptoMove with your AWS
+        access key before generating a AWS key pair using this endpoint.
+        For an overview of the CryptoMove-AWS integration, see
+        [AWS Integration](https://docs.cryptomove.com/docs/integrations).
       tags:
         - "AWS integration"
       parameters:
