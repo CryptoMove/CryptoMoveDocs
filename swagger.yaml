@@ -866,10 +866,9 @@ paths:
     post:
       description: >
         Allows an org admin to designate a user as a group admin and grant the new admin
-        permissions to the group. Only an org admin with CREATE_GROUP_ADMIN
-        and UPDATE_PERMISSION permissions can use this endpoint. An org admin can call
-        this endpoint for an existing group admin to replace the admin's
-        existing permissions with the specified ones. 
+        permissions to the group. An org admin or a group
+        admin with UDPATE_PERMISSION can call this endpoint for an existing group 
+        admin to replace the admin's existing permissions with the specified ones. 
       tags: 
         - "admin"
       parameters:
@@ -983,8 +982,8 @@ paths:
     get:
       description: >
         If at least one group is specified, returns a list of users who belong
-        to the specified groups. In this case, you must have either the LIST_GROUP_USERS
-        permission for the domain or the UPDATE_GROUP permission for the specified groups.
+        to the groups. In this case, you must have either the LIST_GROUP_USERS
+        permission or the UPDATE_GROUP permission for the specified groups.
         You can list all groups within your domain by calling this endpoint without
         specifying any groups. In this case, you must have LIST_GROUP_USERS permission
         for the domain. 
@@ -1061,6 +1060,12 @@ paths:
       tags: 
         - "admin"
       parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: email
           in: query
           type: string
