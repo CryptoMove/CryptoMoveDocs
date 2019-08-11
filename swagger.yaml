@@ -41,31 +41,33 @@ paths:
           description: "Could not update parameters"
         500:
           description: "Failed to lock user key"
-  # /user/secret/protect_link:
-  #   post:
-  #     description: >
-  #       Updates a shared secret. You must have write access to the secret.
-  #     tags:
-  #       - "secrets"
-  #     parameters:
-  #       - name: Authorization
-  #         in: header
-  #         type: string
-  #         required: true
-  #         description: >
-  #           Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
-  #       - name: protectLink_parameters
-  #         description: JSON parameters
-  #         in: body
-  #         schema:
-  #           $ref: "#/definitions/ProtectLinkRequestParameters"
-  #     responses:
-  #       200:
-  #         description: "Succesfully updated parameters"
-  #       400:
-  #         description: "Could not update parameters"
-  #       500:
-  #         description: "Failed to lock user key"
+  /user/secret/protect_link:
+    post:
+      description: >
+        Updates a shared secret. You must have write access to the secret.
+        You can modify metadata using the metadata object in the JSON request
+        body. The metadata object can contain custom key:value pairs.
+      tags:
+        - "secrets"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: protectLink_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/ProtectLinkRequestParameters"
+      responses:
+        200:
+          description: "Succesfully updated parameters"
+        400:
+          description: "Could not update parameters"
+        500:
+          description: "Failed to lock user key"
   /user/secret/expose:
     post:
       description: >
@@ -329,9 +331,37 @@ paths:
   #         description: "Could not unshare_a_key"
   #       500:
   #         description: "Failed to unshare_a_key"
+  /user/secret/update_key_metadata:
+    post:
+      description: >
+        Updates metadata of a secret or shared secret. You can add custom metadata
+        by specifying unique key:value pairs.
+      tags:
+        - secrets
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: updateMetadata_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/updateMetadataRequestParameters"
+      responses:
+        200:
+          description: "success"
+        400:
+          description: "Error"
   /user/secret/update_description:
     post:
-      description: "Updates the description of a specifc version of a secret."
+      description: >
+        Updates the description of a specifc version of a secret. If you want to simultaneously
+        update other metadata or update the description of a shared secret, use the
+        [update_key_metadata](https://docs.cryptomove.com/reference#post_user-secret-update-key-metadata)
+        endpoint. 
       tags:
         - "secrets"
       parameters:
@@ -355,7 +385,11 @@ paths:
           description: "Failed to update description date"
   /user/secret/update_classification:
     post:
-      description: "Updates the classification of a secret."
+      description: >
+        Updates the classification of a secret. If you want to simultaneously
+        update other metadata or update the classification of a shared secret, use the
+        [update_key_metadata](https://docs.cryptomove.com/reference#post_user-secret-update-key-metadata)
+        endpoint. 
       tags:
         - "secrets"
       parameters:
@@ -379,7 +413,12 @@ paths:
           description: "Failed to update classification"
   /user/secret/update_expiration:
     post:
-      description: "Updates the expiration date of a specific version of a secret."
+      description: >
+        Updates the expiration date of a specific version of a secret.
+        If you want to simultaneously update other metadata or update the expiration
+        of a shared secret, use the
+        [update_key_metadata](https://docs.cryptomove.com/reference#post_user-secret-update-key-metadata)
+        endpoint. 
       tags:
         - "secrets"
       parameters:
@@ -1091,18 +1130,6 @@ paths:
   #         description: "get authorization code by email"
   #       400:
   #         description: "error"
-  # /user/secret/update_key_metadata:
-  #   post:
-  #     description: "Update user key metadata for authorized request"
-  #     tags:
-  #       - "secrets"
-  #     responses:
-  #       200:
-  #         description: "Succesfully update user metadata versions of current key"
-  #       400:
-  #         description: "Failed to update user key metadata"
-  #       500:
-  #         description: "Failed to update user key metadata"
   # /user/secret/update_user_metadata:
   #     post:
   #       description: "Update user metadata for authorized request"
@@ -1334,15 +1361,36 @@ definitions:
       key_value:
         type: string
         description: "New value of the shared secret."
-      classification:
-        type: string
-        description: Updated classification of the shared secret. Accepts any string. Optional.
-      description:
-        type: string
-        description: New description of the shared secret. Optional.
-      expiration_time:
+      without_list:
         type: integer
-        description: Number of days until the shared secret expires. Optional. Defaults to 10 days.
+        description: >
+          Setting this parameter to 1 prevents the response from listing
+          all of the user's existing secrets. Optional.
+      metadata:
+        type: object
+        description: >
+          Optional metadata for the shared secret. Only specify those values you
+          want to replace for the shared secret.
+        properties:
+          application_type:
+            type: string
+            description: Optional.
+          classification:
+            type: string
+            description: Optional.
+          cloud_type:
+            type: string
+            description: Optional.
+          description:
+            type: string
+            description: Optional.
+          environment_type:
+            type: string
+            description: Optional.
+          expiration_time:
+            type: integer
+            description: Number of days until the secret expires. Optional. Defaults to 10 days.
+
   ExposeRequestParameters:
     type: object
     required:
@@ -1370,15 +1418,18 @@ definitions:
   SharingRequestParameters:
     type: object
     required:
-      - key_name
+      - key_names
       - permission
       - usr_id_from
       - usr_id_to
       - email
     properties:
-      key_name:
-        type: string
-        description: Name of the secret.
+      key_names:
+        type: array
+        description: Names of the secrets to be shared.
+        items:
+          type: string
+          description: Array of secrets to be shared.
       permission:
         type: string
         description: >
@@ -1394,8 +1445,11 @@ definitions:
           Email of the user who is sharing the secret.
           Must be the user who created the secret.
       usr_id_to:
-        type: string
-        description: Email of the user who will have shared access to the secret.
+        type: array
+        items:
+          type: string
+          description: >
+            Email of user who will have shared access to the secret.
       email:
         type: string
         description: >
@@ -1521,6 +1575,48 @@ definitions:
       expiration_time:
         type: integer
         description: The number of days before the version of the secret will expire.
+  updateMetadataRequestParameters:
+    type: object
+    required:
+      - email
+      - key_name
+      - metadata
+    properties:
+      email: 
+        type: string
+        description: Email of user with write access to secret or shared secret.
+      key_name:
+        type: string
+        description: Name of secret or shared secret.
+      key_version:
+        type: integer
+        description: >
+          Numerical version of the secret with the metadata that you want to update.
+      metadata:
+        type: object
+        description: >
+          Only specify those values you want to update.
+        properties:
+          application_type:
+            type: string
+            description: Optional.
+          classification:
+            type: string
+            description: Optional.
+          cloud_type:
+            type: string
+            description: Optional.
+          description:
+            type: string
+            description: Optional.
+          environment_type:
+            type: string
+            description: Optional.
+          expiration_time:
+            type: integer
+            description: Optional.
+
+
   updateDescriptionRequestParameters:
     type: object
     required:
