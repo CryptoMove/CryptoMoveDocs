@@ -1212,9 +1212,10 @@ definitions:
         description: Email of the authorized user who created the secrets to be deleted.
       key_names:
         type: array
+        description: Array of the secrets that you want to delete.
         items:
           type: string
-          description: Array of the names of the secrets that you want to delete.
+          description: Name of a secret that you want to delete.
   DeleteSharedKeyLinkRequestParameters:
     type: object
     required:
@@ -1329,6 +1330,10 @@ definitions:
           all of the user's existing secrets. Optional.
       metadata:
         type: object
+        description: >
+          Metadata that is attached to the secret. If the metadata object is omitted,
+          the default values are used. Custom metadata can be attached to the secret
+          by adding unique key:value pairs to the metadata object.
         properties:
           application_type:
             type: string
@@ -1374,8 +1379,7 @@ definitions:
       metadata:
         type: object
         description: >
-          Optional metadata for the shared secret. Only specify those values you
-          want to replace for the shared secret.
+          Only specify those values you want to replace for the shared secret.
         properties:
           application_type:
             type: string
@@ -1431,10 +1435,10 @@ definitions:
     properties:
       key_name:
         type: array
-        description: Names of the secrets to be shared.
+        description: Array of the secrets to be shared.
         items:
           type: string
-          description: Array of secrets to be shared.
+          description: Name of a secret to be shared.
       permission:
         type: string
         description: >
@@ -1451,6 +1455,7 @@ definitions:
           Must be the user who created the secret.
       usr_id_to:
         type: array
+        description: Array of users who will have shared access to the secret.
         items:
           type: string
           description: >
@@ -1729,17 +1734,21 @@ definitions:
         description: Email of an existing user who will be a group admin.
       groups:
         type: array
+        description: >
+          Array of the groups for which the user will be a Group Admin, along their permissions
+          to those groups.
         items: 
           type: object
           properties:
             group:
               type: string
-              description: Name of an existing group.
+              description: Name of an existing group for which the user will be a Group Admin.
             permissions:
               type: array
-              description: Array of permissions the user will have for the group.
+              description: Array of the permissions the Group Admin will have for the group.
               items:
-                type: string  
+                type: string
+                description: Permission that can be assigned to a Group Admin.  
   GroupAdminDeleteParameters:
     type: object
     properties:
@@ -1748,9 +1757,11 @@ definitions:
         description: Email of user who will stop being a group admin.
       group:
         type: array
+        description: Array of groups for which the user will no longer be an admin.
         items:
           type: string
-          description: Array of groups for which the user will no longer be an admin.
+          description: Name of a group.
+          
   GroupParameters:
     type: object
     required:
@@ -1765,6 +1776,7 @@ definitions:
           Array of email addresses of the users that you want to add to the new group.
         items:
           type: string
+          description: Email address of a CryptoMove user.
   GroupDeleteParameters:
     type: object
     required:
@@ -1787,6 +1799,7 @@ definitions:
         description: Array of the groups to which the user will be added.
         items:
           type: string
+          description: Name of an existing group.
   UserDeleteParameters:
     type: object
     required:
@@ -1801,6 +1814,7 @@ definitions:
         description: Array of the groups from which the user will be removed.
         items:
           type: string
+          description: Name of an existing group.
   ListNoDupResponse:
     type: object
     properties:
