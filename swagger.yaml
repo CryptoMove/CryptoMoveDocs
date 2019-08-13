@@ -334,8 +334,13 @@ paths:
   /user/secret/update_key_metadata:
     post:
       description: >
-        Updates metadata of a secret or shared secret. You can add custom metadata
-        by specifying unique key:value pairs.
+        Updates metadata of a specific version of a secret or shared secret. To list the
+        versions of a secret, use 
+        [version_list](https://docs.cryptomove.com/reference#post_user-secret-version-list).
+        To list the versions of a shared secret, use 
+        [version_list_for_link](https://docs.cryptomove.com/reference#post_user-secret-version-list-for-link).
+        You can add custom metadata to the secret's existing metadata by specifying
+        unique key:value pairs in the JSON request body.
       tags:
         - secrets
       parameters:
@@ -1418,13 +1423,13 @@ definitions:
   SharingRequestParameters:
     type: object
     required:
-      - key_names
+      - key_name
       - permission
       - usr_id_from
       - usr_id_to
       - email
     properties:
-      key_names:
+      key_name:
         type: array
         description: Names of the secrets to be shared.
         items:
@@ -1455,18 +1460,18 @@ definitions:
         description: >
           Email of the user who created the secret.
           Same value as usr_id_from
-  UnshareRequestParameters:
-    type: object
-    required:
-      - usr_id_from
-      - key_name
-    properties:
-      usr_id_from:
-        type: string
-        description: "Email of user who will no longer have access to the secret."
-      key_name:
-        type: string
-        description: "Name of the secret."
+  # UnshareRequestParameters:
+  #   type: object
+  #   required:
+  #     - usr_id_from
+  #     - key_name
+  #   properties:
+  #     usr_id_from:
+  #       type: string
+  #       description: "Email of user who will no longer have access to the secret."
+  #     key_name:
+  #       type: string
+  #       description: "Name of the secret."
   VersionExposeRequestParameters:
     type: object
     required:
@@ -1580,6 +1585,7 @@ definitions:
     required:
       - email
       - key_name
+      - key_version
       - metadata
     properties:
       email: 
