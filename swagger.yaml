@@ -785,12 +785,18 @@ paths:
           description: "registration succeeded"
         400:
           description: "error"
-  /user/secret/logout:
+  /user/logout:
     post:
       description: "Logs the user out of the system."
       tags:
         - "auth"
       parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: logout_parameters
           description: JSON parameters
           in: body
@@ -1199,8 +1205,11 @@ definitions:
         type: string
         description: "Email of an authorized user."
       key_name:
-        type: string
-        description: "Name of the secret you want to delete."
+        type: array
+        description: "Array of the secrets you want to delete."
+        items:
+          type: string
+          description: Name of the secret you want to delete.
   DeleteMultipleKeyRequestParameters:
     type: object
     required:
@@ -1323,6 +1332,27 @@ definitions:
       key_value:
         type: string
         description: "Value of the new secret."
+      copy_count:
+        type: integer
+        description: >
+          Number of copies of the secret that are kept in CryptoMove. This is for
+          debugging purposes and is unrelated to versions of the secret. Maximum
+          value is 256. Default value is 2.
+      delete_time:
+        type: integer
+        description: >
+          Number of minutes after which the secret is automatically deleted from CryptoMove.
+          Default and maximum value is 525600000 (1000 years).
+      move_pace:
+        type: integer
+        description: >
+          Number of times a day that the secret is moved within CryptoMove. Maximum value is
+          28800. Default value is 4.
+      split_count:
+        type: integer
+        description: >
+          Number of parts into which the secret is fragmented in CryptoMove. Maximum value
+          is 4096. Default value is 2.
       without_list:
         type: integer
         description: >
@@ -1713,7 +1743,7 @@ definitions:
       expiration_hours:
         type: integer
         description: >
-          Number of hours before the access token expires (maximum of 24 hours).
+          Number of hours before the access token expires. There is no maximum value.
   RefreshTokenParameters:
     type: object
     required:
