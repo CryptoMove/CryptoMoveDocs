@@ -1337,12 +1337,12 @@ definitions:
         description: >
           Number of copies of the secret that are kept in CryptoMove. This is for
           debugging purposes and is unrelated to versions of the secret. Maximum
-          value is 256. Default value is 2.
+          and default value is 2.
       delete_time:
         type: integer
         description: >
           Number of minutes after which the secret is automatically deleted from CryptoMove.
-          Default and maximum value is 525600000 (1000 years).
+          Maximum and default value is 525600000 (1000 years).
       move_pace:
         type: integer
         description: >
