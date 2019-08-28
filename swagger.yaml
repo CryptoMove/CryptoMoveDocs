@@ -204,30 +204,30 @@ paths:
           description: "Could not delete parameters"
         500:
           description: "Failed to delete user key"
-  /user/secret/delete_multiple_key:
-    post:
-      description: >
-        Deletes multiple secrets using a single endpoint call.
-        Only the user who created a secret can delete it.
-      tags:
-        - "secrets"
-      parameters:
-        - name: Authorization
-          in: header
-          type: string
-          required: true
-          description: >
-            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
-        - name: deletemultiple_parameters
-          in: body
-          description: JSON parameters
-          schema:
-            $ref: "#/definitions/DeleteMultipleKeyRequestParameters"
-      responses:
-        200:
-          description: "success"
-        400:
-          description: "error"
+  # /user/secret/delete_multiple_key:
+  #   post:
+  #     description: >
+  #       Deletes multiple secrets using a single endpoint call.
+  #       Only the user who created a secret can delete it.
+  #     tags:
+  #       - "secrets"
+  #     parameters:
+  #       - name: Authorization
+  #         in: header
+  #         type: string
+  #         required: true
+  #         description: >
+  #           Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+  #       - name: deletemultiple_parameters
+  #         in: body
+  #         description: JSON parameters
+  #         schema:
+  #           $ref: "#/definitions/DeleteMultipleKeyRequestParameters"
+  #     responses:
+  #       200:
+  #         description: "success"
+  #       400:
+  #         description: "error"
   /user/secret/delete_shared_key_link:
     post:
       description: >
@@ -1210,21 +1210,21 @@ definitions:
         items:
           type: string
           description: Name of the secret you want to delete.
-  DeleteMultipleKeyRequestParameters:
-    type: object
-    required:
-      - email
-      - key_names
-    properties:
-      email:
-        type: string
-        description: Email of the authorized user who created the secrets to be deleted.
-      key_names:
-        type: array
-        description: Array of the secrets that you want to delete.
-        items:
-          type: string
-          description: Name of a secret that you want to delete.
+  # DeleteMultipleKeyRequestParameters:
+  #   type: object
+  #   required:
+  #     - email
+  #     - key_names
+  #   properties:
+  #     email:
+  #       type: string
+  #       description: Email of the authorized user who created the secrets to be deleted.
+  #     key_names:
+  #       type: array
+  #       description: Array of the secrets that you want to delete.
+  #       items:
+  #         type: string
+  #         description: Name of a secret that you want to delete.
   DeleteSharedKeyLinkRequestParameters:
     type: object
     required:
