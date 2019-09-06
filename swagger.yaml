@@ -506,7 +506,9 @@ paths:
   /user/secret/version_list_for_link:
     post:
       description: >
-        Lists information about all versions of a shared secret.
+        Lists information about all versions of a shared secret. The "permission"
+        name/value pair in the JSON response indicates your access to each shared
+        secret; possible values are R (read only), W (write only), or RW (both).  
       tags:
         - "secrets"
       parameters:
@@ -588,7 +590,7 @@ paths:
           description: "success"
   /user/list_file:
     post:
-      description: Lists names and version numbers of the user's files currently in CryptoMove.
+      description: Lists names, sizes, and version numbers of the user's files currently in CryptoMove.
       tags:
         - "files"
       parameters:
@@ -1460,7 +1462,6 @@ definitions:
       - key_name
       - permission
       - usr_id_from
-      - usr_id_to
       - email
     properties:
       key_name:
@@ -1485,11 +1486,21 @@ definitions:
           Must be the user who created the secret.
       usr_id_to:
         type: array
-        description: Array of users who will have shared access to the secret.
+        description: >
+          Array of users who will have shared access to the secret. This
+          field is ignored if you specify the `group_id_to`
+          name/value pair.
         items:
           type: string
           description: >
             Email of user who will have shared access to the secret.
+      group_id_to:
+        type: string
+        description: 
+          Name of a group. Each member of the group will have shared access
+          to the secret. You must be a member of the group to share the
+          secret. For more information about creating groups, see
+          [Groups Administration](https://docs.cryptomove.com/docs/administration).
       email:
         type: string
         description: >
