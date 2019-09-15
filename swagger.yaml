@@ -46,7 +46,7 @@ paths:
       description: >
         Updates a shared secret. You must have write access to the secret.
         You can modify metadata using the metadata object in the JSON request
-        body. The metadata object can contain custom key:value pairs.
+        body. The metadata object can contain custom name/value pairs.
       tags:
         - "secrets"
       parameters:
@@ -340,7 +340,7 @@ paths:
         To list the versions of a shared secret, use 
         [version_list_for_link](https://docs.cryptomove.com/reference#post_user-secret-version-list-for-link).
         You can add custom metadata to the secret's existing metadata by specifying
-        unique key:value pairs in the JSON request body.
+        unique name/value pairs in the JSON request body.
       tags:
         - secrets
       parameters:
@@ -668,11 +668,11 @@ paths:
       responses:
         200:
           description: "success"
-  /user/analytics:
+  /analytics/secret_summary:
     get:
       description: >
-        Returns a report about a user's secrets and files in the CryptoMove
-        key vault. The user is identified by the access token in the header.
+        Returns how many secrets and/or files a user has in CryptoMove, along with the
+        total number of versions of those items. The user is identified by the access token. 
       tags:
         - "analytics"
       parameters:
@@ -682,9 +682,148 @@ paths:
           required: true
           description: >
             Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: filter_type
+          in: query
+          type: string
+          description: >
+            Specifies whether you want analytics on secrets, files, or all.
+            Default is secret.
+          enum:
+            - secret
+            - file
+            - all 
+        - name: filter_tag
+          in: query
+          type: string
+          description: >
+            Limits analytics to secrets and files that have the specified value defined
+            for at least one of the following metadata categories: `classification`,
+            `cloud_type`, `environment_type`, or `application_type`.
       responses:
         200:
           description: "success"
+          schema:
+            $ref: "#/definitions/SecretSummaryResponse"
+  /analytics/secret_by_type:
+    get:
+      description: >
+        Reports how many of a user's secrets and/or files belong to the
+        following metadata categories: `classification`, `cloud_type`, `environment_type`,
+        and `application_type`. If a secret does not have a value defined for a metadata category,
+        it is included in the `none` field under the category's JSON object. The user is identified
+        by the access token. 
+      tags:
+        - "analytics"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: filter_type
+          in: query
+          type: string
+          description: >
+            Specifies whether you want analytics on secrets, files, or all.
+            Default is secret.
+          enum:
+            - secret
+            - file
+            - all 
+        - name: filter_tag
+          in: query
+          type: string
+          description: >
+            Limits analytics to secrets and files that have the specified value defined
+            for at least one of the following metadata categories: `classification`,
+            `cloud_type`, `environment_type`, or `application_type`.          
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/SecretByTypeResponse"
+  /analytics/secret_by_expiration:
+    get:
+      description: >
+        Reports how many of a user's secrets and/or files are active or expired,
+        grouping them based on the time period that you specify. For example, 
+        if you specify period=week in your query, the response object tells
+        you which secrets will expire or are already expired each week. 
+        The user is identified by the access token.
+      tags:
+        - "analytics"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: period
+          in: query
+          type: string
+          description: >
+            The time period that the secrets are grouped into in the response object.
+            Default is month.
+          enum:
+            - day
+            - week
+            - month
+            - year 
+        - name: filter_type
+          in: query
+          type: string
+          description: >
+            Specifies whether you want analytics on secrets, files, or all.
+            Default is secret.          
+          enum:
+            - secret
+            - file
+            - all  
+        - name: filter_tag
+          in: query
+          type: string
+          description: >
+            Limits analytics to secrets and files that have the specified value defined
+            for at least one of the following metadata categories: `classification`,
+            `cloud_type`, `environment_type`, or `application_type`.          
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/SecretByExpirationResponse"
+  /analytics/secret_access_history:
+    get:
+      description: >
+        Reports how many times the user has revealed secrets, grouped by the
+        specified time period. Includes how many times the user revealed the
+        same secret. The user is identified by the access token.
+      tags:
+        - "analytics"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: period
+          in: query
+          type: string
+          description: >
+            The time period that the secrets are grouped into in the response object.
+            Default is month.          
+          enum:
+            - day
+            - week
+            - month
+            - year   
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/SecretAccessHistoryResponse"
   /user/secret/set_user_aws_access_setting:
     post:
       description: >
@@ -1365,7 +1504,7 @@ definitions:
         description: >
           Metadata that is attached to the secret. If the metadata object is omitted,
           the default values are used. Custom metadata can be attached to the secret
-          by adding unique key:value pairs to the metadata object.
+          by adding unique name/value pairs to the metadata object.
         properties:
           application_type:
             type: string
@@ -1876,3 +2015,167 @@ definitions:
       status:
         description: Status from the server
         type: string
+  SecretSummaryResponse:
+    type: object
+    properties:
+      total_secrets:
+        description: Lists how many secrets the user has in CryptoMove.
+        type: integer
+      total_files:
+        description: Lists how many files the user has in CryptoMove.
+        type: integer
+      total_versions:
+        description: Total number of versions of the user's files and secrets.
+        type: integer
+  SecretByTypeResponse:
+    type: object
+    properties:
+      application_type:
+        description: >
+          Lists number of secrets for each value associated with the application_type
+          metadata category.
+        type: object
+        properties:
+          None:
+            description: >
+              Number of secrets that do not have a value specified
+              for this metadata category.
+            type: integer
+      classification:
+        description: >
+          Lists number of secrets for each value associated with the classification
+          metadata category.
+        type: object
+        properties:
+          None:
+            description: >
+              Number of secrets that do not have a value specified
+              for this metadata category.
+            type: integer
+      cloud_type:
+        description: >
+          Lists number of secrets for each value associated with the cloud_type
+          metadata category.
+        type: object
+        properties:
+          None:
+            description: >
+              Number of secrets that do not have a value specified
+              for this metadata category.
+            type: integer
+      environment_type:
+        description: >
+          Lists number of secrets for each value associated with the environment_type
+          metadata category.
+        type: object
+        properties:
+          None:
+            description: >
+              Number of secrets that do not have a value specified
+              for this metadata category.
+            type: integer
+      total_secrets:
+        description: Number of user's secrets returned by the API call.
+        type: integer
+  SecretByExpirationResponse:
+    type: object
+    properties:
+      active_secrets_by_timeslot:
+        description: >
+          Number of currently active secrets, grouped into the time period during which
+          they will expire. Default time period is months.
+        type: array
+        items:
+          type: object
+          properties:
+            count:
+              description: >
+                Number of secrets that will expire in this time period.
+              type: integer
+            start_date:
+              description: >
+                Start of the time period.
+              type: string
+            start_timestamp:
+              description: >
+                Start of the time period expressed in UNIX Epoch time.
+      active_secrets_count:
+        description: Total number of active secrets.
+        type: integer
+      all_secrets_by_timeslot:
+        description: >
+          All of the user's secrets grouped into time periods during which they expired
+          or will expire. Default time period is months.
+        type: array
+        items:
+          type: object
+          properties:
+            count:
+              description: >
+                Number of secrets that expired or will expire in this time period.
+              type: integer
+            start_date:
+              description: >
+                Start of the time period.
+              type: string
+            start_timestamp:
+              description: >
+                Start of the time period expressed in UNIX Epoch time.
+      all_secrets_count:
+        description: Total number of active and expired secrets.
+        type: integer
+      expired_secrets_by_timeslot:
+        description: >
+          Number of expired secrets, grouped into time periods during which they expired.
+          Default time period is months.
+        type: array
+        items:
+          type: object
+          properties:
+            count:
+              description: >
+                Number of secrets that expired in this time period.
+              type: integer
+            start_date:
+              description: >
+                Start of the time period.
+              type: string
+            start_timestamp:
+              description: >
+                Start of the time period expressed in UNIX Epoch time.
+      expired_secrets_count: 
+        description: Total number of expired secrets.
+        type: integer
+      total_secrets:
+        description: Total number of secrets.
+        type: integer
+  SecretAccessHistoryResponse:
+    type: object
+    properties:
+      expose_by_timeslot:
+        description: >
+          Number of times the user revealed secrets within the time period. Default
+          time period is months.
+        type: array
+        items:
+          type: object
+          properties:
+            count:
+              description: >
+                Number of times the user revealed secrets. Includes revealing the same secret
+                multiple times. 
+              type: integer
+            start_date:
+              description: >
+                Start of the time period.
+              type: string
+            start_timestamp:
+              description: >
+                Start of the time period expressed in UNIX Epoch time.
+      expose_count:
+        description: Total number of times the user revealed a secret.
+        type: integer
+
+
+
+
