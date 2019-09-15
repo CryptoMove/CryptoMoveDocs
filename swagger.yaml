@@ -2099,6 +2099,7 @@ definitions:
             start_timestamp:
               description: >
                 Start of the time period expressed in UNIX Epoch time.
+              type: number
       active_secrets_count:
         description: Total number of active secrets.
         type: integer
@@ -2121,6 +2122,7 @@ definitions:
             start_timestamp:
               description: >
                 Start of the time period expressed in UNIX Epoch time.
+              type: number
       all_secrets_count:
         description: Total number of active and expired secrets.
         type: integer
@@ -2143,6 +2145,7 @@ definitions:
             start_timestamp:
               description: >
                 Start of the time period expressed in UNIX Epoch time.
+              type: number
       expired_secrets_count: 
         description: Total number of expired secrets.
         type: integer
@@ -2172,6 +2175,7 @@ definitions:
             start_timestamp:
               description: >
                 Start of the time period expressed in UNIX Epoch time.
+              type: number
       expose_count:
         description: Total number of times the user revealed a secret.
         type: integer
