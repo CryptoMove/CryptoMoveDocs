@@ -18,7 +18,7 @@ paths:
         Stores a new secret. To create a new version of a secret,
         call this endpoint with an existing name and new value. The
         metadata object in the request body is optional. If excluded,
-        the default metadata values are used. You can add custom key-value
+        the default metadata values are used. You can add custom name/value
         pairs in the metadata object.
       tags:
         - "secrets"
@@ -1009,6 +1009,29 @@ paths:
           description: "refresh token successful"
         400:
           description: "error"
+  /user/set_salt:
+    post:
+      description: >
+        Sets a permanent SALT code for the user's account. Once set, all endpoints requiring
+        an access token will also require the user's SALT code. This SALT code is specified
+        in a SALT:<value> header of subsequent API calls.
+      tags:
+        - auth
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: setSalt_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/SetSaltRequestParameters"
+      responses:
+        200:
+          description: "success"
   /user/soft-delete-user:
     post:
       description: >
@@ -1995,6 +2018,14 @@ definitions:
         items:
           type: string
           description: Name of an existing group.
+  SetSaltRequestParameters:
+    type: object
+    required:
+      - salt
+    properties:
+      salt:
+        type: string
+        description: The SALT code that will be required in the header of subsequent API calls.
   ListNoDupResponse:
     type: object
     properties:
