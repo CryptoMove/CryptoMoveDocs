@@ -865,12 +865,12 @@ paths:
   /role/group_admin:
     post:
       description: >
-        Allows an org admin to designate a user as a group admin and grant the new admin
-        permissions to the group. An org admin or a group
-        admin with UDPATE_PERMISSION can call this endpoint for an existing group 
-        admin to replace the admin's existing permissions with the specified ones. 
+        Allows an Org Admin to designate a user as a Team Admin and grant the new admin
+        permissions to the team. An Org Admin or a Team
+        Admin with UDPATE_PERMISSION can call this endpoint for an existing Team 
+        Admin to replace the admin's existing permissions with the specified ones. 
       tags: 
-        - "admin"
+        - "teams"
       parameters:
         - name: Authorization
           in: header
@@ -890,10 +890,10 @@ paths:
           description: error  
     delete:
       description: >
-        Removes a user from being an admin for one or more groups. If a group is not specified,
-        the user stops being an admin for all groups in the domain.
+        Removes a user from being an admin for one or more teams. If a team is not specified,
+        the user stops being an admin for all teams in the domain.
       tags:
-        - "admin"
+        - "teams"
       parameters:
         - name: Authorization
           in: header
@@ -913,9 +913,9 @@ paths:
           description: error  
     get: 
       description: >
-        Lists the group admins for the specified groups along with their permissions.
+        Lists the Team Admins for the specified teams along with their permissions.
       tags: 
-        - "admin"
+        - "teams"
       parameters:
         - name: Authorization
           in: header
@@ -926,7 +926,7 @@ paths:
         - name: groups
           in: query          
           type: string
-          description: Comma-delimited list of group names.
+          description: Comma-delimited list of team names.
       responses:
         200:
           description: success
@@ -935,10 +935,10 @@ paths:
   /role/group:
     post:
       description: >
-        Creates a group and adds any specified users to the new group. You must have
+        Creates a team and adds any specified users to the new team. You must have
         UPDATE_GROUP permission to use this endpoint. 
       tags:
-        - "admin"
+        - "teams"
       parameters:
         - name: Authorization
           in: header
@@ -958,10 +958,10 @@ paths:
           description: error
     delete:
       description: >
-        Deletes the specified group. You must have the UPDATE_GROUP permission to use
+        Deletes the specified team. You must have the UPDATE_GROUP permission to use
         this endpoint.
       tags: 
-        - "admin"
+        - "teams"
       parameters:
         - name: Authorization
           in: header
@@ -981,14 +981,14 @@ paths:
           description: error
     get:
       description: >
-        If at least one group is specified, returns a list of users who belong
-        to the groups. In this case, you must have either the LIST_GROUP_USERS
-        permission or the UPDATE_GROUP permission for the specified groups.
-        You can list all groups within your domain by calling this endpoint without
-        specifying any groups. In this case, you must have LIST_GROUP_USERS permission
+        If at least one team is specified, returns a list of users who belong
+        to the teams. In this case, you must have either the LIST_GROUP_USERS
+        permission or the UPDATE_GROUP permission for the specified teams.
+        You can list all teams within your domain by calling this endpoint without
+        specifying any teams. In this case, you must have LIST_GROUP_USERS permission
         for the domain. 
       tags: 
-          - "admin"
+          - "teams"
       parameters:
         - name: Authorization
           in: header
@@ -999,7 +999,7 @@ paths:
         - name: groups
           in: query
           type: string
-          description: Comma-delimited list of group names.
+          description: Comma-delimited list of team names.
       responses:
         200:
           description: success
@@ -1008,10 +1008,10 @@ paths:
   /role/user:
     post:
       description: >
-        Adds users to an existing group. You must have the UPDATE_GROUP permission
+        Adds users to an existing team. You must have the UPDATE_GROUP permission
         to use this endpoint.
       tags:
-        - "admin"
+        - "teams"
       parameters:
         - name: Authorization
           in: header
@@ -1031,10 +1031,10 @@ paths:
           description: error
     delete:
       description: >
-        Removes a user from the specified groups. You must have the UPDATE_GROUP permission
+        Removes a user from the specified teams. You must have the UPDATE_GROUP permission
         to use this endpoint.
       tags: 
-        - "admin"
+        - "teams"
       parameters:
         - name: Authorization
           in: header
@@ -1054,11 +1054,11 @@ paths:
           description: error
     get:
       description: >
-        Returns a list of the groups that the specified user belongs to.
+        Returns a list of the teams that the specified user belongs to.
         You must have LIST_GROUP_USERS permission for the domain to use this
         endpoint.
       tags: 
-        - "admin"
+        - "teams"
       parameters:
         - name: Authorization
           in: header
@@ -1069,7 +1069,7 @@ paths:
         - name: email
           in: query
           type: string
-          description: Login email of a user who belongs to at least one group.
+          description: Login email of a user who belongs to at least one team.
       responses:
         200:
           description: success
@@ -1629,7 +1629,7 @@ definitions:
     properties:
       login:
         type: string
-        description: Email of an existing user who will be a group admin.
+        description: Email of an existing user who will be a Team Admin.
       groups:
         type: array
         items: 
@@ -1637,10 +1637,10 @@ definitions:
           properties:
             group:
               type: string
-              description: Name of an existing group.
+              description: Name of an existing team.
             permissions:
               type: array
-              description: Array of permissions the user will have for the group.
+              description: Array of permissions the user will have for the team.
               items:
                 type: string  
   GroupAdminDeleteParameters:
@@ -1648,12 +1648,12 @@ definitions:
     properties:
       login:
         type: string
-        description: Email of user who will stop being a group admin.
+        description: Email of user who will stop being a Team Admin.
       group:
         type: array
         items:
           type: string
-          description: Array of groups for which the user will no longer be an admin.
+          description: Array of teams for which the user will no longer be an admin.
   GroupParameters:
     type: object
     required:
@@ -1661,11 +1661,11 @@ definitions:
     properties:
       group_name:
         type: string
-        description: Name of the group that you want to create.
+        description: Name of the team that you want to create.
       group_users:
         type: array
         description: >
-          Array of email addresses of the users that you want to add to the new group.
+          Array of email addresses of the users that you want to add to the new team.
         items:
           type: string
   GroupDeleteParameters:
@@ -1675,7 +1675,7 @@ definitions:
     properties:
       group_name:
         type: string
-        description: Name of the group that you want to delete.
+        description: Name of the team that you want to delete.
   UserParameters:
     type: object
     required:
@@ -1684,10 +1684,10 @@ definitions:
     properties:
       login:
         type: string
-        description: Email address of the user you want to add to the specified groups.
+        description: Email address of the user you want to add to the specified teams.
       groups: 
         type: array
-        description: Array of the groups to which the user will be added.
+        description: Array of the teams to which the user will be added.
         items:
           type: string
   UserDeleteParameters:
@@ -1698,10 +1698,10 @@ definitions:
     properties:
       login:
         type: string
-        description: User that you want to remove from the specified groups.
+        description: User that you want to remove from the specified teams.
       groups:
         type: array
-        description: Array of the groups from which the user will be removed.
+        description: Array of the teams from which the user will be removed.
         items:
           type: string
   ListNoDupResponse:
