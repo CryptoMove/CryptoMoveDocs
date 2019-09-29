@@ -1928,9 +1928,12 @@ definitions:
             group:
               type: string
               description: Name of an existing team.
+            permissions:
+              type: array
+              description: Array of permissions the user will have for the team.
               items:
-                type: string
-                description: Permission that can be assigned to a Group Admin.  
+                type: string  
+                description: Permission that can be assigned to a Team Admin.  
   GroupAdminDeleteParameters:
     type: object
     properties:
@@ -1995,7 +1998,7 @@ definitions:
         description: Array of the teams from which the user will be removed.
         items:
           type: string
-          description: Name of an existing group.
+          description: Name of an existing team.
   ListNoDupResponse:
     type: object
     properties:
