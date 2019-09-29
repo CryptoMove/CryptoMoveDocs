@@ -1053,219 +1053,219 @@ paths:
           description: success
         400:
           description: error    
-  # /role/group_admin:
-  #   post:
-  #     description: >
-  #       Allows an Org Admin to designate a user as a Team Admin and grant the new admin
-  #       permissions to the team. An Org Admin or a Team
-  #       Admin with UDPATE_PERMISSION can call this endpoint for an existing Team 
-  #       Admin to replace the admin's existing permissions with the specified ones. 
-  #     tags: 
-  #       - "teams"
-  #     parameters:
-  #       - name: Authorization
-  #         in: header
-  #         type: string
-  #         required: true
-  #         description: >
-  #           Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
-  #       - name: groupadmin_parameters
-  #         description: JSON parameters
-  #         in: body
-  #         schema:
-  #           $ref: "#/definitions/GroupAdminParameters"
-  #     responses:
-  #       200:
-  #         description: success
-  #       400:
-  #         description: error  
-  #   delete:
-  #     description: >
-  #       Removes a user from being an admin for one or more teams. If a team is not specified,
-  #       the user stops being an admin for all teams in the domain.
-  #     tags:
-  #       - "teams"
-  #     parameters:
-  #       - name: Authorization
-  #         in: header
-  #         type: string
-  #         required: true
-  #         description: >
-  #           Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
-  #       - name: groupadmindelete_parameters
-  #         description: JSON parameters
-  #         in: body
-  #         schema:
-  #           $ref: "#/definitions/GroupAdminDeleteParameters"
-  #     responses:
-  #       200:
-  #         description: success
-  #       400:
-  #         description: error  
-  #   get: 
-  #     description: >
-  #       Lists the Team Admins for the specified teams along with their permissions.
-  #     tags: 
-  #       - "teams"
-  #     parameters:
-  #       - name: Authorization
-  #         in: header
-  #         type: string
-  #         required: true
-  #         description: >
-  #           Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
-  #       - name: groups
-  #         in: query          
-  #         type: string
-  #         description: Comma-delimited list of team names.
-  #     responses:
-  #       200:
-  #         description: success
-  #       400:
-  #         description: error  
-  # /role/group:
-  #   post:
-  #     description: >
-  #       Creates a team and adds any specified users to the new team. You must have
-  #       UPDATE_GROUP permission to use this endpoint. 
-  #     tags:
-  #       - "teams"
-  #     parameters:
-  #       - name: Authorization
-  #         in: header
-  #         type: string
-  #         required: true
-  #         description: >
-  #           Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
-  #       - name: group_parameters
-  #         description: JSON parameters
-  #         in: body
-  #         schema:
-  #           $ref: "#/definitions/GroupParameters"
-  #     responses:
-  #       200: 
-  #         description: success
-  #       400:
-  #         description: error
-  #   delete:
-  #     description: >
-  #       Deletes the specified team. You must have the UPDATE_GROUP permission to use
-  #       this endpoint.
-  #     tags: 
-  #       - "teams"
-  #     parameters:
-  #       - name: Authorization
-  #         in: header
-  #         type: string
-  #         required: true
-  #         description: >
-  #           Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
-  #       - name: groupDelete_parameters
-  #         description: JSON parameters
-  #         in: body
-  #         schema:
-  #           $ref: "#/definitions/GroupDeleteParameters"
-  #     responses: 
-  #       200:
-  #         description: success
-  #       400:
-  #         description: error
-  #   get:
-  #     description: >
-  #       If at least one team is specified, returns a list of users who belong
-  #       to the teams. In this case, you must have either the LIST_GROUP_USERS
-  #       permission or the UPDATE_GROUP permission for the specified teams.
-  #       You can list all teams within your domain by calling this endpoint without
-  #       specifying any teams. In this case, you must have LIST_GROUP_USERS permission
-  #       for the domain. 
-  #     tags: 
-  #         - "teams"
-  #     parameters:
-  #       - name: Authorization
-  #         in: header
-  #         type: string
-  #         required: true
-  #         description: >
-  #           Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
-  #       - name: groups
-  #         in: query
-  #         type: string
-  #         description: Comma-delimited list of team names.
-  #     responses:
-  #       200:
-  #         description: success
-  #       400:
-  #         description: error  
-  # /role/user:
-  #   post:
-  #     description: >
-  #       Adds users to an existing team. You must have the UPDATE_GROUP permission
-  #       to use this endpoint.
-  #     tags:
-  #       - "teams"
-  #     parameters:
-  #       - name: Authorization
-  #         in: header
-  #         type: string
-  #         required: true
-  #         description: >
-  #           Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
-  #       - name: user_parameters
-  #         description: JSON parameters
-  #         in: body
-  #         schema:
-  #           $ref: "#/definitions/UserParameters"
-  #     responses:
-  #       200: 
-  #         description: success
-  #       400:
-  #         description: error
-  #   delete:
-  #     description: >
-  #       Removes a user from the specified teams. You must have the UPDATE_GROUP permission
-  #       to use this endpoint.
-  #     tags: 
-  #       - "teams"
-  #     parameters:
-  #       - name: Authorization
-  #         in: header
-  #         type: string
-  #         required: true
-  #         description: >
-  #           Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
-  #       - name: UserDelete_parameters
-  #         description: JSON parameters
-  #         in: body
-  #         schema:
-  #           $ref: "#/definitions/UserDeleteParameters"
-  #     responses: 
-  #       200:
-  #         description: success
-  #       400:
-  #         description: error
-  #   get:
-  #     description: >
-  #       Returns a list of the teams that the specified user belongs to.
-  #       You must have LIST_GROUP_USERS permission for the domain to use this
-  #       endpoint.
-  #     tags: 
-  #       - "teams"
-  #     parameters:
-  #       - name: Authorization
-  #         in: header
-  #         type: string
-  #         required: true
-  #         description: >
-  #           Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
-  #       - name: email
-  #         in: query
-  #         type: string
-  #         description: Login email of a user who belongs to at least one team.
-  #     responses:
-  #       200:
-  #         description: success
-  #       400:
-  #         description: error  
+  /role/group_admin:
+    post:
+      description: >
+        Allows an Org Admin to designate a user as a Team Admin and grant the new admin
+        permissions to the team. An Org Admin or a Team
+        Admin with UDPATE_PERMISSION can call this endpoint for an existing Team 
+        Admin to replace the admin's existing permissions with the specified ones. 
+      tags: 
+        - "teams"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: groupadmin_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/GroupAdminParameters"
+      responses:
+        200:
+          description: success
+        400:
+          description: error  
+    delete:
+      description: >
+        Removes a user from being an admin for one or more teams. If a team is not specified,
+        the user stops being an admin for all teams in the domain.
+      tags:
+        - "teams"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: groupadmindelete_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/GroupAdminDeleteParameters"
+      responses:
+        200:
+          description: success
+        400:
+          description: error  
+    get: 
+      description: >
+        Lists the Team Admins for the specified teams along with their permissions.
+      tags: 
+        - "teams"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: groups
+          in: query          
+          type: string
+          description: Comma-delimited list of team names.
+      responses:
+        200:
+          description: success
+        400:
+          description: error  
+  /role/group:
+    post:
+      description: >
+        Creates a team and adds any specified users to the new team. You must have
+        UPDATE_GROUP permission to use this endpoint. 
+      tags:
+        - "teams"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: group_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/GroupParameters"
+      responses:
+        200: 
+          description: success
+        400:
+          description: error
+    delete:
+      description: >
+        Deletes the specified team. You must have the UPDATE_GROUP permission to use
+        this endpoint.
+      tags: 
+        - "teams"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: groupDelete_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/GroupDeleteParameters"
+      responses: 
+        200:
+          description: success
+        400:
+          description: error
+    get:
+      description: >
+        If at least one team is specified, returns a list of users who belong
+        to the teams. In this case, you must have either the LIST_GROUP_USERS
+        permission or the UPDATE_GROUP permission for the specified teams.
+        You can list all teams within your domain by calling this endpoint without
+        specifying any teams. In this case, you must have LIST_GROUP_USERS permission
+        for the domain. 
+      tags: 
+          - "teams"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: groups
+          in: query
+          type: string
+          description: Comma-delimited list of team names.
+      responses:
+        200:
+          description: success
+        400:
+          description: error  
+  /role/user:
+    post:
+      description: >
+        Adds users to an existing team. You must have the UPDATE_GROUP permission
+        to use this endpoint.
+      tags:
+        - "teams"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: user_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/UserParameters"
+      responses:
+        200: 
+          description: success
+        400:
+          description: error
+    delete:
+      description: >
+        Removes a user from the specified teams. You must have the UPDATE_GROUP permission
+        to use this endpoint.
+      tags: 
+        - "teams"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: UserDelete_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/UserDeleteParameters"
+      responses: 
+        200:
+          description: success
+        400:
+          description: error
+    get:
+      description: >
+        Returns a list of the teams that the specified user belongs to.
+        You must have LIST_GROUP_USERS permission for the domain to use this
+        endpoint.
+      tags: 
+        - "teams"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: email
+          in: query
+          type: string
+          description: Login email of a user who belongs to at least one team.
+      responses:
+        200:
+          description: success
+        400:
+          description: error  
 
   # /user/login_authorization_code:
   #   post:
@@ -1911,76 +1911,76 @@ definitions:
       used_access_token:
         type: string
         description: Previously valid access token. 
-  # GroupAdminParameters:
-  #   type: object
-  #   properties:
-  #     login:
-  #       type: string
-  #       description: Email of an existing user who will be a Team Admin.
-  #     groups:
-  #       type: array
-  #       description: >
-  #         Array of the teams for which the user will be a Team Admin, along their permissions
-  #         to those teams.
-  #       items: 
-  #         type: object
-  #         properties:
-  #           group:
-  #             type: string
-  #             description: Name of an existing team.
-  #             items:
-  #               type: string
-  #               description: Permission that can be assigned to a Group Admin.  
-  # GroupAdminDeleteParameters:
-  #   type: object
-  #   properties:
-  #     login:
-  #       type: string
-  #       description: Email of user who will stop being a Team Admin.
-  #     group:
-  #       type: array
-  #       description: Array of teams for which the user will no longer be an admin.
-  #       items:
-  #         type: string
-  #         description: Name of an existing team.
-  # GroupParameters:
-  #   type: object
-  #   required:
-  #     - group_name
-  #   properties:
-  #     group_name:
-  #       type: string
-  #       description: Name of the team that you want to create.
-  #     group_users:
-  #       type: array
-  #       description: >
-  #         Array of email addresses of the users that you want to add to the new team.
-  #       items:
-  #         type: string
-  #         description: Email address of a CryptoMove user.
-  # GroupDeleteParameters:
-  #   type: object
-  #   required:
-  #     - group_name
-  #   properties:
-  #     group_name:
-  #       type: string
-  #       description: Name of the team that you want to delete.
-  # UserParameters:
-  #   type: object
-  #   required:
-  #     - login
-  #     - groups
-  #   properties:
-  #     login:
-  #       type: string
-  #       description: Email address of the user you want to add to the specified teams.
-  #     groups: 
-  #       type: array
-  #       description: Array of the teams to which the user will be added.
-  #       items:
-  #         type: string
-  #         description: Name of an existing team.
+  GroupAdminParameters:
+    type: object
+    properties:
+      login:
+        type: string
+        description: Email of an existing user who will be a Team Admin.
+      groups:
+        type: array
+        description: >
+          Array of the teams for which the user will be a Team Admin, along their permissions
+          to those teams.
+        items: 
+          type: object
+          properties:
+            group:
+              type: string
+              description: Name of an existing team.
+              items:
+                type: string
+                description: Permission that can be assigned to a Group Admin.  
+  GroupAdminDeleteParameters:
+    type: object
+    properties:
+      login:
+        type: string
+        description: Email of user who will stop being a Team Admin.
+      group:
+        type: array
+        description: Array of teams for which the user will no longer be an admin.
+        items:
+          type: string
+          description: Name of an existing team.
+  GroupParameters:
+    type: object
+    required:
+      - group_name
+    properties:
+      group_name:
+        type: string
+        description: Name of the team that you want to create.
+      group_users:
+        type: array
+        description: >
+          Array of email addresses of the users that you want to add to the new team.
+        items:
+          type: string
+          description: Email address of a CryptoMove user.
+  GroupDeleteParameters:
+    type: object
+    required:
+      - group_name
+    properties:
+      group_name:
+        type: string
+        description: Name of the team that you want to delete.
+  UserParameters:
+    type: object
+    required:
+      - login
+      - groups
+    properties:
+      login:
+        type: string
+        description: Email address of the user you want to add to the specified teams.
+      groups: 
+        type: array
+        description: Array of the teams to which the user will be added.
+        items:
+          type: string
+          description: Name of an existing team.
   UserDeleteParameters:
     type: object
     required:
