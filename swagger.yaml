@@ -41,31 +41,33 @@ paths:
           description: "Could not update parameters"
         500:
           description: "Failed to lock user key"
-  # /user/secret/protect_link:
-  #   post:
-  #     description: >
-  #       Updates a shared secret. You must have write access to the secret.
-  #     tags:
-  #       - "secrets"
-  #     parameters:
-  #       - name: Authorization
-  #         in: header
-  #         type: string
-  #         required: true
-  #         description: >
-  #           Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
-  #       - name: protectLink_parameters
-  #         description: JSON parameters
-  #         in: body
-  #         schema:
-  #           $ref: "#/definitions/ProtectLinkRequestParameters"
-  #     responses:
-  #       200:
-  #         description: "Succesfully updated parameters"
-  #       400:
-  #         description: "Could not update parameters"
-  #       500:
-  #         description: "Failed to lock user key"
+  /user/secret/protect_link:
+    post:
+      description: >
+        Updates a shared secret. You must have write access to the secret.
+        You can modify metadata using the metadata object in the JSON request
+        body. The metadata object can contain custom name/value pairs.
+      tags:
+        - "secrets"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: protectLink_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/ProtectLinkRequestParameters"
+      responses:
+        200:
+          description: "Succesfully updated parameters"
+        400:
+          description: "Could not update parameters"
+        500:
+          description: "Failed to lock user key"
   /user/secret/expose:
     post:
       description: >
@@ -202,30 +204,30 @@ paths:
           description: "Could not delete parameters"
         500:
           description: "Failed to delete user key"
-  /user/secret/delete_multiple_key:
-    post:
-      description: >
-        Deletes multiple secrets using a single endpoint call.
-        Only the user who created a secret can delete it.
-      tags:
-        - "secrets"
-      parameters:
-        - name: Authorization
-          in: header
-          type: string
-          required: true
-          description: >
-            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
-        - name: deletemultiple_parameters
-          in: body
-          description: JSON parameters
-          schema:
-            $ref: "#/definitions/DeleteMultipleKeyRequestParameters"
-      responses:
-        200:
-          description: "success"
-        400:
-          description: "error"
+  # /user/secret/delete_multiple_key:
+  #   post:
+  #     description: >
+  #       Deletes multiple secrets using a single endpoint call.
+  #       Only the user who created a secret can delete it.
+  #     tags:
+  #       - "secrets"
+  #     parameters:
+  #       - name: Authorization
+  #         in: header
+  #         type: string
+  #         required: true
+  #         description: >
+  #           Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+  #       - name: deletemultiple_parameters
+  #         in: body
+  #         description: JSON parameters
+  #         schema:
+  #           $ref: "#/definitions/DeleteMultipleKeyRequestParameters"
+  #     responses:
+  #       200:
+  #         description: "success"
+  #       400:
+  #         description: "error"
   /user/secret/delete_shared_key_link:
     post:
       description: >
@@ -329,9 +331,42 @@ paths:
   #         description: "Could not unshare_a_key"
   #       500:
   #         description: "Failed to unshare_a_key"
+  /user/secret/update_key_metadata:
+    post:
+      description: >
+        Updates metadata of a specific version of a secret or shared secret. To list the
+        versions of a secret, use 
+        [version_list](https://docs.cryptomove.com/reference#post_user-secret-version-list).
+        To list the versions of a shared secret, use 
+        [version_list_for_link](https://docs.cryptomove.com/reference#post_user-secret-version-list-for-link).
+        You can add custom metadata to the secret's existing metadata by specifying
+        unique name/value pairs in the JSON request body.
+      tags:
+        - secrets
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: updateMetadata_parameters
+          description: JSON parameters
+          in: body
+          schema:
+            $ref: "#/definitions/updateMetadataRequestParameters"
+      responses:
+        200:
+          description: "success"
+        400:
+          description: "Error"
   /user/secret/update_description:
     post:
-      description: "Updates the description of a specifc version of a secret."
+      description: >
+        Updates the description of a specifc version of a secret. If you want to simultaneously
+        update other metadata or update the description of a shared secret, use the
+        [update_key_metadata](https://docs.cryptomove.com/reference#post_user-secret-update-key-metadata)
+        endpoint. 
       tags:
         - "secrets"
       parameters:
@@ -355,7 +390,11 @@ paths:
           description: "Failed to update description date"
   /user/secret/update_classification:
     post:
-      description: "Updates the classification of a secret."
+      description: >
+        Updates the classification of a secret. If you want to simultaneously
+        update other metadata or update the classification of a shared secret, use the
+        [update_key_metadata](https://docs.cryptomove.com/reference#post_user-secret-update-key-metadata)
+        endpoint. 
       tags:
         - "secrets"
       parameters:
@@ -379,7 +418,12 @@ paths:
           description: "Failed to update classification"
   /user/secret/update_expiration:
     post:
-      description: "Updates the expiration date of a specific version of a secret."
+      description: >
+        Updates the expiration date of a specific version of a secret.
+        If you want to simultaneously update other metadata or update the expiration
+        of a shared secret, use the
+        [update_key_metadata](https://docs.cryptomove.com/reference#post_user-secret-update-key-metadata)
+        endpoint. 
       tags:
         - "secrets"
       parameters:
@@ -462,7 +506,9 @@ paths:
   /user/secret/version_list_for_link:
     post:
       description: >
-        Lists information about all versions of a shared secret.
+        Lists information about all versions of a shared secret. The "permission"
+        name/value pair in the JSON response indicates your access to each shared
+        secret; possible values are R (read only), W (write only), or RW (both).  
       tags:
         - "secrets"
       parameters:
@@ -544,7 +590,7 @@ paths:
           description: "success"
   /user/list_file:
     post:
-      description: Lists names and version numbers of the user's files currently in CryptoMove.
+      description: Lists names, sizes, and version numbers of the user's files currently in CryptoMove.
       tags:
         - "files"
       parameters:
@@ -622,11 +668,11 @@ paths:
       responses:
         200:
           description: "success"
-  /user/analytics:
+  /analytics/secret_summary:
     get:
       description: >
-        Returns a report about a user's secrets and files in the CryptoMove
-        key vault. The user is identified by the access token in the header.
+        Returns how many secrets and/or files a user has in CryptoMove, along with the
+        total number of versions of those items. The user is identified by the access token. 
       tags:
         - "analytics"
       parameters:
@@ -636,9 +682,148 @@ paths:
           required: true
           description: >
             Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: filter_type
+          in: query
+          type: string
+          description: >
+            Specifies whether you want analytics on secrets, files, or all.
+            Default is secret.
+          enum:
+            - secret
+            - file
+            - all 
+        - name: filter_tag
+          in: query
+          type: string
+          description: >
+            Limits analytics to secrets and files that have the specified value defined
+            for at least one of the following metadata categories: `classification`,
+            `cloud_type`, `environment_type`, or `application_type`.
       responses:
         200:
           description: "success"
+          schema:
+            $ref: "#/definitions/SecretSummaryResponse"
+  /analytics/secret_by_type:
+    get:
+      description: >
+        Reports how many of a user's secrets and/or files belong to the
+        following metadata categories: `classification`, `cloud_type`, `environment_type`,
+        and `application_type`. If a secret does not have a value defined for a metadata category,
+        it is included in the `none` field under the category's JSON object. The user is identified
+        by the access token. 
+      tags:
+        - "analytics"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: filter_type
+          in: query
+          type: string
+          description: >
+            Specifies whether you want analytics on secrets, files, or all.
+            Default is secret.
+          enum:
+            - secret
+            - file
+            - all 
+        - name: filter_tag
+          in: query
+          type: string
+          description: >
+            Limits analytics to secrets and files that have the specified value defined
+            for at least one of the following metadata categories: `classification`,
+            `cloud_type`, `environment_type`, or `application_type`.          
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/SecretByTypeResponse"
+  /analytics/secret_by_expiration:
+    get:
+      description: >
+        Reports how many of a user's secrets and/or files are active or expired,
+        grouping them based on the time period that you specify. For example, 
+        if you specify period=week in your query, the response object tells
+        you which secrets will expire or are already expired each week. 
+        The user is identified by the access token.
+      tags:
+        - "analytics"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: period
+          in: query
+          type: string
+          description: >
+            The time period that the secrets are grouped into in the response object.
+            Default is month.
+          enum:
+            - day
+            - week
+            - month
+            - year 
+        - name: filter_type
+          in: query
+          type: string
+          description: >
+            Specifies whether you want analytics on secrets, files, or all.
+            Default is secret.          
+          enum:
+            - secret
+            - file
+            - all  
+        - name: filter_tag
+          in: query
+          type: string
+          description: >
+            Limits analytics to secrets and files that have the specified value defined
+            for at least one of the following metadata categories: `classification`,
+            `cloud_type`, `environment_type`, or `application_type`.          
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/SecretByExpirationResponse"
+  /analytics/secret_access_history:
+    get:
+      description: >
+        Reports how many times the user has revealed secrets, grouped by the
+        specified time period. Includes how many times the user revealed the
+        same secret. The user is identified by the access token.
+      tags:
+        - "analytics"
+      parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
+        - name: period
+          in: query
+          type: string
+          description: >
+            The time period that the secrets are grouped into in the response object.
+            Default is month.          
+          enum:
+            - day
+            - week
+            - month
+            - year   
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/SecretAccessHistoryResponse"
   /user/secret/set_user_aws_access_setting:
     post:
       description: >
@@ -741,12 +926,18 @@ paths:
           description: "registration succeeded"
         400:
           description: "error"
-  /user/secret/logout:
+  /user/logout:
     post:
       description: "Logs the user out of the system."
       tags:
         - "auth"
       parameters:
+        - name: Authorization
+          in: header
+          type: string
+          required: true
+          description: >
+            Valid [access token](https://docs.cryptomove.com/docs/access-tokens).
         - name: logout_parameters
           description: JSON parameters
           in: body
@@ -1096,18 +1287,6 @@ paths:
   #         description: "get authorization code by email"
   #       400:
   #         description: "error"
-  # /user/secret/update_key_metadata:
-  #   post:
-  #     description: "Update user key metadata for authorized request"
-  #     tags:
-  #       - "secrets"
-  #     responses:
-  #       200:
-  #         description: "Succesfully update user metadata versions of current key"
-  #       400:
-  #         description: "Failed to update user key metadata"
-  #       500:
-  #         description: "Failed to update user key metadata"
   # /user/secret/update_user_metadata:
   #     post:
   #       description: "Update user metadata for authorized request"
@@ -1172,22 +1351,26 @@ definitions:
         type: string
         description: "Email of an authorized user."
       key_name:
-        type: string
-        description: "Name of the secret you want to delete."
-  DeleteMultipleKeyRequestParameters:
-    type: object
-    required:
-      - email
-      - key_names
-    properties:
-      email:
-        type: string
-        description: Email of the authorized user who created the secrets to be deleted.
-      key_names:
         type: array
+        description: "Array of the secrets you want to delete."
         items:
           type: string
-          description: Array of the names of the secrets that you want to delete.
+          description: Name of the secret you want to delete.
+  # DeleteMultipleKeyRequestParameters:
+  #   type: object
+  #   required:
+  #     - email
+  #     - key_names
+  #   properties:
+  #     email:
+  #       type: string
+  #       description: Email of the authorized user who created the secrets to be deleted.
+  #     key_names:
+  #       type: array
+  #       description: Array of the secrets that you want to delete.
+  #       items:
+  #         type: string
+  #         description: Name of a secret that you want to delete.
   DeleteSharedKeyLinkRequestParameters:
     type: object
     required:
@@ -1295,6 +1478,27 @@ definitions:
       key_value:
         type: string
         description: "Value of the new secret."
+      copy_count:
+        type: integer
+        description: >
+          Number of copies of the secret that are kept in CryptoMove. This is for
+          debugging purposes and is unrelated to versions of the secret. Maximum
+          and default value is 2.
+      delete_time:
+        type: integer
+        description: >
+          Number of minutes after which the secret is automatically deleted from CryptoMove.
+          Maximum and default value is 525600000 (1000 years).
+      move_pace:
+        type: integer
+        description: >
+          Number of times a day that the secret is moved within CryptoMove. Maximum value is
+          28800. Default value is 4.
+      split_count:
+        type: integer
+        description: >
+          Number of parts into which the secret is fragmented in CryptoMove. Maximum value
+          is 4096. Default value is 2.
       without_list:
         type: integer
         description: >
@@ -1302,6 +1506,10 @@ definitions:
           all of the user's existing secrets. Optional.
       metadata:
         type: object
+        description: >
+          Metadata that is attached to the secret. If the metadata object is omitted,
+          the default values are used. Custom metadata can be attached to the secret
+          by adding unique name/value pairs to the metadata object.
         properties:
           application_type:
             type: string
@@ -1339,15 +1547,35 @@ definitions:
       key_value:
         type: string
         description: "New value of the shared secret."
-      classification:
-        type: string
-        description: Updated classification of the shared secret. Accepts any string. Optional.
-      description:
-        type: string
-        description: New description of the shared secret. Optional.
-      expiration_time:
+      without_list:
         type: integer
-        description: Number of days until the shared secret expires. Optional. Defaults to 10 days.
+        description: >
+          Setting this parameter to 1 prevents the response from listing
+          all of the user's existing secrets. Optional.
+      metadata:
+        type: object
+        description: >
+          Only specify those values you want to replace for the shared secret.
+        properties:
+          application_type:
+            type: string
+            description: Optional.
+          classification:
+            type: string
+            description: Optional.
+          cloud_type:
+            type: string
+            description: Optional.
+          description:
+            type: string
+            description: Optional.
+          environment_type:
+            type: string
+            description: Optional.
+          expiration_time:
+            type: integer
+            description: Number of days until the secret expires. Optional. Defaults to 10 days.
+
   ExposeRequestParameters:
     type: object
     required:
@@ -1378,12 +1606,14 @@ definitions:
       - key_name
       - permission
       - usr_id_from
-      - usr_id_to
       - email
     properties:
       key_name:
-        type: string
-        description: Name of the secret.
+        type: array
+        description: Array of the secrets to be shared.
+        items:
+          type: string
+          description: Name of a secret to be shared.
       permission:
         type: string
         description: >
@@ -1399,25 +1629,39 @@ definitions:
           Email of the user who is sharing the secret.
           Must be the user who created the secret.
       usr_id_to:
+        type: array
+        description: >
+          Array of users who will have shared access to the secret. This
+          field is ignored if you specify the `group_id_to`
+          name/value pair.
+        items:
+          type: string
+          description: >
+            Email of user who will have shared access to the secret.
+      group_id_to:
         type: string
-        description: Email of the user who will have shared access to the secret.
+        description: 
+          Name of a group. Each member of the group will have shared access
+          to the secret. You must be a member of the group to share the
+          secret. For more information about creating groups, see
+          [Groups Administration](https://docs.cryptomove.com/docs/administration).
       email:
         type: string
         description: >
           Email of the user who created the secret.
           Same value as usr_id_from
-  UnshareRequestParameters:
-    type: object
-    required:
-      - usr_id_from
-      - key_name
-    properties:
-      usr_id_from:
-        type: string
-        description: "Email of user who will no longer have access to the secret."
-      key_name:
-        type: string
-        description: "Name of the secret."
+  # UnshareRequestParameters:
+  #   type: object
+  #   required:
+  #     - usr_id_from
+  #     - key_name
+  #   properties:
+  #     usr_id_from:
+  #       type: string
+  #       description: "Email of user who will no longer have access to the secret."
+  #     key_name:
+  #       type: string
+  #       description: "Name of the secret."
   VersionExposeRequestParameters:
     type: object
     required:
@@ -1526,6 +1770,49 @@ definitions:
       expiration_time:
         type: integer
         description: The number of days before the version of the secret will expire.
+  updateMetadataRequestParameters:
+    type: object
+    required:
+      - email
+      - key_name
+      - key_version
+      - metadata
+    properties:
+      email: 
+        type: string
+        description: Email of user with write access to secret or shared secret.
+      key_name:
+        type: string
+        description: Name of secret or shared secret.
+      key_version:
+        type: integer
+        description: >
+          Numerical version of the secret with the metadata that you want to update.
+      metadata:
+        type: object
+        description: >
+          Only specify those values you want to update.
+        properties:
+          application_type:
+            type: string
+            description: Optional.
+          classification:
+            type: string
+            description: Optional.
+          cloud_type:
+            type: string
+            description: Optional.
+          description:
+            type: string
+            description: Optional.
+          environment_type:
+            type: string
+            description: Optional.
+          expiration_time:
+            type: integer
+            description: Optional.
+
+
   updateDescriptionRequestParameters:
     type: object
     required:
@@ -1611,7 +1898,7 @@ definitions:
       expiration_hours:
         type: integer
         description: >
-          Number of hours before the access token expires (maximum of 24 hours).
+          Number of hours before the access token expires. There is no maximum value.
   RefreshTokenParameters:
     type: object
     required:
@@ -1632,17 +1919,18 @@ definitions:
         description: Email of an existing user who will be a Team Admin.
       groups:
         type: array
+        description: >
+          Array of the groups for which the user will be a Group Admin, along their permissions
+          to those groups.
         items: 
           type: object
           properties:
             group:
               type: string
               description: Name of an existing team.
-            permissions:
-              type: array
-              description: Array of permissions the user will have for the team.
               items:
-                type: string  
+                type: string
+                description: Permission that can be assigned to a Group Admin.  
   GroupAdminDeleteParameters:
     type: object
     properties:
@@ -1651,9 +1939,10 @@ definitions:
         description: Email of user who will stop being a Team Admin.
       group:
         type: array
+        description: Array of teams for which the user will no longer be an admin.
         items:
           type: string
-          description: Array of teams for which the user will no longer be an admin.
+          description: Name of an existing team.
   GroupParameters:
     type: object
     required:
@@ -1668,6 +1957,7 @@ definitions:
           Array of email addresses of the users that you want to add to the new team.
         items:
           type: string
+          description: Email address of a CryptoMove user.
   GroupDeleteParameters:
     type: object
     required:
@@ -1690,6 +1980,7 @@ definitions:
         description: Array of the teams to which the user will be added.
         items:
           type: string
+          description: Name of an existing group.
   UserDeleteParameters:
     type: object
     required:
@@ -1704,6 +1995,7 @@ definitions:
         description: Array of the teams from which the user will be removed.
         items:
           type: string
+          description: Name of an existing group.
   ListNoDupResponse:
     type: object
     properties:
@@ -1724,3 +2016,171 @@ definitions:
       status:
         description: Status from the server
         type: string
+  SecretSummaryResponse:
+    type: object
+    properties:
+      total_secrets:
+        description: Lists how many secrets the user has in CryptoMove.
+        type: integer
+      total_files:
+        description: Lists how many files the user has in CryptoMove.
+        type: integer
+      total_versions:
+        description: Total number of versions of the user's files and secrets.
+        type: integer
+  SecretByTypeResponse:
+    type: object
+    properties:
+      application_type:
+        description: >
+          Lists number of secrets for each value associated with the application_type
+          metadata category.
+        type: object
+        properties:
+          None:
+            description: >
+              Number of secrets that do not have a value specified
+              for this metadata category.
+            type: integer
+      classification:
+        description: >
+          Lists number of secrets for each value associated with the classification
+          metadata category.
+        type: object
+        properties:
+          None:
+            description: >
+              Number of secrets that do not have a value specified
+              for this metadata category.
+            type: integer
+      cloud_type:
+        description: >
+          Lists number of secrets for each value associated with the cloud_type
+          metadata category.
+        type: object
+        properties:
+          None:
+            description: >
+              Number of secrets that do not have a value specified
+              for this metadata category.
+            type: integer
+      environment_type:
+        description: >
+          Lists number of secrets for each value associated with the environment_type
+          metadata category.
+        type: object
+        properties:
+          None:
+            description: >
+              Number of secrets that do not have a value specified
+              for this metadata category.
+            type: integer
+      total_secrets:
+        description: Number of user's secrets returned by the API call.
+        type: integer
+  SecretByExpirationResponse:
+    type: object
+    properties:
+      active_secrets_by_timeslot:
+        description: >
+          Number of currently active secrets, grouped into the time period during which
+          they will expire. Default time period is months.
+        type: array
+        items:
+          type: object
+          properties:
+            count:
+              description: >
+                Number of secrets that will expire in this time period.
+              type: integer
+            start_date:
+              description: >
+                Start of the time period.
+              type: string
+            start_timestamp:
+              description: >
+                Start of the time period expressed in UNIX Epoch time.
+              type: number
+      active_secrets_count:
+        description: Total number of active secrets.
+        type: integer
+      all_secrets_by_timeslot:
+        description: >
+          All of the user's secrets grouped into time periods during which they expired
+          or will expire. Default time period is months.
+        type: array
+        items:
+          type: object
+          properties:
+            count:
+              description: >
+                Number of secrets that expired or will expire in this time period.
+              type: integer
+            start_date:
+              description: >
+                Start of the time period.
+              type: string
+            start_timestamp:
+              description: >
+                Start of the time period expressed in UNIX Epoch time.
+              type: number
+      all_secrets_count:
+        description: Total number of active and expired secrets.
+        type: integer
+      expired_secrets_by_timeslot:
+        description: >
+          Number of expired secrets, grouped into time periods during which they expired.
+          Default time period is months.
+        type: array
+        items:
+          type: object
+          properties:
+            count:
+              description: >
+                Number of secrets that expired in this time period.
+              type: integer
+            start_date:
+              description: >
+                Start of the time period.
+              type: string
+            start_timestamp:
+              description: >
+                Start of the time period expressed in UNIX Epoch time.
+              type: number
+      expired_secrets_count: 
+        description: Total number of expired secrets.
+        type: integer
+      total_secrets:
+        description: Total number of secrets.
+        type: integer
+  SecretAccessHistoryResponse:
+    type: object
+    properties:
+      expose_by_timeslot:
+        description: >
+          Number of times the user revealed secrets within the time period. Default
+          time period is months.
+        type: array
+        items:
+          type: object
+          properties:
+            count:
+              description: >
+                Number of times the user revealed secrets. Includes revealing the same secret
+                multiple times. 
+              type: integer
+            start_date:
+              description: >
+                Start of the time period.
+              type: string
+            start_timestamp:
+              description: >
+                Start of the time period expressed in UNIX Epoch time.
+              type: number
+      expose_count:
+        description: Total number of times the user revealed a secret.
+        type: integer
+
+
+
+
